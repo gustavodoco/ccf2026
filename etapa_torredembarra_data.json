@@ -1,0 +1,42 @@
+{
+  "_info": "Etapa 1 Torredembarra 2026 - Omplir amb les dades reals dels grups i parelles.",
+  "or": {
+    "grupos": [
+      {
+        "nome": "Grup A",
+        "equipes": ["Parella A1", "Parella A2", "Parella A3", "Parella A4", "Parella A5"],
+        "partidas": [
+          { "local": 0, "visit": 1, "p_local": null, "p_visit": null },
+          { "local": 2, "visit": 3, "p_local": null, "p_visit": null },
+          { "local": 4, "visit": 0, "p_local": null, "p_visit": null },
+          { "local": 1, "visit": 2, "p_local": null, "p_visit": null },
+          { "local": 3, "visit": 4, "p_local": null, "p_visit": null },
+          { "local": 0, "visit": 3, "p_local": null, "p_visit": null },
+          { "local": 1, "visit": 4, "p_local": null, "p_visit": null },
+          { "local": 2, "visit": 0, "p_local": null, "p_visit": null },
+          { "local": 3, "visit": 1, "p_local": null, "p_visit": null },
+          { "local": 4, "visit": 2, "p_local": null, "p_visit": null }
+        ]
+      },
+      {
+        "nome": "Grup B",
+        "equipes": ["Parella B1", "Parella B2", "Parella B3", "Parella B4", "Parella B5"],
+        "partidas": [
+          { "local": 0, "visit": 1, "p_local": null, "p_visit": null },
+          { "local": 2, "visit": 3, "p_local": null, "p_visit": null },
+          { "local": 4, "visit": 0, "p_local": null, "p_visit": null },
+          { "local": 1, "visit": 2, "p_local": null, "p_visit": null },
+          { "local": 3, "visit": 4, "p_local": null, "p_visit": null },
+          { "local": 0, "visit": 3, "p_local": null, "p_visit": null },
+          { "local": 1, "visit": 4, "p_local": null, "p_visit": null },
+          { "local": 2, "visit": 0, "p_local": null, "p_visit": null },
+          { "local": 3, "visit": 1, "p_local": null, "p_visit": null },
+          { "local": 4, "visit": 2, "p_local": null, "p_visit": null }
+        ]
+      }
+    ]
+  },
+  "plata": { "grupos": [] },
+  "bronze": { "grupos": [] },
+  "femeni": { "grupos": [] }
+}

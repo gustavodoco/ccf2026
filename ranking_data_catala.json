@@ -1,0 +1,22 @@
+{
+  "_info": "Circuit Català de Futevolei 2026 - 4 categories. Omplir amb les dades reals.",
+  "or": [
+    { "name": "Jugador Or 1", "club": "Club A", "etapa_1": 0, "etapa_2": 0, "etapa_3": 0, "total": 0, "position": 1 },
+    { "name": "Jugador Or 2", "club": "Club B", "etapa_1": 0, "etapa_2": 0, "etapa_3": 0, "total": 0, "position": 2 }
+  ],
+  "plata": [
+    { "name": "Jugador Plata 1", "club": "Club A", "etapa_1": 0, "etapa_2": 0, "etapa_3": 0, "total": 0, "position": 1 }
+  ],
+  "bronze": [
+    { "name": "Jugador Bronze 1", "club": "Club C", "etapa_1": 0, "etapa_2": 0, "etapa_3": 0, "total": 0, "position": 1 }
+  ],
+  "femeni": [
+    { "name": "Jugadora Femení 1", "club": "Club A", "etapa_1": 0, "etapa_2": 0, "etapa_3": 0, "total": 0, "position": 1 }
+  ],
+  "club_rankings": {
+    "or":     [{ "name": "Club A", "points": 0, "players": 1, "position": 1 }],
+    "plata":  [{ "name": "Club A", "points": 0, "players": 1, "position": 1 }],
+    "bronze": [{ "name": "Club C", "points": 0, "players": 1, "position": 1 }],
+    "femeni": [{ "name": "Club A", "points": 0, "players": 1, "position": 1 }]
+  }
+}

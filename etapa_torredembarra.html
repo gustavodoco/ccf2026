@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etapa 1 Torredembarra 2026 – Circuit Català de Futevolei</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1507;
+            min-height: 100vh;
+            padding: 20px;
+            color: #fff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 0%, rgba(225,107,11,0.22) 0%, transparent 50%),
+                radial-gradient(ellipse at 85% 100%, rgba(249,234,9,0.07) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+
+        /* HEADER */
+        .page-header { text-align: center; margin-bottom: 24px; }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 13px;
+            margin-bottom: 16px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #f9ea09; }
+
+        .etapa-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e16b0b, #f9a030);
+            color: #1a1507;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 2.5px;
+            padding: 5px 16px;
+            border-radius: 30px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #fff 40%, #f9ea09);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-sub { color: rgba(255,255,255,0.5); font-size: 14px; }
+
+        .dates-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(249,234,9,0.1);
+            border: 1px solid rgba(249,234,9,0.3);
+            color: #f9ea09;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(226,75,74,0.15);
+            border: 1px solid rgba(226,75,74,0.4);
+            color: #f09595;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-top: 8px;
+            margin-left: 6px;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #e24b4a;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* UPDATE BAR */
+        .update-bar {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .refresh-btn {
+            background: rgba(225,107,11,0.15);
+            border: 1px solid rgba(225,107,11,0.35);
+            color: #f9a030;
+            font-size: 12px;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .refresh-btn:hover { background: rgba(225,107,11,0.28); }
+
+        /* CAT TABS */
+        .cat-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cat-tab {
+            padding: 10px 22px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 30px;
+            color: rgba(255,255,255,0.65);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.5px;
+        }
+        .cat-tab:hover { background: rgba(225,107,11,0.15); border-color: rgba(225,107,11,0.4); color: #fff; }
+        .cat-tab.active {
+            background: linear-gradient(135deg, #e16b0b, #f9a030);
+            border-color: #e16b0b;
+            color: #1a1507;
+        }
+
+        /* CONTENT CARD */
+        .content-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        /* GROUPS GRID */
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+        }
+
+        /* GROUP CARD */
+        .group-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .group-header {
+            background: linear-gradient(135deg, #e16b0b, #f9a030);
+            color: #1a1507;
+            padding: 12px 18px;
+            font-weight: 900;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .group-body { padding: 14px 18px; }
+
+        /* MATCHES */
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.35);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .match-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+        }
+        .match-row:last-of-type { border-bottom: none; }
+
+        .team-name {
+            flex: 1;
+            color: rgba(255,255,255,0.88);
+            font-weight: 500;
+            line-height: 1.3;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .team-name.right { text-align: right; }
+
+        .vs { color: rgba(255,255,255,0.25); font-size: 10px; min-width: 12px; text-align: center; }
+
+        .score-wrap { display: flex; gap: 3px; }
+
+        .score-box {
+            width: 26px;
+            height: 24px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.6);
+        }
+        .score-box.winner {
+            background: rgba(225,107,11,0.7);
+            border-color: #e16b0b;
+            color: white;
+        }
+
+        /* STANDINGS TABLE */
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 12px;
+        }
+        .standings-table thead tr { background: rgba(225,107,11,0.12); }
+        .standings-table th {
+            padding: 8px 10px;
+            text-align: center;
+            color: rgba(255,255,255,0.45);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .standings-table th:first-child { text-align: left; }
+        .standings-table td {
+            padding: 8px 10px;
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .standings-table td:first-child { text-align: left; }
+        .standings-table tr:last-child td { border-bottom: none; }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            font-size: 11px;
+            font-weight: 800;
+            margin-right: 6px;
+        }
+        .rank-1 { background: #f9ea09; color: #1a1507; }
+        .rank-2 { background: rgba(255,255,255,0.2); color: white; }
+        .rank-other { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.45); }
+
+        .qual-indicator {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+        .qual { background: #e16b0b; }
+        .no-qual { background: rgba(255,255,255,0.18); }
+
+        /* PLAYOFFS */
+        .playoffs-section { margin-top: 28px; }
+
+        .playoffs-title {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            color: #f9a030;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .playoffs-title::before, .playoffs-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(225,107,11,0.35);
+        }
+
+        .playoff-phase { margin-bottom: 20px; }
+
+        .playoff-phase-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .playoff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 10px;
+        }
+
+        .playoff-match {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .playoff-match.final { border-color: rgba(249,234,9,0.35); background: rgba(249,234,9,0.04); }
+        .playoff-match.tercer { border-color: rgba(225,107,11,0.35); }
+
+        .playoff-match-label {
+            background: rgba(255,255,255,0.05);
+            padding: 5px 12px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+        }
+        .playoff-match.final .playoff-match-label {
+            background: rgba(249,234,9,0.1);
+            color: #f9ea09;
+        }
+
+        .playoff-team {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            color: rgba(255,255,255,0.8);
+        }
+        .playoff-team:last-child { border-bottom: none; }
+        .playoff-team.winner { color: #f9a030; font-weight: 700; }
+        .playoff-team.tbd { color: rgba(255,255,255,0.28); font-style: italic; }
+
+        .playoff-score {
+            font-size: 15px;
+            font-weight: 800;
+            min-width: 24px;
+            text-align: right;
+            color: rgba(255,255,255,0.7);
+        }
+        .playoff-score.winner { color: #e16b0b; }
+
+        /* CONFIG PANEL */
+        .config-panel {
+            background: rgba(225,107,11,0.07);
+            border: 1px solid rgba(225,107,11,0.2);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+        }
+        .config-title { font-size: 13px; font-weight: 700; color: #f9a030; margin-bottom: 12px; }
+        .config-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+        .config-label { font-size: 12px; color: rgba(255,255,255,0.55); min-width: 80px; }
+        .config-input {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 6px;
+            color: white;
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+        .config-input::placeholder { color: rgba(255,255,255,0.25); }
+        .config-save {
+            background: linear-gradient(135deg, #e16b0b, #f9a030);
+            color: #1a1507;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .config-hint { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 8px; line-height: 1.5; }
+        .toggle-config {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.13);
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+
+        /* LOADING */
+        .loading { text-align: center; padding: 40px; color: rgba(255,255,255,0.35); }
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top-color: #e16b0b;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 10px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 600px) {
+            .page-title { font-size: 1.4rem; }
+            .groups-grid { grid-template-columns: 1fr; }
+            body { padding: 12px; }
+            .content-card { padding: 14px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <div class="page-header">
+        <div class="logo-wrap">
+            <img src="logo.png" alt="Circuit Català de Futevolei" style="height:55px; filter:brightness(0) invert(1); opacity:0.85; margin-bottom:8px;" onerror="this.style.display='none'">
+        </div>
+        <div><span class="etapa-badge">Etapa 1 · 2026</span></div>
+        <h1 class="page-title">⛵ Torredembarra</h1>
+        <p class="page-sub">Circuit Català de Futevolei</p>
+        <div>
+            <span class="dates-badge">📅 15 · 16 · 17 de Maig 2026</span>
+            <span class="live-badge">
+                <span class="live-dot"></span>
+                Actualització automàtica des de Google Sheets
+            </span>
+        </div>
+        <!-- Admin: clica 5x al títol per obrir la configuració -->
+    </div>
+
+    <div class="update-bar">
+        <span id="last-update">Carregant dades...</span>
+        <button class="refresh-btn" onclick="loadAllData()">↻ Actualitzar</button>
+    </div>
+
+    <button class="toggle-config" onclick="toggleConfig()" style="display:none;" id="admin-btn">⚙ Configurar URLs de Google Sheets</button>
+
+    <div class="config-panel" id="config-panel" style="display:none;">
+        <div class="config-title">URLs de Google Sheets (CSV publicat)</div>
+        <div class="config-row">
+            <span class="config-label">Or</span>
+            <input class="config-input" id="url-or" placeholder="https://docs.google.com/spreadsheets/d/.../pub?...&output=csv">
+        </div>
+        <div class="config-row">
+            <span class="config-label">Plata</span>
+            <input class="config-input" id="url-plata" placeholder="https://docs.google.com/spreadsheets/d/.../pub?...&output=csv">
+        </div>
+        <div class="config-row">
+            <span class="config-label">Bronze</span>
+            <input class="config-input" id="url-bronze" placeholder="https://docs.google.com/spreadsheets/d/.../pub?...&output=csv">
+        </div>
+        <div class="config-row">
+            <span class="config-label">Femení</span>
+            <input class="config-input" id="url-femeni" placeholder="https://docs.google.com/spreadsheets/d/.../pub?...&output=csv">
+        </div>
+        <div class="config-row">
+            <button class="config-save" onclick="saveUrls()">Desar URLs</button>
+        </div>
+        <div style="font-size:12px; font-weight:700; color:rgba(255,255,255,0.5); margin: 12px 0 8px;">URLs Playoffs (pestanyes separades)</div>
+        <div class="config-row">
+            <span class="config-label">Playoffs Or</span>
+            <input class="config-input" id="url-playoff-or" placeholder="URL CSV de la pestanya Playoffs_Or">
+        </div>
+        <div class="config-row">
+            <span class="config-label">Playoffs Plata</span>
+            <input class="config-input" id="url-playoff-plata" placeholder="URL CSV de la pestanya Playoffs_Plata">
+        </div>
+        <div class="config-row">
+            <span class="config-label">Playoffs Bronze</span>
+            <input class="config-input" id="url-playoff-bronze" placeholder="URL CSV de la pestanya Playoffs_Bronze">
+        </div>
+        <div class="config-row">
+            <span class="config-label">Playoffs Femení</span>
+            <input class="config-input" id="url-playoff-femeni" placeholder="URL CSV de la pestanya Playoffs_Femeni">
+        </div>
+        <div class="config-hint">
+            Com obtenir la URL: Arxiu → Compartir → Publicar al web → selecciona la pestanya → CSV → Publicar → copiar l'enllaç.<br>
+            Mentre no estigui configurat, les dades venen de l'arxiu local <code>etapa_torredembarra_data.json</code>.
+        </div>
+    </div>
+
+    <div class="cat-tabs">
+        <button class="cat-tab active" onclick="showCat('or', this)">OR</button>
+        <button class="cat-tab" onclick="showCat('plata', this)">PLATA</button>
+        <button class="cat-tab" onclick="showCat('bronze', this)">BRONZE</button>
+        <button class="cat-tab" onclick="showCat('femeni', this)">FEMENÍ</button>
+    </div>
+
+    <div class="content-card">
+        <div id="cat-content">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Carregant dades de l'etapa...</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ============================================================
+// ACCÉS ADMIN — clica 5x al títol ⛵ per obrir configuració
+// ============================================================
+let _clicks = 0, _timer;
+document.querySelector('.page-title').addEventListener('click', () => {
+    _clicks++;
+    clearTimeout(_timer);
+    _timer = setTimeout(() => { _clicks = 0; }, 2000);
+    if (_clicks >= 5) {
+        _clicks = 0;
+        const btn = document.getElementById('admin-btn');
+        btn.style.display = 'inline-block';
+        btn.scrollIntoView({ behavior: 'smooth' });
+    }
+});
+
+// ============================================================
+// URLs — omplir amb les URLs del teu Google Sheets
+// ============================================================
+const SHEET_URLS = {
+    or:     '',   // → enganxa aquí la URL CSV de la pestanya Or
+    plata:  '',   // → enganxa aquí la URL CSV de la pestanya Plata
+    bronze: '',   // → enganxa aquí la URL CSV de la pestanya Bronze
+    femeni: ''    // → enganxa aquí la URL CSV de la pestanya Femení
+};
+
+const PLAYOFF_URLS = {
+    or:     '',
+    plata:  '',
+    bronze: '',
+    femeni: ''
+};
+
+const FALLBACK_PLAYOFFS = { or: [], plata: [], bronze: [], femeni: [] };
+let playoffData = { or: [], plata: [], bronze: [], femeni: [] };
+
+// ============================================================
+// DADES INTEGRADES (fallback mentre no hi ha Google Sheets)
+// ============================================================
+const FALLBACK_DATA = {
+    or: {
+        grupos: [
+            {
+                nome: 'Grup A',
+                equipes: ['Parella A1', 'Parella A2', 'Parella A3', 'Parella A4', 'Parella A5'],
+                partidas: [
+                    {local:0,visit:1,p_local:null,p_visit:null},
+                    {local:2,visit:3,p_local:null,p_visit:null},
+                    {local:4,visit:0,p_local:null,p_visit:null},
+                    {local:1,visit:2,p_local:null,p_visit:null},
+                    {local:3,visit:4,p_local:null,p_visit:null},
+                    {local:0,visit:3,p_local:null,p_visit:null},
+                    {local:1,visit:4,p_local:null,p_visit:null},
+                    {local:2,visit:0,p_local:null,p_visit:null},
+                    {local:3,visit:1,p_local:null,p_visit:null},
+                    {local:4,visit:2,p_local:null,p_visit:null}
+                ]
+            },
+            {
+                nome: 'Grup B',
+                equipes: ['Parella B1', 'Parella B2', 'Parella B3', 'Parella B4', 'Parella B5'],
+                partidas: [
+                    {local:0,visit:1,p_local:null,p_visit:null},
+                    {local:2,visit:3,p_local:null,p_visit:null},
+                    {local:4,visit:0,p_local:null,p_visit:null},
+                    {local:1,visit:2,p_local:null,p_visit:null},
+                    {local:3,visit:4,p_local:null,p_visit:null},
+                    {local:0,visit:3,p_local:null,p_visit:null},
+                    {local:1,visit:4,p_local:null,p_visit:null},
+                    {local:2,visit:0,p_local:null,p_visit:null},
+                    {local:3,visit:1,p_local:null,p_visit:null},
+                    {local:4,visit:2,p_local:null,p_visit:null}
+                ]
+            }
+        ]
+    },
+    plata: { grupos: [] },
+    bronze: { grupos: [] },
+    femeni: { grupos: [] }
+};
+
+let etapaData = {};
+let currentCat = 'or';
+
+// ============================================================
+// CÀRREGA
+// ============================================================
+async function loadAllData() {
+    document.getElementById('last-update').textContent = 'Actualitzant...';
+
+    // Fallback immediat
+    Object.keys(FALLBACK_DATA).forEach(cat => {
+        if (!etapaData[cat] || !etapaData[cat].grupos || etapaData[cat].grupos.length === 0) {
+            etapaData[cat] = FALLBACK_DATA[cat];
+        }
+    });
+
+    // Intenta carregar des de JSON local
+    try {
+        const resp = await fetch('etapa_torredembarra_data.json');
+        if (resp.ok) {
+            const json = await resp.json();
+            Object.keys(json).forEach(cat => {
+                if (json[cat] && json[cat].grupos) etapaData[cat] = json[cat];
+            });
+        }
+    } catch(e) {}
+
+    renderCat(currentCat);
+
+    // Intenta Sheets
+    const promises = Object.entries(SHEET_URLS).map(async ([cat, url]) => {
+        if (!url) return;
+        try {
+            const data = await loadFromSheets(url);
+            if (data && data.grupos && data.grupos.length > 0) etapaData[cat] = data;
+        } catch(e) {
+            console.warn(`Sheets ${cat} no disponible`);
+        }
+    });
+    await Promise.allSettled(promises);
+
+    // Playoffs
+    const ppromises = Object.entries(PLAYOFF_URLS).map(async ([cat, url]) => {
+        if (!url) { playoffData[cat] = FALLBACK_PLAYOFFS[cat]; return; }
+        try { playoffData[cat] = await loadPlayoffsFromSheets(url); }
+        catch(e) { playoffData[cat] = FALLBACK_PLAYOFFS[cat]; }
+    });
+    await Promise.allSettled(ppromises);
+
+    const now = new Date();
+    document.getElementById('last-update').textContent =
+        `Última actualització: ${now.toLocaleTimeString('ca-ES')}`;
+
+    renderCat(currentCat);
+}
+
+async function loadFromSheets(csvUrl) {
+    const resp = await fetch(csvUrl);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return parseCSV(await resp.text());
+}
+
+function parseCSV(text) {
+    const lines = text.trim().split('\n').map(l => l.split(',').map(c => c.trim().replace(/"/g, '')));
+    const headers = lines[0];
+    const grupos = {};
+    for (let i = 1; i < lines.length; i++) {
+        const row = {};
+        headers.forEach((h, idx) => { row[h] = lines[i][idx] || ''; });
+        if (!row.grupo || !row.local) continue;
+        if (!grupos[row.grupo]) grupos[row.grupo] = { nome: row.grupo, partidas: [], equipes: [] };
+        const g = grupos[row.grupo];
+        const localIdx = getOrAdd(g.equipes, row.local);
+        const visitIdx = getOrAdd(g.equipes, row.visitante);
+        const pL = row.pontos_local !== '' ? parseInt(row.pontos_local) : null;
+        const pV = row.pontos_visit !== '' ? parseInt(row.pontos_visit) : null;
+        g.partidas.push({ local: localIdx, visit: visitIdx, p_local: pL, p_visit: pV });
+    }
+    return { grupos: Object.values(grupos) };
+}
+
+function getOrAdd(arr, val) {
+    let idx = arr.indexOf(val);
+    if (idx === -1) { arr.push(val); idx = arr.length - 1; }
+    return idx;
+}
+
+async function loadPlayoffsFromSheets(csvUrl) {
+    const resp = await fetch(csvUrl);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const lines = (await resp.text()).trim().split('\n').map(l => l.split(',').map(c => c.trim().replace(/"/g, '')));
+    const headers = lines[0];
+    const partidas = [];
+    for (let i = 1; i < lines.length; i++) {
+        const row = {};
+        headers.forEach((h, idx) => { row[h] = lines[i][idx] || ''; });
+        if (!row.fase || !row.local) continue;
+        partidas.push({
+            fase: row.fase, local: row.local, visit: row.visitante,
+            p_local: row.pontos_local !== '' ? parseInt(row.pontos_local) : null,
+            p_visit: row.pontos_visit !== '' ? parseInt(row.pontos_visit) : null
+        });
+    }
+    return partidas;
+}
+
+// ============================================================
+// RENDER
+// ============================================================
+function calcStandings(grupo) {
+    const stats = grupo.equipes.map(e => ({ nome: e, v: 0, p_plus: 0, p_minus: 0 }));
+    grupo.partidas.forEach(p => {
+        if (p.p_local !== null && p.p_visit !== null) {
+            stats[p.local].p_plus += p.p_local;
+            stats[p.local].p_minus += p.p_visit;
+            stats[p.visit].p_plus += p.p_visit;
+            stats[p.visit].p_minus += p.p_local;
+            if (p.p_local > p.p_visit) stats[p.local].v++;
+            else if (p.p_visit > p.p_local) stats[p.visit].v++;
+        }
+    });
+    return stats.sort((a, b) =>
+        b.v - a.v ||
+        (b.p_plus - b.p_minus) - (a.p_plus - a.p_minus) ||
+        b.p_plus - a.p_plus
+    );
+}
+
+function renderGrup(g) {
+    const standings = calcStandings(g);
+    const matchesHtml = g.partidas.map(p => {
+        const has = p.p_local !== null && p.p_visit !== null;
+        const lW = has && p.p_local > p.p_visit;
+        const vW = has && p.p_visit > p.p_local;
+        return `<div class="match-row">
+            <span class="team-name">${g.equipes[p.local]}</span>
+            <span class="vs">×</span>
+            <span class="team-name right">${g.equipes[p.visit]}</span>
+            <div class="score-wrap">
+                <div class="score-box ${lW ? 'winner' : ''}">${p.p_local !== null ? p.p_local : '–'}</div>
+                <div class="score-box ${vW ? 'winner' : ''}">${p.p_visit !== null ? p.p_visit : '–'}</div>
+            </div>
+        </div>`;
+    }).join('');
+
+    const standingsHtml = standings.map((s, i) => {
+        const coef = s.p_plus - s.p_minus;
+        const rc = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : 'rank-other';
+        const q = i < 2
+            ? '<span class="qual-indicator qual" title="Classifica"></span>'
+            : '<span class="qual-indicator no-qual"></span>';
+        return `<tr>
+            <td><span class="rank-badge ${rc}">${i+1}</span>${s.nome}${q}</td>
+            <td>${s.v}</td>
+            <td>${s.p_plus}</td>
+            <td>${s.p_minus}</td>
+            <td>${coef >= 0 ? '+' : ''}${coef}</td>
+        </tr>`;
+    }).join('');
+
+    return `<div class="group-card">
+        <div class="group-header">${g.nome}</div>
+        <div class="group-body">
+            <div class="section-label">Partits</div>
+            ${matchesHtml}
+            <div class="section-label" style="margin-top:14px;">Classificació</div>
+            <table class="standings-table">
+                <thead><tr>
+                    <th>Parella</th><th>V</th><th>P+</th><th>P−</th><th>Coef</th>
+                </tr></thead>
+                <tbody>${standingsHtml}</tbody>
+            </table>
+        </div>
+    </div>`;
+}
+
+function renderPlayoffs(partidas) {
+    if (!partidas || partidas.length === 0) return '';
+
+    const phaseGroups = [
+        { label: '🔁 Triangular — Repesca', fases: ['Triangular'], cls: '' },
+        { label: '⚔️ Quarts de Final', fases: ['QF1','QF2','QF3','QF4'], cls: '' },
+        { label: '🏆 Semifinals', fases: ['SF1','SF2'], cls: '' },
+        { label: '🥉 Disputa 3r Lloc', fases: ['3lloc'], cls: 'tercer' },
+        { label: '🥇 Final', fases: ['Final'], cls: 'final' },
+    ];
+
+    let html = `<div class="playoffs-section"><div class="playoffs-title">Playoffs</div>`;
+
+    phaseGroups.forEach(pg => {
+        const matches = partidas.filter(p => pg.fases.includes(p.fase));
+        if (!matches.length) return;
+
+        html += `<div class="playoff-phase">
+            <div class="playoff-phase-label">${pg.label}</div>
+            <div class="playoff-grid">`;
+
+        matches.forEach(m => {
+            const has = m.p_local !== null && m.p_visit !== null;
+            const lW = has && m.p_local > m.p_visit;
+            const vW = has && m.p_visit > m.p_local;
+            const lTbd = !m.local || m.local === 'Per definir';
+            const vTbd = !m.visit || m.visit === 'Per definir';
+            html += `<div class="playoff-match ${pg.cls}">
+                <div class="playoff-match-label">${m.fase.replace('QF','QF ').replace('SF','SF ')}</div>
+                <div class="playoff-team ${lW ? 'winner' : ''} ${lTbd ? 'tbd' : ''}">
+                    <span>${lTbd ? 'Per definir' : m.local}</span>
+                    <span class="playoff-score ${lW ? 'winner' : ''}">${m.p_local !== null ? m.p_local : '–'}</span>
+                </div>
+                <div class="playoff-team ${vW ? 'winner' : ''} ${vTbd ? 'tbd' : ''}">
+                    <span>${vTbd ? 'Per definir' : m.visit}</span>
+                    <span class="playoff-score ${vW ? 'winner' : ''}">${m.p_visit !== null ? m.p_visit : '–'}</span>
+                </div>
+            </div>`;
+        });
+
+        html += `</div></div>`;
+    });
+
+    return html + `</div>`;
+}
+
+function showCat(cat, btn) {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = cat;
+    renderCat(cat);
+}
+
+function renderCat(cat) {
+    const el = document.getElementById('cat-content');
+    const data = etapaData[cat];
+
+    if (!data || !data.grupos || data.grupos.length === 0) {
+        el.innerHTML = `<div class="loading">
+            <p style="font-size:14px; color:rgba(255,255,255,0.4);">
+                Dades de ${cat.toUpperCase()} no disponibles.<br>
+                <span style="font-size:12px;">Configura la URL de Google Sheets o espera el sorteig.</span>
+            </p>
+        </div>`;
+        return;
+    }
+
+    const grupsHtml = data.grupos.map(renderGrup).join('');
+    const playoffsHtml = renderPlayoffs(playoffData[cat]);
+    el.innerHTML = `${playoffsHtml}<div class="groups-grid">${grupsHtml}</div>`;
+}
+
+// ============================================================
+// CONFIGURACIÓ URLs
+// ============================================================
+function toggleConfig() {
+    const panel = document.getElementById('config-panel');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+    if (panel.style.display === 'block') {
+        document.getElementById('url-or').value = SHEET_URLS.or;
+        document.getElementById('url-plata').value = SHEET_URLS.plata;
+        document.getElementById('url-bronze').value = SHEET_URLS.bronze;
+        document.getElementById('url-femeni').value = SHEET_URLS.femeni;
+        document.getElementById('url-playoff-or').value = PLAYOFF_URLS.or;
+        document.getElementById('url-playoff-plata').value = PLAYOFF_URLS.plata;
+        document.getElementById('url-playoff-bronze').value = PLAYOFF_URLS.bronze;
+        document.getElementById('url-playoff-femeni').value = PLAYOFF_URLS.femeni;
+    }
+}
+
+function saveUrls() {
+    SHEET_URLS.or     = document.getElementById('url-or').value.trim()     || SHEET_URLS.or;
+    SHEET_URLS.plata  = document.getElementById('url-plata').value.trim()  || SHEET_URLS.plata;
+    SHEET_URLS.bronze = document.getElementById('url-bronze').value.trim() || SHEET_URLS.bronze;
+    SHEET_URLS.femeni = document.getElementById('url-femeni').value.trim() || SHEET_URLS.femeni;
+    PLAYOFF_URLS.or     = document.getElementById('url-playoff-or').value.trim()     || PLAYOFF_URLS.or;
+    PLAYOFF_URLS.plata  = document.getElementById('url-playoff-plata').value.trim()  || PLAYOFF_URLS.plata;
+    PLAYOFF_URLS.bronze = document.getElementById('url-playoff-bronze').value.trim() || PLAYOFF_URLS.bronze;
+    PLAYOFF_URLS.femeni = document.getElementById('url-playoff-femeni').value.trim() || PLAYOFF_URLS.femeni;
+    document.getElementById('config-panel').style.display = 'none';
+    loadAllData();
+}
+
+// ============================================================
+// INIT — actualitza cada 2 minuts
+// ============================================================
+loadAllData();
+setInterval(loadAllData, 120000);
+</script>
+</body>
+</html>
