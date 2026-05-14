@@ -27,7 +27,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .content-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;margin-bottom:16px}
 .cat-info-box{background:rgba(225,107,11,.08);border:1px solid rgba(225,107,11,.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:rgba(255,255,255,.6);line-height:1.6}
 .cat-info-box strong{color:#f9a030}
-.groups-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.groups-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
 .group-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden}
 .group-header{background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;padding:12px 18px;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
 .group-size{font-size:10px;opacity:.65}
@@ -83,9 +83,14 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .hora-badge{display:inline-block;background:rgba(249,234,9,0.12);border:1px solid rgba(249,234,9,0.25);color:#f9ea09;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:5px}
 .prog-empty{text-align:center;padding:30px;color:rgba(255,255,255,0.3);font-size:13px}
 
-.sched-badge{display:inline-flex;align-items:center;gap:4px;margin-right:6px;flex-shrink:0}
-.sched-hora{display:inline-block;background:rgba(249,234,9,0.12);border:1px solid rgba(249,234,9,0.3);color:#f9ea09;font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;white-space:nowrap}
-.sched-camp{display:inline-block;background:rgba(225,107,11,0.15);border:1px solid rgba(225,107,11,0.3);color:#f9a030;font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;white-space:nowrap}
+.sched-badge{display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
+.sched-hora{display:inline-block;background:rgba(249,234,9,0.12);border:1px solid rgba(249,234,9,0.3);color:#f9ea09;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.sched-camp{display:inline-block;background:rgba(225,107,11,0.15);border:1px solid rgba(225,107,11,0.3);color:#f9a030;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.match-sched{margin-bottom:5px}
+.match-row{flex-direction:column;align-items:flex-start;padding:10px 0}
+.match-teams{display:flex;align-items:center;gap:6px;width:100%}
+.team-name{flex:1;color:rgba(255,255,255,.88);font-weight:600;font-size:13px;white-space:normal;overflow:visible;text-overflow:unset}
+.team-name.right{text-align:right}
 </style>
 </head>
 <body>
@@ -243,7 +248,7 @@ function renderGrup(g){
     const schedBadge=prog
       ? `<span class="sched-badge"><span class="sched-hora">${esc(prog.hora)}</span><span class="sched-camp">${esc(prog.camp)}</span></span>`
       : '';
-    return`<div class="match-row">${schedBadge}<span class="team-name">${g.equipes[p.local]}</span><span class="vs">×</span><span class="team-name right">${g.equipes[p.visit]}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${p.p_local!==null?p.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${p.p_visit!==null?p.p_visit:'–'}</div></div></div>`
+    return`<div class="match-row">${schedBadge?`<div class="match-sched">${schedBadge}</div>`:''}<div class="match-teams"><span class="team-name">${g.equipes[p.local]}</span><span class="vs">×</span><span class="team-name right">${g.equipes[p.visit]}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${p.p_local!==null?p.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${p.p_visit!==null?p.p_visit:'–'}</div></div></div></div>`
   }).join('');
   const rows=st.map((s,i)=>{const pos=i+1,rc=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'rank-other';const coef=s.p_plus-s.p_minus;return`<tr><td><span class="rank-badge ${rc}">${pos}</span>${s.nome}</td><td>${s.v}</td><td>${s.p_plus}</td><td>${s.p_minus}</td><td>${coef>=0?'+':''}${coef}</td></tr>`}).join('');
   return`<div class="group-card"><div class="group-header"><span>${g.nome}</span><span class="group-size">${g.equipes.length} equipes</span></div><div class="group-body"><div class="section-label">Partits</div>${matches}<div class="section-label" style="margin-top:14px">Classificació</div><table class="standings-table"><thead><tr><th>Parella</th><th>V</th><th>P+</th><th>P−</th><th>Coef</th></tr></thead><tbody>${rows}</tbody></table></div></div>`
