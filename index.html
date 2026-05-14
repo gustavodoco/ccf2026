@@ -71,6 +71,17 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .spinner{display:inline-block;width:24px;height:24px;border:2px solid rgba(255,255,255,.1);border-top-color:#e16b0b;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:10px}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:600px){.page-title{font-size:1.4rem}.groups-grid{grid-template-columns:1fr}body{padding:12px}.content-card{padding:14px}.cat-tab{padding:9px 14px;font-size:12px}}
+
+.programa-day-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.prog-day-btn{padding:7px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.13);border-radius:20px;color:rgba(255,255,255,0.55);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.prog-day-btn.active{background:rgba(249,234,9,0.15);border-color:rgba(249,234,9,0.4);color:#f9ea09}
+.programa-table{width:100%;border-collapse:collapse;font-size:12px}
+.programa-table th{padding:9px 14px;text-align:left;background:rgba(249,234,9,0.08);color:rgba(249,234,9,0.6);font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid rgba(249,234,9,0.15);white-space:nowrap}
+.programa-table td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.8);vertical-align:middle;white-space:nowrap}
+.programa-table tr:last-child td{border-bottom:none}
+.programa-table tr:hover td{background:rgba(249,234,9,0.04)}
+.hora-badge{display:inline-block;background:rgba(249,234,9,0.12);border:1px solid rgba(249,234,9,0.25);color:#f9ea09;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:5px}
+.prog-empty{text-align:center;padding:30px;color:rgba(255,255,255,0.3);font-size:13px}
 </style>
 </head>
 <body>
@@ -111,6 +122,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <button class="cat-tab" onclick="showCat('amateur',this)">AMATEUR</button>
   <button class="cat-tab" onclick="showCat('femeni',this)">FEMENÍ</button>
   <button class="cat-tab" onclick="showCat('mixt',this)">MIXT</button>
+  <button class="cat-tab" id="tab-programa" onclick="showPrograma(this)" style="margin-left:auto;background:rgba(249,234,9,0.08);border-color:rgba(249,234,9,0.25);color:rgba(249,234,9,0.7)">&#128197; Programa</button>
 </div>
 <div class="content-card"><div id="cat-content"><div class="loading"><div class="spinner"></div><p>Carregant dades...</p></div></div></div>
 </div>
@@ -127,11 +139,13 @@ const SHEET_URLS={
   femeni:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=1561764640&single=true&output=csv',
   mixt:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=45733146&single=true&output=csv'
 };
-const PLAYOFF_URLS={pro:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=514388579&single=true&output=csv',
-'amat-a':'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=930444700&single=true&output=csv',
-'amat-b':'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=930444700&single=true&output=csv',
-femeni:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=564804510&single=true&output=csv',
-mixt:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=1195574451&single=true&output=csv'};
+const PLAYOFF_URLS={pro:'','amat-a':'','amat-b':'',femeni:'',mixt:''};
+const PROGRAMA_URLS={
+  divendres:'',
+  sabado:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=579853102&single=true&output=csv',
+  domingo:''
+};
+let programaData={divendres:null,sabado:null,domingo:null};
 
 // ── FALLBACK ──────────────────────────────────────────────
 const FALLBACK_DATA={
@@ -175,6 +189,7 @@ async function loadAllData(){
   try{const r=await fetch('etapa_torredembarra_data.json');if(r.ok){const j=await r.json();Object.keys(j).forEach(c=>{if(j[c]&&j[c].grupos)etapaData[c]={...FALLBACK_DATA[c],...j[c]}})}}catch(e){}
   await Promise.allSettled(Object.entries(SHEET_URLS).map(async([c,u])=>{if(!u)return;try{const d=await loadFromSheets(u);if(d&&d.grupos&&d.grupos.length)etapaData[c]={...FALLBACK_DATA[c],...d}}catch(e){}}));
   await Promise.allSettled(Object.entries(PLAYOFF_URLS).map(async([k,u])=>{if(!u)return;try{playoffData[k]=await loadPlayoffsFromSheets(u)}catch(e){}}));
+  await loadPrograma();
   document.getElementById('last-update').textContent=`Última actualització: ${new Date().toLocaleTimeString('ca-ES')}`;
   renderCat(currentCat);
 }
@@ -482,13 +497,107 @@ function renderCat(cat){
     playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(mx.prevSvg,mx.prevW,mx.prevH)}</div><div class="bracket-svg-wrap" style="margin-top:16px">${makeSVG(mx.mainSvg,mx.mainW,mx.mainH)}</div>`;
   }
 
-  el.innerHTML=`${info}${playoffs}<div style="height:12px"></div>${grups}`;
+  el.innerHTML=`${info}${grups}<div style="height:24px"></div>${playoffs}`;
 }
 
 // ── CONFIG ────────────────────────────────────────────────
 function toggleConfig(){const p=document.getElementById('config-panel');p.style.display=p.style.display==='none'?'block':'none';if(p.style.display==='block'){document.getElementById('url-pro').value=SHEET_URLS.pro;document.getElementById('url-amateur').value=SHEET_URLS.amateur;document.getElementById('url-femeni').value=SHEET_URLS.femeni;document.getElementById('url-mixt').value=SHEET_URLS.mixt;document.getElementById('url-playoff-pro').value=PLAYOFF_URLS.pro;document.getElementById('url-playoff-amat-a').value=PLAYOFF_URLS['amat-a'];document.getElementById('url-playoff-amat-b').value=PLAYOFF_URLS['amat-b'];document.getElementById('url-playoff-femeni').value=PLAYOFF_URLS.femeni;document.getElementById('url-playoff-mixt').value=PLAYOFF_URLS.mixt;}}
 function saveUrls(){SHEET_URLS.pro=document.getElementById('url-pro').value.trim()||SHEET_URLS.pro;SHEET_URLS.amateur=document.getElementById('url-amateur').value.trim()||SHEET_URLS.amateur;SHEET_URLS.femeni=document.getElementById('url-femeni').value.trim()||SHEET_URLS.femeni;SHEET_URLS.mixt=document.getElementById('url-mixt').value.trim()||SHEET_URLS.mixt;PLAYOFF_URLS.pro=document.getElementById('url-playoff-pro').value.trim()||PLAYOFF_URLS.pro;PLAYOFF_URLS['amat-a']=document.getElementById('url-playoff-amat-a').value.trim()||PLAYOFF_URLS['amat-a'];PLAYOFF_URLS['amat-b']=document.getElementById('url-playoff-amat-b').value.trim()||PLAYOFF_URLS['amat-b'];PLAYOFF_URLS.femeni=document.getElementById('url-playoff-femeni').value.trim()||PLAYOFF_URLS.femeni;PLAYOFF_URLS.mixt=document.getElementById('url-playoff-mixt').value.trim()||PLAYOFF_URLS.mixt;document.getElementById('config-panel').style.display='none';loadAllData();}
 
+
+// ── PROGRAMA ──────────────────────────────────────────────
+function parseCSVLine(line){
+  const res=[];let cur='';let inQ=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){inQ=!inQ;}
+    else if(ch===','&&!inQ){res.push(cur.trim());cur='';}
+    else cur+=ch;
+  }
+  res.push(cur.trim());
+  return res;
+}
+
+function parseProgramaCSV(text){
+  const lines=text.trim().split('\n').map(l=>parseCSVLine(l));
+  if(lines.length<2) return null;
+  const headers=lines[0];
+  // odd cols = field names (col 1,3,5...)
+  const fields=[];
+  for(let c=1;c<headers.length;c+=2) fields.push((headers[c]||('Camp '+Math.ceil(c/2))).trim());
+  const rows=[];
+  for(let r=1;r<lines.length;r++){
+    const row=lines[r];
+    let hasData=false;
+    const slots=fields.map((f,ci)=>{
+      const hora=(row[ci*2]||'').trim();
+      const partida=(row[ci*2+1]||'').trim();
+      if(hora||partida) hasData=true;
+      return{hora,partida,camp:f};
+    });
+    if(hasData) rows.push(slots);
+  }
+  return{fields,rows};
+}
+
+async function loadPrograma(){
+  for(const [day,url] of Object.entries(PROGRAMA_URLS)){
+    if(!url) continue;
+    try{
+      const r=await fetch(url);
+      if(!r.ok) continue;
+      programaData[day]=parseProgramaCSV(await r.text());
+    }catch(e){}
+  }
+}
+
+let currentProgramaDay='sabado';
+
+function showPrograma(btn){
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  currentCat='__programa__';
+  renderPrograma();
+}
+
+function switchProgramaDay(day,btn){
+  currentProgramaDay=day;
+  document.querySelectorAll('.prog-day-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPrograma();
+}
+
+function renderPrograma(){
+  const el=document.getElementById('cat-content');
+  const days=[
+    {key:'divendres',label:'Divendres 15'},
+    {key:'sabado',label:'Dissabte 16'},
+    {key:'domingo',label:'Diumenge 17'}
+  ];
+  const dayBtns=days.map(d=>`<button class="prog-day-btn${d.key===currentProgramaDay?' active':''}" onclick="switchProgramaDay('${d.key}',this)">${d.label}</button>`).join('');
+  const data=programaData[currentProgramaDay];
+  let tableHtml='';
+  if(!data||!data.rows||!data.rows.length){
+    tableHtml=`<div class="prog-empty">Programa no disponible per a aquest dia.</div>`;
+  } else {
+    const ths=data.fields.map(f=>`<th>${esc(f)}</th>`).join('');
+    const trs=data.rows.map(slots=>`<tr>${slots.map(s=>{
+      if(!s.hora&&!s.partida) return`<td style="color:rgba(255,255,255,0.2)">–</td>`;
+      const h=s.hora?`<span class="hora-badge">${esc(s.hora)}</span>`:'';
+      const p=s.partida?esc(s.partida):'';
+      return`<td>${h}${p}</td>`;
+    }).join('')}</tr>`).join('');
+    tableHtml=`<div style="overflow-x:auto"><table class="programa-table"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
+  }
+  el.innerHTML=`
+    <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f9ea09;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="flex:1;height:1px;background:rgba(249,234,9,0.2);display:block"></span>
+      &#128197; Programa de Partits
+      <span style="flex:1;height:1px;background:rgba(249,234,9,0.2);display:block"></span>
+    </div>
+    <div class="programa-day-tabs">${dayBtns}</div>
+    ${tableHtml}`;
+}
 loadAllData();
 setInterval(loadAllData,120000);
 </script>
