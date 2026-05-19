@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rànquing General – Circuit Català de Futevolei 2026</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJ827VFRD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WKJ827VFRD');
+</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#1a1507;min-height:100vh;padding:20px;color:#fff;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(225,107,11,.22) 0%,transparent 50%),radial-gradient(ellipse at 85% 100%,rgba(249,234,9,.07) 0%,transparent 50%);pointer-events:none;z-index:0}
+.container{max-width:1200px;margin:0 auto;position:relative;z-index:1}
+
+/* NAV */
+.top-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.nav-brand{display:flex;flex-direction:column}
+.nav-brand-sub{font-size:10px;font-weight:700;letter-spacing:3px;color:rgba(255,255,255,.4);text-transform:uppercase}
+.nav-brand-name{font-size:18px;font-weight:900;letter-spacing:-0.5px;color:#fff}
+.nav-etapes{display:flex;gap:8px;flex-wrap:wrap}
+.nav-etapa-btn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:20px;color:rgba(255,255,255,.6);text-decoration:none;font-size:12px;font-weight:600;padding:7px 14px;transition:all .2s}
+.nav-etapa-btn:hover{background:rgba(225,107,11,.15);border-color:rgba(225,107,11,.4);color:#fff}
+.nav-etapa-btn.active{background:linear-gradient(135deg,#e16b0b,#f9a030);border-color:#e16b0b;color:#1a1507}
+.nav-etapa-btn .dot{width:6px;height:6px;border-radius:50%;background:#f9ea09;flex-shrink:0}
+.nav-etapa-btn .dot.off{background:rgba(255,255,255,.25)}
+
+/* HEADER */
+.page-header{text-align:center;margin-bottom:32px}
+.circuit-badge{display:inline-block;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-size:10px;font-weight:900;letter-spacing:3px;padding:5px 16px;border-radius:30px;margin-bottom:12px;text-transform:uppercase}
+.page-title{font-size:2.2rem;font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:8px;background:linear-gradient(135deg,#fff 40%,#f9ea09);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-sub{color:rgba(255,255,255,.5);font-size:14px}
+
+/* ETAPES CARDS */
+.etapes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:32px}
+@media(max-width:700px){.etapes-grid{grid-template-columns:1fr}}
+.etapa-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 20px;text-decoration:none;color:#fff;transition:all .2s;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden}
+.etapa-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(225,107,11,.08),transparent);opacity:0;transition:opacity .2s}
+.etapa-card:hover{border-color:rgba(225,107,11,.4);transform:translateY(-2px);box-shadow:0 8px 32px rgba(225,107,11,.15)}
+.etapa-card:hover::before{opacity:1}
+.etapa-card.active-etapa{border-color:rgba(249,234,9,.35);background:rgba(249,234,9,.05)}
+.etapa-card.upcoming{opacity:.5;cursor:default;pointer-events:none}
+.etapa-card.upcoming:hover{transform:none;box-shadow:none}
+.etapa-num{font-size:10px;font-weight:800;letter-spacing:2px;color:#f9a030;text-transform:uppercase}
+.etapa-city{font-size:1.3rem;font-weight:800;letter-spacing:-.5px}
+.etapa-date{font-size:11px;color:rgba(255,255,255,.45);font-weight:500}
+.etapa-status{display:inline-block;font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:10px;text-transform:uppercase;margin-top:2px}
+.etapa-status.live{background:rgba(249,234,9,.15);color:#f9ea09;border:1px solid rgba(249,234,9,.3)}
+.etapa-status.upcoming{background:rgba(255,255,255,.07);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.1)}
+.etapa-status.done{background:rgba(100,200,100,.1);color:#7ddd7d;border:1px solid rgba(100,200,100,.25)}
+
+/* CONTENT CARD */
+.content-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;margin-bottom:16px}
+
+/* TABS */
+.cat-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.cat-tab{padding:10px 22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:30px;color:rgba(255,255,255,.65);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.cat-tab:hover{background:rgba(225,107,11,.15);border-color:rgba(225,107,11,.4);color:#fff}
+.cat-tab.active{background:linear-gradient(135deg,#e16b0b,#f9a030);border-color:#e16b0b;color:#1a1507}
+
+/* FILTERS */
+.filters{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.filter-group{flex:1;min-width:180px}
+.filter-group label{display:block;font-size:10px;font-weight:700;letter-spacing:1.5px;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:5px}
+.filter-group input,.filter-group select{width:100%;padding:9px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#fff;font-size:13px}
+.filter-group input:focus,.filter-group select:focus{outline:none;border-color:#e16b0b}
+.filter-group select option{background:#2a1f0a}
+
+/* RANKING TABLE */
+.ranking-table{width:100%;border-collapse:collapse}
+.ranking-table thead tr{background:rgba(225,107,11,.12)}
+.ranking-table th{padding:10px 14px;text-align:left;color:rgba(255,255,255,.45);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;user-select:none;white-space:nowrap}
+.ranking-table th:hover{color:#f9a030}
+.ranking-table th.num{text-align:center}
+.ranking-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px;color:rgba(255,255,255,.85)}
+.ranking-table td.num{text-align:center}
+.ranking-table tr:hover td{background:rgba(225,107,11,.06)}
+.ranking-table tr:last-child td{border-bottom:none}
+
+.pos{font-weight:800;font-size:1rem}
+.pos-1{color:#f9ea09}
+.pos-2{color:#d0d0d0}
+.pos-3{color:#e16b0b}
+
+.pts-col{font-weight:700;color:#f9a030;font-size:14px}
+.pts-etapa{color:rgba(255,255,255,.45);font-size:12px}
+.pts-etapa.has{color:rgba(255,255,255,.75)}
+
+.dupla-name{font-weight:600}
+.club-name{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+
+.no-data{text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:14px}
+
+/* UPDATE */
+.update-bar{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.refresh-btn{background:rgba(225,107,11,.15);border:1px solid rgba(225,107,11,.35);color:#f9a030;font-size:12px;padding:5px 12px;border-radius:6px;cursor:pointer}
+.refresh-btn:hover{background:rgba(225,107,11,.28)}
+
+.loading{text-align:center;padding:40px;color:rgba(255,255,255,.35)}
+.spinner{display:inline-block;width:24px;height:24px;border:2px solid rgba(255,255,255,.1);border-top-color:#e16b0b;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.page-title{font-size:1.6rem}body{padding:12px}.content-card{padding:14px}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- NAV -->
+<nav class="top-nav">
+  <div class="nav-brand">
+    <span class="nav-brand-sub">Circuit Català de</span>
+    <span class="nav-brand-name">Futevolei 2026</span>
+  </div>
+  <div class="nav-etapes">
+    <a href="index.html" class="nav-etapa-btn active">
+      <span class="dot"></span>Etapa 1 · Torredembarra
+    </a>
+    <span class="nav-etapa-btn"><span class="dot off"></span>Etapa 2 · Castelldefels</span>
+    <span class="nav-etapa-btn"><span class="dot off"></span>Etapa 3 · Vilanova</span>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div><img src="logo.png" alt="Circuit Català" style="height:60px;filter:brightness(0) invert(1);opacity:.85;margin-bottom:10px" onerror="this.style.display='none'"></div>
+  <div><span class="circuit-badge">Temporada 2026</span></div>
+  <h1 class="page-title">Rànquing General</h1>
+  <p class="page-sub">Classificació acumulada de les 3 etapes</p>
+</div>
+
+<!-- ETAPES CARDS -->
+<div class="etapes-grid">
+  <a href="index.html" class="etapa-card active-etapa">
+    <span class="etapa-num">Etapa 1</span>
+    <span class="etapa-city">⛵ Torredembarra</span>
+    <span class="etapa-date">15 · 16 · 17 de Maig 2026</span>
+    <span class="etapa-status live">En curs</span>
+  </a>
+  <div class="etapa-card upcoming">
+    <span class="etapa-num">Etapa 2</span>
+    <span class="etapa-city">🏖 Castelldefels</span>
+    <span class="etapa-date">Data per confirmar</span>
+    <span class="etapa-status upcoming">Pròximament</span>
+  </div>
+  <div class="etapa-card upcoming">
+    <span class="etapa-num">Etapa 3</span>
+    <span class="etapa-city">🌊 Vilanova i la Geltrú</span>
+    <span class="etapa-date">Data per confirmar</span>
+    <span class="etapa-status upcoming">Pròximament</span>
+  </div>
+</div>
+
+<!-- UPDATE BAR -->
+<div class="update-bar">
+  <span id="last-update">Carregant rànquing...</span>
+  <button class="refresh-btn" onclick="loadAllData()">↻ Actualitzar</button>
+</div>
+
+<!-- CAT TABS -->
+<div class="cat-tabs">
+  <button class="cat-tab active" onclick="switchCat('pro',this)">PRO</button>
+  <button class="cat-tab" onclick="switchCat('amateur-a',this)">AMATEUR A</button>
+  <button class="cat-tab" onclick="switchCat('amateur-b',this)">AMATEUR B</button>
+  <button class="cat-tab" onclick="switchCat('femeni',this)">FEMENÍ</button>
+  <button class="cat-tab" onclick="switchCat('mixt',this)">MIXT</button>
+</div>
+
+<div class="content-card">
+  <div class="filters">
+    <div class="filter-group">
+      <label>Cercar dupla</label>
+      <input type="text" id="search-dupla" placeholder="Nom de la dupla..." oninput="renderRanking()">
+    </div>
+  </div>
+  <div id="ranking-content">
+    <div class="loading"><div class="spinner"></div><p>Carregant dades...</p></div>
+  </div>
+</div>
+
+</div>
+<script>
+// ── PUNTUACIÓ PER POSICIÓ ─────────────────────────────────
+const POINTS = {
+  pro:       [10000,10000,7800,7000,6400,6400,6400,6400,5800,5800,5800,5800,5300,5300,5300,5300,5300,5300,5300,5300,4800,4800,4800,4800,4800,4800,4800,4800],
+  'amateur-a':[4000,4000,2700,2300,2000,2000,2000,2000,1750,1750,1750,1750,1550,1550,1550,1550,1550,1550,1550,1550,1350,1350,1350,1350,1350,1350,1350,1350],
+  'amateur-b':[1000,1000,825,725,650,650,650,650,575,575,575,575,525,525,525,525,525,525,525,525,475,475,475,475,475,475,475,475],
+  femeni:    [4000,4000,2700,2300,2000,2000,2000,2000,1750,1750,1750,1750,1550,1550,1550,1550,1550,1550,1550,1550,1350,1350,1350,1350,1350,1350,1350,1350],
+  mixt:      [4000,4000,2700,2300,2000,2000,2000,2000,1750,1750,1750,1750,1550,1550,1550,1550,1550,1550,1550,1550,1350,1350,1350,1350,1350,1350,1350,1350]
+};
+
+function getPts(cat, pos0){
+  const arr = POINTS[cat] || [];
+  if(pos0 < arr.length) return arr[pos0];
+  return arr[arr.length-1] || 0;
+}
+
+// ── URLs RANKING (Google Sheets CSV) ─────────────────────
+// Formato: dupla, etapa_1, etapa_2, etapa_3
+// dupla = nome, etapa_N = posição final nessa etapa (ex: 1, 5, 13)
+// Deixa vazio se ainda não foi jogada
+const RANKING_URLS = {
+  pro:        '',
+  'amateur-a':'',
+  'amateur-b':'',
+  femeni:     '',
+  mixt:       ''
+};
+
+// ── DADOS ─────────────────────────────────────────────────
+let rankingData = {
+  pro: [], 'amateur-a': [], 'amateur-b': [], femeni: [], mixt: []
+};
+let currentCat = 'pro';
+let sortField = 'total';
+let sortAsc = false;
+
+// ── CÀRREGA ───────────────────────────────────────────────
+async function loadAllData(){
+  document.getElementById('last-update').textContent = 'Actualitzant...';
+
+  await Promise.allSettled(Object.entries(RANKING_URLS).map(async([cat, url]) => {
+    if(!url) return;
+    try {
+      const r = await fetch(url);
+      if(!r.ok) throw new Error('HTTP ' + r.status);
+      const data = parseRankingCSV(await r.text(), cat);
+      if(data && data.length) rankingData[cat] = data;
+    } catch(e) { console.warn('Ranking', cat, e); }
+  }));
+
+  document.getElementById('last-update').textContent =
+    `Última actualització: ${new Date().toLocaleTimeString('ca-ES')}`;
+  renderRanking();
+}
+
+function parseRankingCSV(text, cat){
+  const lines = text.trim().split('\n').map(l => l.split(',').map(c => c.trim().replace(/"/g,'')));
+  if(lines.length < 2) return [];
+  const h = lines[0];
+  const out = [];
+  for(let i = 1; i < lines.length; i++){
+    const row = {};
+    h.forEach((k, idx) => row[k] = lines[i][idx] || '');
+    if(!row.dupla) continue;
+    const pos1 = row.etapa_1 !== '' ? parseInt(row.etapa_1) - 1 : null;
+    const pos2 = row.etapa_2 !== '' ? parseInt(row.etapa_2) - 1 : null;
+    const pos3 = row.etapa_3 !== '' ? parseInt(row.etapa_3) - 1 : null;
+    const p1 = pos1 !== null ? getPts(cat, pos1) : 0;
+    const p2 = pos2 !== null ? getPts(cat, pos2) : 0;
+    const p3 = pos3 !== null ? getPts(cat, pos3) : 0;
+    out.push({
+      dupla: row.dupla,
+      club: row.club || '',
+      etapa_1: p1, etapa_2: p2, etapa_3: p3,
+      total: p1 + p2 + p3,
+      pos1_raw: pos1, pos2_raw: pos2, pos3_raw: pos3
+    });
+  }
+  return out.sort((a,b) => b.total - a.total);
+}
+
+// ── RENDER ────────────────────────────────────────────────
+function switchCat(cat, btn){
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  currentCat = cat;
+  sortField = 'total'; sortAsc = false;
+  renderRanking();
+}
+
+function sortBy(field){
+  if(sortField === field) sortAsc = !sortAsc;
+  else { sortField = field; sortAsc = false; }
+  renderRanking();
+}
+
+function renderRanking(){
+  const el = document.getElementById('ranking-content');
+  const search = document.getElementById('search-dupla').value.toLowerCase();
+  let data = [...(rankingData[currentCat] || [])];
+
+  if(search) data = data.filter(d => d.dupla.toLowerCase().includes(search));
+
+  data.sort((a,b) => {
+    let av = a[sortField] ?? 0, bv = b[sortField] ?? 0;
+    if(typeof av === 'string'){ av = av.toLowerCase(); bv = bv.toLowerCase(); }
+    return sortAsc ? (av > bv ? 1 : -1) : (av < bv ? 1 : -1);
+  });
+
+  if(!data.length){
+    el.innerHTML = `<div class="no-data">${rankingData[currentCat].length === 0
+      ? 'Rànquing no disponible. Configura la URL del Google Sheets per a aquesta categoria.'
+      : 'No s\'han trobat resultats.'}</div>`;
+    return;
+  }
+
+  const rows = data.map((d, i) => {
+    const pos = i + 1;
+    const pc = pos===1?'pos-1':pos===2?'pos-2':pos===3?'pos-3':'';
+    const e1 = d.etapa_1 ? `<span class="pts-etapa has">${d.etapa_1.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
+    const e2 = d.etapa_2 ? `<span class="pts-etapa has">${d.etapa_2.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
+    const e3 = d.etapa_3 ? `<span class="pts-etapa has">${d.etapa_3.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
+    return `<tr>
+      <td class="num"><span class="pos ${pc}">${pos}</span></td>
+      <td><div class="dupla-name">${d.dupla}</div>${d.club?`<div class="club-name">${d.club}</div>`:''}</td>
+      <td class="num">${e1}</td>
+      <td class="num">${e2}</td>
+      <td class="num">${e3}</td>
+      <td class="num pts-col">${d.total.toLocaleString()}</td>
+    </tr>`;
+  }).join('');
+
+  el.innerHTML = `<div style="overflow-x:auto">
+    <table class="ranking-table">
+      <thead><tr>
+        <th class="num" onclick="sortBy('pos')">#</th>
+        <th onclick="sortBy('dupla')">Dupla</th>
+        <th class="num" onclick="sortBy('etapa_1')">E1<br><small style="font-weight:400;opacity:.6">Torredembarra</small></th>
+        <th class="num" onclick="sortBy('etapa_2')">E2<br><small style="font-weight:400;opacity:.6">Castelldefels</small></th>
+        <th class="num" onclick="sortBy('etapa_3')">E3<br><small style="font-weight:400;opacity:.6">Vilanova</small></th>
+        <th class="num" onclick="sortBy('total')">Total</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+  </div>`;
+}
+
+// ── INIT ──────────────────────────────────────────────────
+loadAllData();
+setInterval(loadAllData, 120000);
+</script>
+</body>
+</html>

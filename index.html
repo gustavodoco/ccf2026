@@ -2,6 +2,14 @@
 <html lang="ca">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJ827VFRD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WKJ827VFRD');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Etapa 1 Torredembarra 2026 – Circuit Català de Futevolei</title>
 <style>
@@ -95,6 +103,20 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 </head>
 <body>
 <div class="container">
+<!-- NAV -->
+<nav style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px">
+  <a href="ranking.html" style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;font-weight:600;transition:color .2s" onmouseover="this.style.color='#f9ea09'" onmouseout="this.style.color='rgba(255,255,255,.5)'">
+    ← Rànquing General
+  </a>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 14px;border-radius:20px;text-transform:uppercase">
+      <span style="width:6px;height:6px;border-radius:50%;background:#1a1507;opacity:.5;display:inline-block"></span>
+      Etapa 1 · Torredembarra
+    </span>
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.35);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px">Etapa 2 · Castelldefels</span>
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.35);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px">Etapa 3 · Vilanova</span>
+  </div>
+</nav>
 <div class="page-header">
   <div><img src="logo.png" alt="Circuit Català" style="height:55px;filter:brightness(0) invert(1);opacity:.85;margin-bottom:8px" onerror="this.style.display='none'"></div>
   <div><span class="etapa-badge">Etapa 1 · 2026</span></div>
@@ -147,11 +169,7 @@ const SHEET_URLS={
   femeni:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=1561764640&single=true&output=csv',
   mixt:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=45733146&single=true&output=csv'
 };
-const PLAYOFF_URLS={pro:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=514388579&single=true&output=csv',
-'amat-a':'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=930444700&single=true&output=csv',
-'amat-b':'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=930444700&single=true&output=csv',
-femeni:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=564804510&single=true&output=csv',
-mixt:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=1195574451&single=true&output=csv'};
+const PLAYOFF_URLS={pro:'','amat-a':'','amat-b':'',femeni:'',mixt:''};
 const PROGRAMA_URLS={
   divendres:'',
   sabado:'https://docs.google.com/spreadsheets/d/e/2PACX-1vTtOltc20LrDm5Necudrv_4xcSmGysl7Hr6yGXS6rOVRWBbLVvX4XDl-XtH2EWzdif3PruVeZzzd6v3/pub?gid=579853102&single=true&output=csv',
