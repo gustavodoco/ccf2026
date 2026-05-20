@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJ827VFRD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WKJ827VFRD');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Etapa 2 Castelldefels 2026 – Circuit Català de Futevolei</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#1a1507;min-height:100vh;padding:20px;color:#fff;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 0%,rgba(225,107,11,.22) 0%,transparent 50%),radial-gradient(ellipse at 85% 100%,rgba(249,234,9,.07) 0%,transparent 50%);pointer-events:none;z-index:0}
+.container{max-width:1300px;margin:0 auto;position:relative;z-index:1}
+.page-header{text-align:center;margin-bottom:24px}
+.etapa-badge{display:inline-block;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-size:10px;font-weight:900;letter-spacing:2.5px;padding:5px 16px;border-radius:30px;margin-bottom:10px;text-transform:uppercase}
+.page-title{font-size:2rem;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;background:linear-gradient(135deg,#fff 40%,#f9ea09);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.page-sub{color:rgba(255,255,255,.5);font-size:14px}
+.dates-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(249,234,9,.1);border:1px solid rgba(249,234,9,.3);color:#f9ea09;font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px;margin-top:8px}
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(226,75,74,.15);border:1px solid rgba(226,75,74,.4);color:#f09595;font-size:12px;padding:4px 12px;border-radius:20px;margin-top:8px;margin-left:6px}
+.live-dot{width:6px;height:6px;background:#e24b4a;border-radius:50%;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.update-bar{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:10px 16px;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.refresh-btn{background:rgba(225,107,11,.15);border:1px solid rgba(225,107,11,.35);color:#f9a030;font-size:12px;padding:5px 12px;border-radius:6px;cursor:pointer}
+.refresh-btn:hover{background:rgba(225,107,11,.28)}
+.cat-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.cat-tab{padding:10px 22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);border-radius:30px;color:rgba(255,255,255,.65);font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;letter-spacing:.5px}
+.cat-tab:hover{background:rgba(225,107,11,.15);border-color:rgba(225,107,11,.4);color:#fff}
+.cat-tab.active{background:linear-gradient(135deg,#e16b0b,#f9a030);border-color:#e16b0b;color:#1a1507}
+.content-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:24px;margin-bottom:16px}
+.cat-info-box{background:rgba(225,107,11,.08);border:1px solid rgba(225,107,11,.2);border-radius:10px;padding:12px 16px;margin-bottom:20px;font-size:12px;color:rgba(255,255,255,.6);line-height:1.6}
+.cat-info-box strong{color:#f9a030}
+.groups-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:16px}
+.group-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden}
+.group-header{background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;padding:12px 18px;font-weight:900;font-size:12px;letter-spacing:2px;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
+.group-size{font-size:10px;opacity:.65}
+.group-body{padding:14px 18px}
+.section-label{font-size:10px;letter-spacing:1.5px;color:rgba(255,255,255,.35);text-transform:uppercase;margin-bottom:8px}
+.match-row{display:flex;align-items:center;gap:6px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
+.match-row:last-of-type{border-bottom:none}
+.team-name{flex:1;color:rgba(255,255,255,.88);font-weight:500;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.team-name.right{text-align:right}
+.vs{color:rgba(255,255,255,.25);font-size:10px;min-width:12px;text-align:center}
+.score-wrap{display:flex;gap:3px}
+.score-box{width:26px;height:24px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.6)}
+.score-box.winner{background:rgba(225,107,11,.7);border-color:#e16b0b;color:#fff}
+.standings-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:12px}
+.standings-table thead tr{background:rgba(225,107,11,.12)}
+.standings-table th{padding:8px 10px;text-align:center;color:rgba(255,255,255,.45);font-weight:700;font-size:11px}
+.standings-table th:first-child{text-align:left}
+.standings-table td{padding:8px 10px;text-align:center;color:rgba(255,255,255,.8);border-bottom:1px solid rgba(255,255,255,.05)}
+.standings-table td:first-child{text-align:left}
+.standings-table tr:last-child td{border-bottom:none}
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;font-weight:800;margin-right:6px}
+.rank-1{background:#f9ea09;color:#1a1507}
+.rank-2{background:rgba(255,255,255,.2);color:#fff}
+.rank-3{background:rgba(225,107,11,.5);color:#fff}
+.rank-other{background:rgba(255,255,255,.07);color:rgba(255,255,255,.45)}
+.bracket-section-title{font-size:11px;font-weight:800;letter-spacing:2px;color:#f9a030;text-transform:uppercase;margin:24px 0 14px;display:flex;align-items:center;gap:10px}
+.bracket-section-title::before,.bracket-section-title::after{content:'';flex:1;height:1px;background:rgba(225,107,11,.3)}
+.bracket-svg-wrap{overflow-x:auto;padding:4px 0 16px;cursor:default}
+.bracket-sublabel{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin:16px 0 6px;font-weight:700}
+.config-panel{background:rgba(225,107,11,.07);border:1px solid rgba(225,107,11,.2);border-radius:12px;padding:16px 20px;margin-bottom:20px}
+.config-title{font-size:13px;font-weight:700;color:#f9a030;margin-bottom:12px}
+.config-section{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);margin:14px 0 8px;letter-spacing:1px;text-transform:uppercase}
+.config-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.config-label{font-size:12px;color:rgba(255,255,255,.55);min-width:120px}
+.config-input{flex:1;min-width:200px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);border-radius:6px;color:#fff;font-size:12px;padding:6px 10px}
+.config-input::placeholder{color:rgba(255,255,255,.25)}
+.config-save{background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;border:none;border-radius:6px;padding:6px 14px;font-size:12px;font-weight:800;cursor:pointer}
+.config-hint{font-size:11px;color:rgba(255,255,255,.35);margin-top:10px;line-height:1.5}
+.toggle-config{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.6);font-size:12px;padding:6px 14px;border-radius:6px;cursor:pointer;margin-bottom:16px}
+.loading{text-align:center;padding:40px;color:rgba(255,255,255,.35)}
+.spinner{display:inline-block;width:24px;height:24px;border:2px solid rgba(255,255,255,.1);border-top-color:#e16b0b;border-radius:50%;animation:spin .8s linear infinite;margin-bottom:10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.page-title{font-size:1.4rem}.groups-grid{grid-template-columns:1fr}body{padding:12px}.content-card{padding:14px}.cat-tab{padding:9px 14px;font-size:12px}}
+
+.programa-day-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.prog-day-btn{padding:7px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.13);border-radius:20px;color:rgba(255,255,255,0.55);font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.prog-day-btn.active{background:rgba(249,234,9,0.15);border-color:rgba(249,234,9,0.4);color:#f9ea09}
+.programa-table{width:100%;border-collapse:collapse;font-size:12px}
+.programa-table th{padding:9px 14px;text-align:left;background:rgba(249,234,9,0.08);color:rgba(249,234,9,0.6);font-weight:700;font-size:10px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid rgba(249,234,9,0.15);white-space:nowrap}
+.programa-table td{padding:9px 14px;border-bottom:1px solid rgba(255,255,255,0.05);color:rgba(255,255,255,0.8);vertical-align:middle;white-space:nowrap}
+.programa-table tr:last-child td{border-bottom:none}
+.programa-table tr:hover td{background:rgba(249,234,9,0.04)}
+.hora-badge{display:inline-block;background:rgba(249,234,9,0.12);border:1px solid rgba(249,234,9,0.25);color:#f9ea09;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px;margin-right:5px}
+.prog-empty{text-align:center;padding:30px;color:rgba(255,255,255,0.3);font-size:13px}
+
+.sched-badge{display:inline-flex;align-items:center;gap:5px;flex-shrink:0}
+.sched-hora{display:inline-block;background:rgba(249,234,9,0.12);border:1px solid rgba(249,234,9,0.3);color:#f9ea09;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.sched-camp{display:inline-block;background:rgba(225,107,11,0.15);border:1px solid rgba(225,107,11,0.3);color:#f9a030;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.match-sched{margin-bottom:5px}
+.match-row{flex-direction:column;align-items:flex-start;padding:10px 0}
+.match-teams{display:flex;align-items:center;gap:6px;width:100%}
+.team-name{flex:1;color:rgba(255,255,255,.88);font-weight:600;font-size:13px;white-space:normal;overflow:visible;text-overflow:unset}
+.team-name.right{text-align:right}
+</style>
+</head>
+<body>
+<div class="container">
+<!-- NAV -->
+<nav style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px">
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;font-weight:600;transition:color .2s" onmouseover="this.style.color='#f9ea09'" onmouseout="this.style.color='rgba(255,255,255,.5)'">
+    ← Rànquing General
+  </a>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <span style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 14px;border-radius:20px;text-transform:uppercase">
+      <span style="width:6px;height:6px;border-radius:50%;background:#1a1507;opacity:.5;display:inline-block"></span>
+      Etapa 1 · Torredembarra
+    </span>
+    <span style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 14px;border-radius:20px;text-transform:uppercase">Etapa 2 · Castelldefels</span>
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.35);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px">Etapa 3 · Vilanova</span>
+  </div>
+</nav>
+<div class="page-header">
+  <div><img src="logo.png" alt="Circuit Català" style="height:55px;filter:brightness(0) invert(1);opacity:.85;margin-bottom:8px" onerror="this.style.display='none'"></div>
+  <div><span class="etapa-badge">Etapa 2 · 2026</span></div>
+  <h1 class="page-title">🏖 Castelldefels</h1>
+  <p class="page-sub">Circuit Català de Futevolei</p>
+  <div>
+    <span class="dates-badge">📅 12 · 13 · 14 de Juny 2026</span>
+    <span class="live-badge"><span class="live-dot"></span>Actualització automàtica</span>
+  </div>
+</div>
+<div class="update-bar">
+  <span id="last-update">Carregant dades...</span>
+  <button class="refresh-btn" onclick="loadAllData()">↻ Actualitzar</button>
+</div>
+<button class="toggle-config" onclick="toggleConfig()" style="display:none" id="admin-btn">⚙ Configurar URLs de Google Sheets</button>
+<div class="config-panel" id="config-panel" style="display:none">
+  <div class="config-title">URLs de Google Sheets (CSV publicat)</div>
+  <div class="config-section">Fase de Grups</div>
+  <div class="config-row"><span class="config-label">Pro</span><input class="config-input" id="url-pro" placeholder="URL CSV pestanya Pro"></div>
+  <div class="config-row"><span class="config-label">Amateur</span><input class="config-input" id="url-amateur" placeholder="URL CSV pestanya Amateur"></div>
+  <div class="config-row"><span class="config-label">Femení</span><input class="config-input" id="url-femeni" placeholder="URL CSV pestanya Femení"></div>
+  <div class="config-row"><span class="config-label">Mixt</span><input class="config-input" id="url-mixt" placeholder="URL CSV pestanya Mixt"></div>
+  <div class="config-section">Playoffs</div>
+  <div class="config-row"><span class="config-label">Playoffs Pro</span><input class="config-input" id="url-playoff-pro" placeholder="URL CSV Playoffs_Pro"></div>
+  <div class="config-row"><span class="config-label">Playoffs Amateur A</span><input class="config-input" id="url-playoff-amat-a" placeholder="URL CSV Playoffs_AmateurA"></div>
+  <div class="config-row"><span class="config-label">Playoffs Amateur B</span><input class="config-input" id="url-playoff-amat-b" placeholder="URL CSV Playoffs_AmateurB"></div>
+  <div class="config-row"><span class="config-label">Playoffs Femení</span><input class="config-input" id="url-playoff-femeni" placeholder="URL CSV Playoffs_Femení"></div>
+  <div class="config-row"><span class="config-label">Playoffs Mixt</span><input class="config-input" id="url-playoff-mixt" placeholder="URL CSV Playoffs_Mixt"></div>
+  <div class="config-row" style="margin-top:10px"><button class="config-save" onclick="saveUrls()">Desar URLs</button></div>
+  <div class="config-hint">Arxiu → Compartir → Publicar al web → pestanya → CSV → Publicar → copiar l'enllaç.</div>
+</div>
+<div class="cat-tabs">
+  <button class="cat-tab active" onclick="showCat('pro',this)">PRO</button>
+  <button class="cat-tab" onclick="showCat('amateur',this)">AMATEUR</button>
+  <button class="cat-tab" onclick="showCat('femeni',this)">FEMENÍ</button>
+  <button class="cat-tab" onclick="showCat('mixt',this)">MIXT</button>
+</div>
+<div class="content-card"><div id="cat-content"><div class="loading"><div class="spinner"></div><p>Carregant dades...</p></div></div></div>
+</div>
+
+<script>
+// ── ADMIN ─────────────────────────────────────────────────
+let _c=0,_t;
+document.querySelector('.page-title').addEventListener('click',()=>{_c++;clearTimeout(_t);_t=setTimeout(()=>_c=0,2000);if(_c>=5){_c=0;const b=document.getElementById('admin-btn');b.style.display='inline-block';b.scrollIntoView({behavior:'smooth'})}});
+
+// ── URLs ──────────────────────────────────────────────────
+const SHEET_URLS={
+  pro:'',
+  amateur:'',
+  femeni:'',
+  mixt:''
+};
+const PLAYOFF_URLS={pro:'','amat-a':'','amat-b':'',femeni:'',mixt:''};
+const PROGRAMA_URLS={
+  divendres:'',
+  sabado:'',
+  domingo:''
+};
+let programaData={divendres:null,sabado:null,domingo:null};
+
+// ── FALLBACK ──────────────────────────────────────────────
+const FALLBACK_DATA={
+  pro:{info:'4 grups de 4 equipes. Els <strong>1rs</strong> passen directament a la Fase 2. Els <strong>2ns i 3rs</strong> juguen la Fase 1. Els <strong>4ts</strong> cauen a l\'Amateur A.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3','Parella C4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3','Parella D4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
+  ]},
+  amateur:{info:'2 grups de 3 equipes + 4 grups de 4 equipes. <strong>Amateur A</strong> (12 eq.): 6 primers + 2 millors 2ns + 4 últims del Pro. <strong>Amateur B</strong> (16 eq.): la resta.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3','Parella C4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3','Parella D4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3','Parella E4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3','Parella F4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
+  ]},
+  femeni:{info:'1 grup de 7 equipes (tots contra tots). Les <strong>4 primeres</strong> passen a les semifinals.',grupos:[
+    {nome:'Grup Únic',equipes:['Parella 1','Parella 2','Parella 3','Parella 4','Parella 5','Parella 6','Parella 7'],
+     partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:4,visit:5,p_local:null,p_visit:null},{local:6,visit:0,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null},{local:5,visit:6,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:4,visit:6,p_local:null,p_visit:null},{local:5,visit:0,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:3,visit:5,p_local:null,p_visit:null},{local:6,visit:1,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:1,visit:5,p_local:null,p_visit:null},{local:2,visit:6,p_local:null,p_visit:null},{local:3,visit:0,p_local:null,p_visit:null},{local:4,visit:1,p_local:null,p_visit:null},{local:5,visit:2,p_local:null,p_visit:null},{local:6,visit:3,p_local:null,p_visit:null}]}
+  ]},
+  mixt:{info:'6 grups de 3 equipes. <strong>Fase prèvia</strong>: 2ns vs 3rs d\'altres grups. Els 6 primers + 6 vencedors = <strong>12 equipes</strong> al playoff.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
+  ]}
+};
+
+let etapaData={};
+let playoffData={pro:[],  'amat-a':[], 'amat-b':[], femeni:[], mixt:[]};
+let currentCat='pro';
+
+// ── CÀRREGA ───────────────────────────────────────────────
+async function loadAllData(){
+  document.getElementById('last-update').textContent='Actualitzant...';
+  Object.keys(FALLBACK_DATA).forEach(c=>{if(!etapaData[c])etapaData[c]=JSON.parse(JSON.stringify(FALLBACK_DATA[c]))});
+  renderCat(currentCat);
+  try{const r=await fetch('etapa_castelldefels_data.json');if(r.ok){const j=await r.json();Object.keys(j).forEach(c=>{if(j[c]&&j[c].grupos)etapaData[c]={...FALLBACK_DATA[c],...j[c]}})}}catch(e){}
+  await Promise.allSettled(Object.entries(SHEET_URLS).map(async([c,u])=>{if(!u)return;try{const d=await loadFromSheets(u);if(d&&d.grupos&&d.grupos.length)etapaData[c]={...FALLBACK_DATA[c],...d}}catch(e){}}));
+  await Promise.allSettled(Object.entries(PLAYOFF_URLS).map(async([k,u])=>{if(!u)return;try{playoffData[k]=await loadPlayoffsFromSheets(u)}catch(e){}}));
+  await loadPrograma();
+  document.getElementById('last-update').textContent=`Última actualització: ${new Date().toLocaleTimeString('ca-ES')}`;
+  renderCat(currentCat);
+}
+async function loadFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();return parseCSV(await r.text())}
+function parseCSV(text){
+  const lines=text.trim().split('\n').map(l=>l.split(',').map(c=>c.trim().replace(/"/g,'')));
+  const h=lines[0];const grupos={};
+  for(let i=1;i<lines.length;i++){const row={};h.forEach((k,idx)=>row[k]=lines[i][idx]||'');if(!row.grupo||!row.local)continue;if(!grupos[row.grupo])grupos[row.grupo]={nome:row.grupo,partidas:[],equipes:[]};const g=grupos[row.grupo];const lI=goa(g.equipes,row.local);const vI=goa(g.equipes,row.visitante);g.partidas.push({local:lI,visit:vI,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null})}
+  return{grupos:Object.values(grupos)}
+}
+async function loadPlayoffsFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();const lines=(await r.text()).trim().split('\n').map(l=>l.split(',').map(c=>c.trim().replace(/"/g,'')));const h=lines[0];const out=[];for(let i=1;i<lines.length;i++){const row={};h.forEach((k,idx)=>row[k]=lines[i][idx]||'');if(!row.fase||!row.local)continue;out.push({fase:row.fase,local:row.local,visit:row.visitante,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null})}return out}
+function goa(arr,v){let i=arr.indexOf(v);if(i===-1){arr.push(v);i=arr.length-1}return i}
+
+// ── CLASSIFICACIÓ ─────────────────────────────────────────
+function calcStandings(g){
+  const s=g.equipes.map(e=>({nome:e,v:0,p_plus:0,p_minus:0}));
+  g.partidas.forEach(p=>{if(p.p_local!==null&&p.p_visit!==null){s[p.local].p_plus+=p.p_local;s[p.local].p_minus+=p.p_visit;s[p.visit].p_plus+=p.p_visit;s[p.visit].p_minus+=p.p_local;if(p.p_local>p.p_visit)s[p.local].v++;else if(p.p_visit>p.p_local)s[p.visit].v++}});
+  return s.sort((a,b)=>b.v-a.v||(b.p_plus-b.p_minus)-(a.p_plus-a.p_minus)||b.p_plus-a.p_plus)
+}
+function findPrograma(nameA, nameB){
+  // Busca en tots els dies del programa
+  for(const day of Object.keys(programaData)){
+    const data=programaData[day];
+    if(!data||!data.rows) continue;
+    for(const slots of data.rows){
+      for(const s of slots){
+        if(!s.partida) continue;
+        const p=s.partida.toLowerCase();
+        const a=nameA.toLowerCase(), b=nameB.toLowerCase();
+        // Comprova si els dos noms apareixen a la cel·la
+        if(p.includes(a)&&p.includes(b)){
+          return{hora:s.hora, camp:s.camp, dia:day};
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function diaLabel(d){return d==='divendres'?'Div.':d==='sabado'?'Dis.':'Diu.'}
+
+function renderGrup(g){
+  const st=calcStandings(g);
+  const matches=g.partidas.map(p=>{
+    const has=p.p_local!==null&&p.p_visit!==null;
+    const lW=has&&p.p_local>p.p_visit,vW=has&&p.p_visit>p.p_local;
+    const prog=findPrograma(g.equipes[p.local],g.equipes[p.visit]);
+    const schedBadge=prog
+      ? `<span class="sched-badge"><span class="sched-hora">${esc(prog.hora)}</span><span class="sched-camp">${esc(prog.camp)}</span></span>`
+      : '';
+    return`<div class="match-row">${schedBadge?`<div class="match-sched">${schedBadge}</div>`:''}<div class="match-teams"><span class="team-name">${g.equipes[p.local]}</span><span class="vs">×</span><span class="team-name right">${g.equipes[p.visit]}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${p.p_local!==null?p.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${p.p_visit!==null?p.p_visit:'–'}</div></div></div></div>`
+  }).join('');
+  const rows=st.map((s,i)=>{const pos=i+1,rc=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'rank-other';const coef=s.p_plus-s.p_minus;return`<tr><td><span class="rank-badge ${rc}">${pos}</span>${s.nome}</td><td>${s.v}</td><td>${s.p_plus}</td><td>${s.p_minus}</td><td>${coef>=0?'+':''}${coef}</td></tr>`}).join('');
+  return`<div class="group-card"><div class="group-header"><span>${g.nome}</span><span class="group-size">${g.equipes.length} equipes</span></div><div class="group-body"><div class="section-label">Classificació</div><table class="standings-table"><thead><tr><th>Parella</th><th>V</th><th>P+</th><th>P−</th><th>Coef</th></tr></thead><tbody>${rows}</tbody></table><div class="section-label" style="margin-top:14px">Partits</div>${matches}</div></div>`
+}
+
+// ══════════════════════════════════════════════════════════
+// SVG BRACKET ENGINE
+// ══════════════════════════════════════════════════════════
+const BW=200, BH=58, GAP=14, COL=240, HEADER=28;
+const C={
+  bg:'#1e1a0a', bgMatch:'rgba(255,255,255,0.05)', bgMatchW:'rgba(100,180,255,0.07)',
+  bgMatchL:'rgba(255,60,60,0.06)', bgFinal:'rgba(249,234,9,0.09)', bgTercer:'rgba(225,107,11,0.09)',
+  bgPrevia:'rgba(80,200,80,0.07)',
+  border:'rgba(255,255,255,0.12)', borderW:'rgba(100,180,255,0.35)', borderL:'rgba(255,80,80,0.35)',
+  borderFinal:'rgba(249,234,9,0.55)', borderTercer:'rgba(225,107,11,0.5)', borderPrevia:'rgba(80,200,80,0.45)',
+  line:'rgba(255,255,255,0.2)', lineW:'rgba(100,180,255,0.4)', lineL:'rgba(255,80,80,0.35)',
+  lineFinal:'rgba(249,234,9,0.5)', linePrevia:'rgba(80,200,80,0.4)',
+  labelW:'rgba(100,180,255,0.7)', labelL:'rgba(255,100,100,0.7)', labelF:'#f9ea09',
+  labelTercer:'#f9a030', labelPrevia:'rgba(100,220,100,0.8)',
+  teamNormal:'rgba(255,255,255,0.8)', teamTbd:'rgba(255,255,255,0.22)', teamWinner:'#f9a030',
+  scoreNormal:'rgba(255,255,255,0.5)', scoreWinner:'#e16b0b',
+  headerBg:'rgba(255,255,255,0.04)', headerText:'rgba(255,255,255,0.35)',
+  divider:'rgba(255,255,255,0.08)'
+};
+
+function svgText(x,y,text,fill,fontSize,fontWeight,anchor,clip){
+  anchor=anchor||'start';fontWeight=fontWeight||'normal';
+  let attrs=`x="${x}" y="${y}" fill="${fill}" font-size="${fontSize}" font-weight="${fontWeight}" text-anchor="${anchor}" font-family="system-ui,sans-serif"`;
+  if(clip) attrs+=` clip-path="url(#${clip})"`;
+  return`<text ${attrs}>${esc(text)}</text>`;
+}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function svgMatch(x,y,m,type){
+  // type: 'w','l','final','tercer','previa'
+  const has=m&&m.p_local!==null&&m.p_visit!==null;
+  const lW=has&&m.p_local>m.p_visit, vW=has&&m.p_visit>m.p_local;
+  const t1=m?m.local:'', t2=m?m.visit:'';
+  const s1=m&&m.p_local!==null?m.p_local:'', s2=m&&m.p_visit!==null?m.p_visit:'';
+  const tbd1=!t1, tbd2=!t2;
+
+  const bg   = type==='final'?C.bgFinal:type==='tercer'?C.bgTercer:type==='previa'?C.bgPrevia:type==='l'?C.bgMatchL:C.bgMatchW;
+  const bord = type==='final'?C.borderFinal:type==='tercer'?C.borderTercer:type==='previa'?C.borderPrevia:type==='l'?C.borderL:C.borderW;
+
+  const mid=BH/2;
+  const nameW=BW-42;
+  const clipId=`clip-${x}-${y}`;
+
+  let out=`<clipPath id="${clipId}"><rect x="${x+8}" y="${y}" width="${nameW}" height="${BH}"/></clipPath>`;
+  // box
+  out+=`<rect x="${x}" y="${y}" width="${BW}" height="${BH}" rx="6" fill="${bg}" stroke="${bord}" stroke-width="1"/>`;
+  // divider middle
+  out+=`<line x1="${x}" y1="${y+mid}" x2="${x+BW}" y2="${y+mid}" stroke="${C.divider}" stroke-width="1"/>`;
+  // score bg strip
+  out+=`<rect x="${x+BW-36}" y="${y}" width="36" height="${BH}" rx="0" fill="rgba(0,0,0,0.15)"/>`;
+  out+=`<line x1="${x+BW-36}" y1="${y}" x2="${x+BW-36}" y2="${y+BH}" stroke="${C.divider}" stroke-width="1"/>`;
+
+  // team 1
+  const c1=tbd1?C.teamTbd:lW?C.teamWinner:C.teamNormal;
+  const w1=lW?'bold':'normal';
+  out+=svgText(x+10,y+mid-8,tbd1?'·':(t1||'·'),c1,11,w1,'start',clipId);
+  if(s1!=='') out+=svgText(x+BW-18,y+mid-8,s1,lW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
+
+  // team 2
+  const c2=tbd2?C.teamTbd:vW?C.teamWinner:C.teamNormal;
+  const w2=vW?'bold':'normal';
+  out+=svgText(x+10,y+mid+16,tbd2?'·':(t2||'·'),c2,11,w2,'start',clipId);
+  if(s2!=='') out+=svgText(x+BW-18,y+mid+16,s2,vW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
+
+  return out;
+}
+
+function svgColHeader(x,y,label,color){
+  return`<text x="${x+BW/2}" y="${y+18}" text-anchor="middle" fill="${color}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif" text-transform="uppercase">${esc(label.toUpperCase())}</text>`;
+}
+
+// Draw connector line: right edge of match A → left edge of match B
+// Joins two matches from previous column to one in next column
+function svgConnector(x1,y1A,y1B,x2,y2,lineColor){
+  const midY1=(y1A+y1B)/2+BH/2;  // midpoint between two source matches (centre)
+  const srcA=y1A+BH/2, srcB=y1B+BH/2;
+  const dst=y2+BH/2;
+  const mx=x1+BW+8, mx2=x2-8;
+  let d=`M${x1+BW},${srcA} H${mx} V${midY1} V${srcB} M${mx},${midY1} H${mx2} V${dst} H${x2}`;
+  return`<path d="${d}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+}
+// Single line (no merge)
+function svgLine(x1,y1,x2,y2,lineColor){
+  const s=y1+BH/2, d=y2+BH/2;
+  const mx=x1+BW+8;
+  return`<path d="M${x1+BW},${s} H${mx} H${x2}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linecap="round"/>`;
+}
+
+// ── BUILD BRACKET 12 (Pro, Amateur A, Mixt) ──────────────
+function buildBracket12(pd, prefix){
+  const gm=id=>(pd||[]).find(m=>m.fase===prefix+id)||null;
+  // Layout: matches positions [col][row]
+  // W-bracket cols: F1(0), F2(1), F3(2), SF(3), Final(4)
+  // L-bracket cols: PF1(0), PF2(1), PF3(2), 3r(3)
+  const colX=col=>col*COL+10;
+  const vSpaceW=(n,total)=>(total-(n*BH))/( n+1);
+
+  // W-bracket: 4 matches → 4 → 2 → 2 → 1
+  const wRows=[4,4,2,2,1];
+  const wIds=[['P1','P2','P3','P4'],['P5','P6','P7','P8'],['P15','P16'],['P19','P20'],['P22']];
+  const wLabels=['FASE 1','FASE 2','FASE 3','SEMIFINALS','FINAL'];
+  const wColor=id=>(id==='P22'?'final':'w');
+
+  // L-bracket: 4 → 2 → 2 → 1
+  const lIds=[['P9','P10','P11','P12'],['P13','P14'],['P17','P18'],['P21']];
+  const lLabels=['PERD. FASE 1','PERD. FASE 2','PERD. FASE 3','3R LLOC'];
+  const lColor=id=>(id==='P21'?'tercer':'l');
+
+  // Calculate heights
+  const wTotalH=4*BH+5*GAP;  // tallest column has 4 matches
+  const lTotalH=4*BH+5*GAP;
+
+  const totalW=5*COL+20;
+  const wTop=HEADER+10;
+  const lTop=wTotalH+wTop+60;  // L bracket starts below W bracket
+  const totalH=lTop+lTotalH+40;
+
+  // Positions for each match: [col][idx] → y
+  function matchYW(col,idx){
+    const n=wRows[col];
+    const usable=wTotalH;
+    const sp=(usable-(n*BH))/(n+1);
+    return wTop+sp+idx*(BH+sp);
+  }
+  function matchYL(col,idx){
+    const counts=[4,2,2,1];
+    const n=counts[col];
+    const usable=lTotalH;
+    const sp=(usable-(n*BH))/(n+1);
+    return lTop+sp+idx*(BH+sp);
+  }
+
+  let els=``;
+
+  // W-bracket col headers
+  for(let c=0;c<5;c++){
+    const lc=c===4?C.labelF:C.labelW;
+    els+=svgColHeader(colX(c),wTop-HEADER,wLabels[c],lc);
+  }
+  // W-bracket matches + connectors
+  for(let c=0;c<5;c++){
+    const ids=wIds[c];
+    for(let i=0;i<ids.length;i++){
+      const x=colX(c), y=matchYW(c,i);
+      const m=gm(ids[i]);
+      els+=svgMatch(x,y,m,wColor(ids[i]));
+    }
+  }
+  // W connectors: pairs → next col
+  // F1→F2: P1+P2→P5, P3+P4→P6... wait — actually 1→5,2→6,3→7,4→8 (each single)
+  for(let i=0;i<4;i++) els+=svgLine(colX(0),matchYW(0,i),colX(1),matchYW(1,i),C.lineW);
+  // F2→F3: P5+P6→P15, P7+P8→P16
+  els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineW);
+  els+=svgConnector(colX(1),matchYW(1,2),matchYW(1,3),colX(2),matchYW(2,1),C.lineW);
+  // F3→SF: P15→P19, P16→P20
+  for(let i=0;i<2;i++) els+=svgLine(colX(2),matchYW(2,i),colX(3),matchYW(3,i),C.lineW);
+  // SF→Final
+  els+=svgConnector(colX(3),matchYW(3,0),matchYW(3,1),colX(4),matchYW(4,0),C.lineFinal);
+
+  // L-bracket col headers
+  const lColX=col=>col*COL+10;
+  for(let c=0;c<4;c++){
+    const lc=c===3?C.labelTercer:C.labelL;
+    els+=svgColHeader(lColX(c),lTop-HEADER,lLabels[c],lc);
+  }
+  // L matches
+  for(let c=0;c<4;c++){
+    const ids=lIds[c];const counts=[4,2,2,1];
+    for(let i=0;i<ids.length;i++){
+      const x=lColX(c), y=matchYL(c,i);
+      els+=svgMatch(x,y,gm(ids[i]),lColor(ids[i]));
+    }
+  }
+  // L connectors: PF1→PF2: P9+P10→P13, P11+P12→P14 (pairs merge)
+  // Actually per image: 12+11→14, 10+9→13
+  els+=svgConnector(lColX(0),matchYL(0,0),matchYL(0,1),lColX(1),matchYL(1,1),C.lineL);
+  els+=svgConnector(lColX(0),matchYL(0,2),matchYL(0,3),lColX(1),matchYL(1,0),C.lineL);
+  // PF2→PF3 single
+  for(let i=0;i<2;i++) els+=svgLine(lColX(1),matchYL(1,i),lColX(2),matchYL(2,i),C.lineL);
+  // PF3→3r merge
+  els+=svgConnector(lColX(2),matchYL(2,0),matchYL(2,1),lColX(3),matchYL(3,0),C.lineL);
+
+  // Section labels
+  const wLabel=`▲ BRACKET GUANYADORS`;
+  const lLabel=`▼ BRACKET PERDEDORS`;
+  els+=`<text x="10" y="${wTop-HEADER-18}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">${wLabel}</text>`;
+  els+=`<text x="10" y="${lTop-HEADER-18}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">${lLabel}</text>`;
+
+  return{svg:els, w:totalW, h:totalH};
+}
+
+// ── BUILD BRACKET FEMENÍ ─────────────────────────────────
+function buildBracketFemeni(pd){
+  const gm=id=>(pd||[]).find(m=>m.fase===id)||null;
+  const ids=[['SF1','SF2'],['Final'],['3lloc']];
+  const labels=['SEMIFINALS','FINAL','3R I 4T LLOC'];
+  const positions=[[0,1],[0],[0]];
+  const colX=c=>[0,1,1][c]*COL+10;
+  const rowY=(c,i)=>[[60,60+BH+GAP],[60+BH/2],[60+BH+GAP+BH+GAP]][c][i];
+
+  const totalW=2*COL+20, totalH=3*BH+5*GAP+HEADER+60;
+  let els='';
+
+  // col 0: SF1, SF2
+  els+=svgColHeader(colX(0),10,labels[0],C.labelW);
+  els+=svgMatch(colX(0),rowY(0,0),gm('SF1'),'w');
+  els+=svgMatch(colX(0),rowY(0,1),gm('SF2'),'w');
+  // col 1: Final, 3lloc
+  els+=svgColHeader(colX(1)-5,10,'FINAL',C.labelF);
+  els+=svgMatch(colX(1),rowY(1,0),gm('Final'),'final');
+  els+=svgMatch(colX(1),rowY(2,0)+30,gm('3lloc'),'tercer');
+  // label 3lloc
+  els+=`<text x="${colX(1)}" y="${rowY(2,0)+22}" fill="${C.labelTercer}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">3R I 4T LLOC</text>`;
+
+  // connectors: SF1+SF2 → Final
+  els+=svgConnector(colX(0),rowY(0,0),rowY(0,1),colX(1),rowY(1,0),C.lineFinal);
+  // SF1 loser + SF2 loser → 3lloc (conceptual, no data link — just draw lines)
+  els+=`<path d="M${colX(0)+BW},${rowY(0,0)+BH/2} H${colX(0)+BW+20} V${rowY(2,0)+30+BH/2} H${colX(1)}" fill="none" stroke="${C.lineL}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+  els+=`<path d="M${colX(0)+BW},${rowY(0,1)+BH/2} H${colX(0)+BW+20} V${rowY(2,0)+30+BH/2}" fill="none" stroke="${C.lineL}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+
+  return{svg:els, w:totalW, h:totalH};
+}
+
+// ── BUILD BRACKET MIXT (fase prèvia + bracket 12) ────────
+function buildBracketMixt(pd){
+  const gm=id=>(pd||[]).find(m=>m.fase===id)||null;
+  // Fase prèvia: Prev1..Prev6 side by side (2 cols x 3)
+  const prevIds=[['Prev1','Prev2','Prev3'],['Prev4','Prev5','Prev6']];
+  const prevH=3*BH+4*GAP+HEADER+20;
+  const prevW=2*COL+20;
+  let prevEls='';
+  prevEls+=`<text x="10" y="16" fill="${C.labelPrevia}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">🔁 FASE PRÈVIA — 2NS VS 3RS</text>`;
+  for(let c=0;c<2;c++){
+    for(let i=0;i<3;i++){
+      const x=c*COL+10, y=HEADER+10+i*(BH+GAP);
+      prevEls+=svgMatch(x,y,gm(prevIds[c][i]),'previa');
+    }
+  }
+
+  // Main bracket 12 with M prefix
+  const main=buildBracket12(pd,'M');
+
+  return{prevSvg:prevEls, prevW, prevH, mainSvg:main.svg, mainW:main.w, mainH:main.h};
+}
+
+// ── SVG WRAPPER ───────────────────────────────────────────
+function makeSVG(els,w,h){
+  return`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" style="display:block;min-width:${w}px"><rect width="${w}" height="${h}" fill="transparent"/>${els}</svg>`;
+}
+
+// ── RENDER CAT ────────────────────────────────────────────
+function showCat(cat,btn){document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');currentCat=cat;renderCat(cat)}
+
+function renderCat(cat){
+  const el=document.getElementById('cat-content');
+  const data=etapaData[cat];
+  if(!data||!data.grupos||!data.grupos.length){
+    el.innerHTML=`<div class="loading"><p style="font-size:14px;color:rgba(255,255,255,.4)">Dades de ${cat.toUpperCase()} no disponibles.</p></div>`;return
+  }
+  const info=data.info?`<div class="cat-info-box">${data.info}</div>`:'';
+  const grups=`<div class="groups-grid">${data.grupos.map(renderGrup).join('')}</div>`;
+
+  let playoffs='';
+  if(cat==='pro'){
+    const b=buildBracket12(playoffData.pro||[],'');
+    playoffs=`<div class="bracket-section-title">🏆 Playoff Pro — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(b.svg,b.w,b.h)}</div>`;
+  }
+  if(cat==='amateur'){
+    const a=buildBracket12(playoffData['amat-a']||[],'');
+    const b16=buildBracket12(playoffData['amat-b']||[],'');// simplified — same structure
+    playoffs=`<div class="bracket-section-title">🏆 Amateur A — Doble Eliminatòria (12 equipes)</div><div class="bracket-svg-wrap">${makeSVG(a.svg,a.w,a.h)}</div><div class="bracket-section-title" style="margin-top:32px">🏆 Amateur B — Doble Eliminatòria (16 equipes)</div><div class="bracket-svg-wrap">${makeSVG(b16.svg,b16.w,b16.h)}</div>`;
+  }
+  if(cat==='femeni'){
+    const f=buildBracketFemeni(playoffData.femeni||[]);
+    playoffs=`<div class="bracket-section-title">🏆 Playoff Femení</div><div class="bracket-svg-wrap">${makeSVG(f.svg,f.w,f.h)}</div>`;
+  }
+  if(cat==='mixt'){
+    const mx=buildBracketMixt(playoffData.mixt||[]);
+    playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(mx.prevSvg,mx.prevW,mx.prevH)}</div><div class="bracket-svg-wrap" style="margin-top:16px">${makeSVG(mx.mainSvg,mx.mainW,mx.mainH)}</div>`;
+  }
+
+  el.innerHTML=`${info}${grups}<div style="height:24px"></div>${playoffs}`;
+}
+
+// ── CONFIG ────────────────────────────────────────────────
+function toggleConfig(){const p=document.getElementById('config-panel');p.style.display=p.style.display==='none'?'block':'none';if(p.style.display==='block'){document.getElementById('url-pro').value=SHEET_URLS.pro;document.getElementById('url-amateur').value=SHEET_URLS.amateur;document.getElementById('url-femeni').value=SHEET_URLS.femeni;document.getElementById('url-mixt').value=SHEET_URLS.mixt;document.getElementById('url-playoff-pro').value=PLAYOFF_URLS.pro;document.getElementById('url-playoff-amat-a').value=PLAYOFF_URLS['amat-a'];document.getElementById('url-playoff-amat-b').value=PLAYOFF_URLS['amat-b'];document.getElementById('url-playoff-femeni').value=PLAYOFF_URLS.femeni;document.getElementById('url-playoff-mixt').value=PLAYOFF_URLS.mixt;}}
+function saveUrls(){SHEET_URLS.pro=document.getElementById('url-pro').value.trim()||SHEET_URLS.pro;SHEET_URLS.amateur=document.getElementById('url-amateur').value.trim()||SHEET_URLS.amateur;SHEET_URLS.femeni=document.getElementById('url-femeni').value.trim()||SHEET_URLS.femeni;SHEET_URLS.mixt=document.getElementById('url-mixt').value.trim()||SHEET_URLS.mixt;PLAYOFF_URLS.pro=document.getElementById('url-playoff-pro').value.trim()||PLAYOFF_URLS.pro;PLAYOFF_URLS['amat-a']=document.getElementById('url-playoff-amat-a').value.trim()||PLAYOFF_URLS['amat-a'];PLAYOFF_URLS['amat-b']=document.getElementById('url-playoff-amat-b').value.trim()||PLAYOFF_URLS['amat-b'];PLAYOFF_URLS.femeni=document.getElementById('url-playoff-femeni').value.trim()||PLAYOFF_URLS.femeni;PLAYOFF_URLS.mixt=document.getElementById('url-playoff-mixt').value.trim()||PLAYOFF_URLS.mixt;document.getElementById('config-panel').style.display='none';loadAllData();}
+
+
+// ── PROGRAMA ──────────────────────────────────────────────
+function parseCSVLine(line){
+  const res=[];let cur='';let inQ=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){inQ=!inQ;}
+    else if(ch===','&&!inQ){res.push(cur.trim());cur='';}
+    else cur+=ch;
+  }
+  res.push(cur.trim());
+  return res;
+}
+
+function parseProgramaCSV(text){
+  const lines=text.trim().split('\n').map(l=>parseCSVLine(l));
+  if(lines.length<2) return null;
+  const headers=lines[0];
+  // odd cols = field names (col 1,3,5...)
+  const fields=[];
+  for(let c=1;c<headers.length;c+=2) fields.push((headers[c]||('Camp '+Math.ceil(c/2))).trim());
+  const rows=[];
+  for(let r=1;r<lines.length;r++){
+    const row=lines[r];
+    let hasData=false;
+    const slots=fields.map((f,ci)=>{
+      const hora=(row[ci*2]||'').trim();
+      const partida=(row[ci*2+1]||'').trim();
+      if(hora||partida) hasData=true;
+      return{hora,partida,camp:f};
+    });
+    if(hasData) rows.push(slots);
+  }
+  return{fields,rows};
+}
+
+async function loadPrograma(){
+  for(const [day,url] of Object.entries(PROGRAMA_URLS)){
+    if(!url) continue;
+    try{
+      const r=await fetch(url);
+      if(!r.ok) continue;
+      programaData[day]=parseProgramaCSV(await r.text());
+    }catch(e){}
+  }
+}
+
+let currentProgramaDay='sabado';
+
+function showPrograma(btn){
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  currentCat='__programa__';
+  renderPrograma();
+}
+
+function switchProgramaDay(day,btn){
+  currentProgramaDay=day;
+  document.querySelectorAll('.prog-day-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPrograma();
+}
+
+function renderPrograma(){
+  const el=document.getElementById('cat-content');
+  const days=[
+    {key:'divendres',label:'Divendres 15'},
+    {key:'sabado',label:'Dissabte 16'},
+    {key:'domingo',label:'Diumenge 17'}
+  ];
+  const dayBtns=days.map(d=>`<button class="prog-day-btn${d.key===currentProgramaDay?' active':''}" onclick="switchProgramaDay('${d.key}',this)">${d.label}</button>`).join('');
+  const data=programaData[currentProgramaDay];
+  let tableHtml='';
+  if(!data||!data.rows||!data.rows.length){
+    tableHtml=`<div class="prog-empty">Programa no disponible per a aquest dia.</div>`;
+  } else {
+    const ths=data.fields.map(f=>`<th>${esc(f)}</th>`).join('');
+    const trs=data.rows.map(slots=>`<tr>${slots.map(s=>{
+      if(!s.hora&&!s.partida) return`<td style="color:rgba(255,255,255,0.2)">–</td>`;
+      const h=s.hora?`<span class="hora-badge">${esc(s.hora)}</span>`:'';
+      const p=s.partida?esc(s.partida):'';
+      return`<td>${h}${p}</td>`;
+    }).join('')}</tr>`).join('');
+    tableHtml=`<div style="overflow-x:auto"><table class="programa-table"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
+  }
+  el.innerHTML=`
+    <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f9ea09;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="flex:1;height:1px;background:rgba(249,234,9,0.2);display:block"></span>
+      &#128197; Programa de Partits
+      <span style="flex:1;height:1px;background:rgba(249,234,9,0.2);display:block"></span>
+    </div>
+    <div class="programa-day-tabs">${dayBtns}</div>
+    ${tableHtml}`;
+}
+loadAllData();
+setInterval(loadAllData,120000);
+</script>
+
+<!-- FOOTER -->
+<footer style="text-align:center;padding:32px 20px 20px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.06)">
+  <p style="font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Desenvolupat per</p>
+  <p style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.5)">Gustavo Doco</p>
+  <a href="https://instagram.com/gustavorobertigil" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;font-weight:600;transition:color .2s" onmouseover="this.style.color='#f9a030'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    @gustavorobertigil
+  </a>
+</footer>
+
+</body>
+</html>
