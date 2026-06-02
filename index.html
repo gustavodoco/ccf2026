@@ -163,9 +163,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 <!-- CAT TABS -->
 <div class="cat-tabs">
-  <button class="cat-tab active" onclick="switchCat('pro',this)">PRO</button>
-  <button class="cat-tab" onclick="switchCat('amateur-a',this)">AMATEUR A</button>
-  <button class="cat-tab" onclick="switchCat('amateur-b',this)">AMATEUR B</button>
+  <button class="cat-tab active" onclick="switchCat('masc',this)">MASCULÍ</button>
   <button class="cat-tab" onclick="switchCat('femeni',this)">FEMENÍ</button>
   <button class="cat-tab" onclick="switchCat('mixt',this)">MIXT</button>
 </div>
@@ -184,84 +182,80 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 </div>
 <script>
-// ── PUNTUACIÓ PER POSICIÓ ─────────────────────────────────
-const POINTS = {
-  pro:       [10000,10000,7800,7000,6400,6400,6400,6400,5800,5800,5800,5800,5300,5300,5300,5300,5300,5300,5300,5300,4800,4800,4800,4800,4800,4800,4800,4800],
-  'amateur-a':[4000,4000,2700,2300,2000,2000,2000,2000,1750,1750,1750,1750,1550,1550,1550,1550,1550,1550,1550,1550,1350,1350,1350,1350,1350,1350,1350,1350],
-  'amateur-b':[1000,1000,825,725,650,650,650,650,575,575,575,575,525,525,525,525,525,525,525,525,475,475,475,475,475,475,475,475],
-  femeni:    [4000,4000,2700,2300,2000,2000,2000,2000,1750,1750,1750,1750,1550,1550,1550,1550,1550,1550,1550,1550,1350,1350,1350,1350,1350,1350,1350,1350],
-  mixt:      [4000,4000,2700,2300,2000,2000,2000,2000,1750,1750,1750,1750,1550,1550,1550,1550,1550,1550,1550,1550,1350,1350,1350,1350,1350,1350,1350,1350]
-};
-
-function getPts(cat, pos0){
-  const arr = POINTS[cat] || [];
-  if(pos0 < arr.length) return arr[pos0];
-  return arr[arr.length-1] || 0;
-}
-
 // ── URLs RANKING (Google Sheets CSV) ─────────────────────
-// Formato: dupla, etapa_1, etapa_2, etapa_3
-// dupla = nome, etapa_N = posição final nessa etapa (ex: 1, 5, 13)
-// Deixa vazio se ainda não foi jogada
+// Colunes: jugador, etapa_1, etapa_2, etapa_3, total (pontos ja calculats)
 const RANKING_URLS = {
-  pro:        '',
-  'amateur-a':'',
-  'amateur-b':'',
-  femeni:     '',
-  mixt:       ''
+  masc:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRVwd7a3YqBdDzaDwcTBjEl8we4zX7CY9NFQYgVq4sI7mCsSC1YbwG3NDqfqMwtm47NcswYeRb42W15/pub?gid=1600162066&single=true&output=csv',
+  femeni: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRVwd7a3YqBdDzaDwcTBjEl8we4zX7CY9NFQYgVq4sI7mCsSC1YbwG3NDqfqMwtm47NcswYeRb42W15/pub?gid=186506201&single=true&output=csv',
+  mixt:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vRVwd7a3YqBdDzaDwcTBjEl8we4zX7CY9NFQYgVq4sI7mCsSC1YbwG3NDqfqMwtm47NcswYeRb42W15/pub?gid=153975310&single=true&output=csv'
 };
 
 // ── DADOS ─────────────────────────────────────────────────
-let rankingData = {
-  pro: [], 'amateur-a': [], 'amateur-b': [], femeni: [], mixt: []
-};
-let currentCat = 'pro';
+let rankingData = { masc: [], femeni: [], mixt: [] };
+let currentCat = 'masc';
 let sortField = 'total';
 let sortAsc = false;
+
+// ── CSV PARSER (robust) ──────────────────────────────────
+function splitCSVLine(line){
+  const r=[];let cur='';let q=false;
+  for(let i=0;i<line.length;i++){const ch=line[i];
+    if(ch==='"'){q=!q;}
+    else if(ch===','&&!q){r.push(cur);cur='';}
+    else cur+=ch;}
+  r.push(cur);
+  return r.map(s=>s.trim());
+}
+function csvToRows(text){
+  const clean=text.replace(/^\uFEFF/,'').replace(/\r/g,'');
+  const lines=clean.trim().split('\n').filter(l=>l.trim()!=='');
+  if(!lines.length) return[];
+  const headers=splitCSVLine(lines[0]).map(h=>h.toLowerCase().trim());
+  const rows=[];
+  for(let i=1;i<lines.length;i++){
+    const vals=splitCSVLine(lines[i]);
+    const row={};
+    headers.forEach((k,idx)=>row[k]=(vals[idx]||'').trim());
+    rows.push(row);
+  }
+  return rows;
+}
 
 // ── CÀRREGA ───────────────────────────────────────────────
 async function loadAllData(){
   document.getElementById('last-update').textContent = 'Actualitzant...';
-
   await Promise.allSettled(Object.entries(RANKING_URLS).map(async([cat, url]) => {
     if(!url) return;
     try {
       const r = await fetch(url);
       if(!r.ok) throw new Error('HTTP ' + r.status);
-      const data = parseRankingCSV(await r.text(), cat);
+      const data = parseRankingCSV(await r.text());
       if(data && data.length) rankingData[cat] = data;
     } catch(e) { console.warn('Ranking', cat, e); }
   }));
-
   document.getElementById('last-update').textContent =
     `Última actualització: ${new Date().toLocaleTimeString('ca-ES')}`;
   renderRanking();
 }
 
-function parseRankingCSV(text, cat){
-  const lines = text.trim().split('\n').map(l => l.split(',').map(c => c.trim().replace(/"/g,'')));
-  if(lines.length < 2) return [];
-  const h = lines[0];
-  const out = [];
-  for(let i = 1; i < lines.length; i++){
-    const row = {};
-    h.forEach((k, idx) => row[k] = lines[i][idx] || '');
-    if(!row.dupla) continue;
-    const pos1 = row.etapa_1 !== '' ? parseInt(row.etapa_1) - 1 : null;
-    const pos2 = row.etapa_2 !== '' ? parseInt(row.etapa_2) - 1 : null;
-    const pos3 = row.etapa_3 !== '' ? parseInt(row.etapa_3) - 1 : null;
-    const p1 = pos1 !== null ? getPts(cat, pos1) : 0;
-    const p2 = pos2 !== null ? getPts(cat, pos2) : 0;
-    const p3 = pos3 !== null ? getPts(cat, pos3) : 0;
-    out.push({
-      dupla: row.dupla,
-      club: row.club || '',
-      etapa_1: p1, etapa_2: p2, etapa_3: p3,
-      total: p1 + p2 + p3,
-      pos1_raw: pos1, pos2_raw: pos2, pos3_raw: pos3
-    });
+function toNum(v){
+  if(v===undefined||v===null||v==='') return null;
+  const n=parseInt(String(v).replace(/[.\s]/g,''));
+  return isNaN(n)?null:n;
+}
+
+function parseRankingCSV(text){
+  const rows=csvToRows(text);
+  const out=[];
+  for(const row of rows){
+    const nom = row.jugador || row.dupla || row.parella || '';
+    if(!nom) continue;
+    const e1=toNum(row.etapa_1), e2=toNum(row.etapa_2), e3=toNum(row.etapa_3);
+    let total=toNum(row.total);
+    if(total===null) total=(e1||0)+(e2||0)+(e3||0);
+    out.push({ dupla: nom, etapa_1:e1, etapa_2:e2, etapa_3:e3, total });
   }
-  return out.sort((a,b) => b.total - a.total);
+  return out.sort((a,b)=>(b.total||0)-(a.total||0));
 }
 
 // ── RENDER ────────────────────────────────────────────────
@@ -311,7 +305,7 @@ function renderRanking(){
       <td class="num">${e1}</td>
       <td class="num">${e2}</td>
       <td class="num">${e3}</td>
-      <td class="num pts-col">${d.total.toLocaleString()}</td>
+      <td class="num pts-col">${(d.total||0).toLocaleString()}</td>
     </tr>`;
   }).join('');
 
@@ -335,15 +329,6 @@ loadAllData();
 setInterval(loadAllData, 120000);
 </script>
 
-<!-- FOOTER -->
-<footer style="text-align:center;padding:32px 20px 20px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.06)">
-  <p style="font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Desenvolupat per</p>
-  <p style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.5)">Gustavo Doco</p>
-  <a href="https://instagram.com/gustavorobertigil" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;font-weight:600;transition:color .2s" onmouseover="this.style.color='#f9a030'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-    @gustavorobertigil
-  </a>
-</footer>
 
 </body>
 </html>

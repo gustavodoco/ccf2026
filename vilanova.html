@@ -109,12 +109,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
     ← Rànquing General
   </a>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
-    <span style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 14px;border-radius:20px;text-transform:uppercase">
-      <span style="width:6px;height:6px;border-radius:50%;background:#1a1507;opacity:.5;display:inline-block"></span>
-      Etapa 1 · Torredembarra
-    </span>
+    <a href="torredembarra.html" style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.35);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px;text-decoration:none">Etapa 1 · Torredembarra</a>
     <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.35);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px">Etapa 2 · Castelldefels</span>
-    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:rgba(255,255,255,.35);font-size:11px;font-weight:600;padding:5px 14px;border-radius:20px">Etapa 3 · Vilanova</span>
+    <span style="display:inline-flex;align-items:center;gap:5px;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-size:11px;font-weight:800;letter-spacing:1px;padding:5px 14px;border-radius:20px;text-transform:uppercase">Etapa 3 · Vilanova</span>
   </div>
 </nav>
 <div class="page-header">
@@ -163,18 +160,9 @@ let _c=0,_t;
 document.querySelector('.page-title').addEventListener('click',()=>{_c++;clearTimeout(_t);_t=setTimeout(()=>_c=0,2000);if(_c>=5){_c=0;const b=document.getElementById('admin-btn');b.style.display='inline-block';b.scrollIntoView({behavior:'smooth'})}});
 
 // ── URLs ──────────────────────────────────────────────────
-const SHEET_URLS={
-  pro:'',
-  amateur:'',
-  femeni:'',
-  mixt:''
-};
-const PLAYOFF_URLS={pro:'','amat-a':'','amat-b':'',femeni:'',mixt:''};
-const PROGRAMA_URLS={
-  divendres:'',
-  sabado:'',
-  domingo:''
-};
+const SHEET_URLS={ pro:'', amateur:'', femeni:'', mixt:'' };
+const PLAYOFF_URLS={ pro:'', 'amat-a':'', 'amat-b':'', femeni:'', mixt:'' };
+const PROGRAMA_URLS={ divendres:'', sabado:'', domingo:'' };
 let programaData={divendres:null,sabado:null,domingo:null};
 
 // ── FALLBACK ──────────────────────────────────────────────
@@ -223,14 +211,45 @@ async function loadAllData(){
   document.getElementById('last-update').textContent=`Última actualització: ${new Date().toLocaleTimeString('ca-ES')}`;
   renderCat(currentCat);
 }
+function splitCSVLine(line){
+  const r=[];let cur='';let q=false;
+  for(let i=0;i<line.length;i++){const ch=line[i];
+    if(ch==='"'){q=!q;}
+    else if(ch===','&&!q){r.push(cur);cur='';}
+    else cur+=ch;}
+  r.push(cur);
+  return r.map(s=>s.trim());
+}
+function csvToRows(text){
+  // remove BOM + \r, split lines
+  const clean=text.replace(/^\uFEFF/,'').replace(/\r/g,'');
+  const lines=clean.trim().split('\n').filter(l=>l.trim()!=='');
+  if(!lines.length) return[];
+  const headers=splitCSVLine(lines[0]).map(h=>h.toLowerCase().trim());
+  const rows=[];
+  for(let i=1;i<lines.length;i++){
+    const vals=splitCSVLine(lines[i]);
+    const row={};
+    headers.forEach((k,idx)=>row[k]=(vals[idx]||'').trim());
+    rows.push(row);
+  }
+  return rows;
+}
 async function loadFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();return parseCSV(await r.text())}
 function parseCSV(text){
-  const lines=text.trim().split('\n').map(l=>l.split(',').map(c=>c.trim().replace(/"/g,'')));
-  const h=lines[0];const grupos={};
-  for(let i=1;i<lines.length;i++){const row={};h.forEach((k,idx)=>row[k]=lines[i][idx]||'');if(!row.grupo||!row.local)continue;if(!grupos[row.grupo])grupos[row.grupo]={nome:row.grupo,partidas:[],equipes:[]};const g=grupos[row.grupo];const lI=goa(g.equipes,row.local);const vI=goa(g.equipes,row.visitante);g.partidas.push({local:lI,visit:vI,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null})}
-  return{grupos:Object.values(grupos)}
+  const rows=csvToRows(text);
+  const grupos={};
+  for(const row of rows){
+    if(!row.grupo||!row.local)continue;
+    if(!grupos[row.grupo])grupos[row.grupo]={nome:row.grupo,partidas:[],equipes:[]};
+    const g=grupos[row.grupo];
+    const lI=goa(g.equipes,row.local);
+    const vI=goa(g.equipes,row.visitante);
+    g.partidas.push({local:lI,visit:vI,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null});
+  }
+  return{grupos:Object.values(grupos)};
 }
-async function loadPlayoffsFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();const lines=(await r.text()).trim().split('\n').map(l=>l.split(',').map(c=>c.trim().replace(/"/g,'')));const h=lines[0];const out=[];for(let i=1;i<lines.length;i++){const row={};h.forEach((k,idx)=>row[k]=lines[i][idx]||'');if(!row.fase||!row.local)continue;out.push({fase:row.fase,local:row.local,visit:row.visitante,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null})}return out}
+async function loadPlayoffsFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();const rows=csvToRows(await r.text());const out=[];for(const row of rows){if(!row.fase||!row.local)continue;out.push({fase:row.fase,local:row.local,visit:row.visitante,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null})}return out}
 function goa(arr,v){let i=arr.indexOf(v);if(i===-1){arr.push(v);i=arr.length-1}return i}
 
 // ── CLASSIFICACIÓ ─────────────────────────────────────────
@@ -467,6 +486,86 @@ function buildBracket12(pd, prefix){
   return{svg:els, w:totalW, h:totalH};
 }
 
+
+// ── BUILD BRACKET 16 (Amateur B) ─────────────────────────
+function buildBracket16(pd, prefix){
+  const gm=id=>(pd||[]).find(m=>m.fase===prefix+id)||null;
+  const colX=col=>col*COL+10;
+
+  // W: F1(8) → Quarts(4) → Semis(2) → Final(1)
+  const wRows=[8,4,2,1];
+  const wIds=[['P1','P2','P3','P4','P5','P6','P7','P8'],['P9','P10','P11','P12'],['P13','P14'],['P15']];
+  const wLabels=['FASE 1','QUARTS','SEMIFINALS','FINAL'];
+  const wColor=id=>(id==='P15'?'final':'w');
+
+  // L: PF1(4) → PF2(4) → PF3(2) → PSemis(1) → 3r(1)
+  const lIds=[['P16','P17','P18','P19'],['P20','P21','P22','P23'],['P24','P25'],['P26'],['P27']];
+  const lLabels=['PERD. F1','PERD. F2','PERD. F3','PERD. SEMIS','3R LLOC'];
+  const lColor=id=>(id==='P27'?'tercer':'l');
+
+  const wTotalH=8*BH+9*GAP;
+  const lTotalH=8*BH+9*GAP;
+  const totalW=5*COL+20;
+  const wTop=HEADER+10;
+  const lTop=wTotalH+wTop+60;
+  const totalH=lTop+lTotalH+40;
+
+  function yPos(rows,col,idx,top,totalH){
+    const n=rows[col];
+    const sp=(totalH-(n*BH))/(n+1);
+    return top+sp+idx*(BH+sp);
+  }
+  const matchYW=(col,idx)=>yPos(wRows,col,idx,wTop,wTotalH);
+  const lRows=[4,4,2,1,1];
+  const matchYL=(col,idx)=>yPos(lRows,col,idx,lTop,lTotalH);
+
+  let els='';
+  // W headers
+  for(let cc=0;cc<4;cc++){
+    const lc=cc===3?C.labelF:C.labelW;
+    els+=svgColHeader(colX(cc),wTop-HEADER,wLabels[cc],lc);
+  }
+  // W matches
+  for(let cc=0;cc<4;cc++){
+    for(let i=0;i<wIds[cc].length;i++){
+      els+=svgMatch(colX(cc),matchYW(cc,i),gm(wIds[cc][i]),wColor(wIds[cc][i]));
+    }
+  }
+  // W connectors F1→Quarts (pairs merge)
+  els+=svgConnector(colX(0),matchYW(0,0),matchYW(0,1),colX(1),matchYW(1,0),C.lineW);
+  els+=svgConnector(colX(0),matchYW(0,2),matchYW(0,3),colX(1),matchYW(1,1),C.lineW);
+  els+=svgConnector(colX(0),matchYW(0,4),matchYW(0,5),colX(1),matchYW(1,2),C.lineW);
+  els+=svgConnector(colX(0),matchYW(0,6),matchYW(0,7),colX(1),matchYW(1,3),C.lineW);
+  // Quarts→Semis
+  els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineW);
+  els+=svgConnector(colX(1),matchYW(1,2),matchYW(1,3),colX(2),matchYW(2,1),C.lineW);
+  // Semis→Final
+  els+=svgConnector(colX(2),matchYW(2,0),matchYW(2,1),colX(3),matchYW(3,0),C.lineFinal);
+
+  // L headers
+  for(let cc=0;cc<5;cc++){
+    const lc=cc===4?C.labelTercer:C.labelL;
+    els+=svgColHeader(colX(cc),lTop-HEADER,lLabels[cc],lc);
+  }
+  // L matches
+  for(let cc=0;cc<5;cc++){
+    for(let i=0;i<lIds[cc].length;i++){
+      els+=svgMatch(colX(cc),matchYL(cc,i),gm(lIds[cc][i]),lColor(lIds[cc][i]));
+    }
+  }
+  // L connectors (simplified pairs)
+  for(let i=0;i<4;i++) els+=svgLine(colX(0),matchYL(0,i),colX(1),matchYL(1,i),C.lineL);
+  els+=svgConnector(colX(1),matchYL(1,0),matchYL(1,1),colX(2),matchYL(2,0),C.lineL);
+  els+=svgConnector(colX(1),matchYL(1,2),matchYL(1,3),colX(2),matchYL(2,1),C.lineL);
+  els+=svgConnector(colX(2),matchYL(2,0),matchYL(2,1),colX(3),matchYL(3,0),C.lineL);
+  els+=svgLine(colX(3),matchYL(3,0),colX(4),matchYL(4,0),C.lineL);
+
+  els+=`<text x="10" y="${wTop-HEADER-18}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
+  els+=`<text x="10" y="${lTop-HEADER-18}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
+
+  return{svg:els, w:totalW, h:totalH};
+}
+
 // ── BUILD BRACKET FEMENÍ ─────────────────────────────────
 function buildBracketFemeni(pd){
   const gm=id=>(pd||[]).find(m=>m.fase===id)||null;
@@ -544,8 +643,8 @@ function renderCat(cat){
     playoffs=`<div class="bracket-section-title">🏆 Playoff Pro — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(b.svg,b.w,b.h)}</div>`;
   }
   if(cat==='amateur'){
-    const a=buildBracket12(playoffData['amat-a']||[],'');
-    const b16=buildBracket12(playoffData['amat-b']||[],'');// simplified — same structure
+    const a=buildBracket12(playoffData['amat-a']||[],'AP');
+    const b16=buildBracket16(playoffData['amat-b']||[],'BP');
     playoffs=`<div class="bracket-section-title">🏆 Amateur A — Doble Eliminatòria (12 equipes)</div><div class="bracket-svg-wrap">${makeSVG(a.svg,a.w,a.h)}</div><div class="bracket-section-title" style="margin-top:32px">🏆 Amateur B — Doble Eliminatòria (16 equipes)</div><div class="bracket-svg-wrap">${makeSVG(b16.svg,b16.w,b16.h)}</div>`;
   }
   if(cat==='femeni'){
@@ -662,15 +761,7 @@ loadAllData();
 setInterval(loadAllData,120000);
 </script>
 
-<!-- FOOTER -->
-<footer style="text-align:center;padding:32px 20px 20px;margin-top:8px;border-top:1px solid rgba(255,255,255,0.06)">
-  <p style="font-size:11px;color:rgba(255,255,255,0.2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Desenvolupat per</p>
-  <p style="font-size:14px;font-weight:700;color:rgba(255,255,255,0.5)">Gustavo Doco</p>
-  <a href="https://instagram.com/gustavorobertigil" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;font-weight:600;transition:color .2s" onmouseover="this.style.color='#f9a030'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-    @gustavorobertigil
-  </a>
-</footer>
+
 
 </body>
 </html>
