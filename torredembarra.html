@@ -661,8 +661,8 @@ function renderCat(cat){
     playoffs=`<div class="bracket-section-title">🏆 Playoff Pro — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(b.svg,b.w,b.h)}</div>`;
   }
   if(cat==='amateur'){
-    const a=buildBracket12(playoffData['amat-a']||[],'AP');
-    const b16=buildBracket16(playoffData['amat-b']||[],'BP');
+    const a=buildBracket12(playoffData['amat-a']||[],'A');
+    const b16=buildBracket16(playoffData['amat-b']||[],'B');
     playoffs=`<div class="bracket-section-title">🏆 Amateur A — Doble Eliminatòria (12 equipes)</div><div class="bracket-svg-wrap">${makeSVG(a.svg,a.w,a.h)}</div><div class="bracket-section-title" style="margin-top:32px">🏆 Amateur B — Doble Eliminatòria (16 equipes)</div><div class="bracket-svg-wrap">${makeSVG(b16.svg,b16.w,b16.h)}</div>`;
   }
   if(cat==='femeni'){
