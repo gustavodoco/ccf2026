@@ -517,73 +517,83 @@ function buildBracket16(pd, prefix){
   const gm=id=>(pd||[]).find(m=>m.fase===prefix+id)||null;
   const colX=col=>col*COL+10;
 
-  // W: F1(8) → Quarts(4) → Semis(2) → Final(1)
-  const wRows=[8,4,2,1];
-  const wIds=[['P1','P2','P3','P4','P5','P6','P7','P8'],['P9','P10','P11','P12'],['P13','P14'],['P15']];
-  const wLabels=['FASE 1','QUARTS','SEMIFINALS','FINAL'];
-  const wColor=id=>(id==='P15'?'final':'w');
+  // ===== Estructura real (segons imatge Amateur B) =====
+  // W: Fase1(P1-8) -> Fase2(P13-16) -> Fase3(P23,24) -> Semifinals(SF1,SF2) -> Final
+  // L: PerdF1(P9-12) -> PerdF2(P17-20) -> PerdF3(P21,22) -> PerdF4(P25,26)
+  // 3r lloc: 3lloc
+  const wIds=[['P1','P2','P3','P4','P5','P6','P7','P8'],['P13','P14','P15','P16'],['P23','P24'],['SF1','SF2'],['Final']];
+  const wLabels=['FASE 1','FASE 2','FASE 3','SEMIFINALS','FINAL'];
+  const wColor=id=>(id==='Final'?'final':'w');
 
-  // L: PF1(4) → PF2(4) → PF3(2) → PSemis(1) → 3r(1)
-  const lIds=[['P16','P17','P18','P19'],['P20','P21','P22','P23'],['P24','P25'],['P26'],['P27']];
-  const lLabels=['PERD. F1','PERD. F2','PERD. F3','PERD. SEMIS','3R LLOC'];
-  const lColor=id=>(id==='P27'?'tercer':'l');
+  const lIds=[['P9','P10','P11','P12'],['P17','P18','P19','P20'],['P21','P22'],['P25','P26']];
+  const lLabels=['PERDEDORS F1','PERDEDORS F2','PERDEDORS F3','PERDEDORS F4'];
+  const lColor=()=>'l';
+
+  const wRows=[8,4,2,2,1];
+  const lRows=[4,4,2,2];
 
   const wTotalH=8*BH+9*GAP;
-  const lTotalH=8*BH+9*GAP;
+  const lTotalH=4*BH+5*GAP;
   const totalW=5*COL+20;
   const wTop=HEADER+10;
-  const lTop=wTotalH+wTop+60;
-  const totalH=lTop+lTotalH+40;
+  const lTop=wTotalH+wTop+70;
+  const totalH=lTop+lTotalH+90;
 
-  function yPos(rows,col,idx,top,totalH){
+  function yPos(rows,col,idx,top,th){
     const n=rows[col];
-    const sp=(totalH-(n*BH))/(n+1);
+    const sp=(th-(n*BH))/(n+1);
     return top+sp+idx*(BH+sp);
   }
   const matchYW=(col,idx)=>yPos(wRows,col,idx,wTop,wTotalH);
-  const lRows=[4,4,2,1,1];
   const matchYL=(col,idx)=>yPos(lRows,col,idx,lTop,lTotalH);
 
   let els='';
   // W headers
-  for(let cc=0;cc<4;cc++){
-    const lc=cc===3?C.labelF:C.labelW;
+  for(let cc=0;cc<5;cc++){
+    const lc=cc===4?C.labelF:C.labelW;
     els+=svgColHeader(colX(cc),wTop-HEADER,wLabels[cc],lc);
   }
   // W matches
-  for(let cc=0;cc<4;cc++){
+  for(let cc=0;cc<5;cc++){
     for(let i=0;i<wIds[cc].length;i++){
       els+=svgMatch(colX(cc),matchYW(cc,i),gm(wIds[cc][i]),wColor(wIds[cc][i]));
     }
   }
-  // W connectors F1→Quarts (pairs merge)
+  // W connectors: Fase1(8)->Fase2(4)
   els+=svgConnector(colX(0),matchYW(0,0),matchYW(0,1),colX(1),matchYW(1,0),C.lineW);
   els+=svgConnector(colX(0),matchYW(0,2),matchYW(0,3),colX(1),matchYW(1,1),C.lineW);
   els+=svgConnector(colX(0),matchYW(0,4),matchYW(0,5),colX(1),matchYW(1,2),C.lineW);
   els+=svgConnector(colX(0),matchYW(0,6),matchYW(0,7),colX(1),matchYW(1,3),C.lineW);
-  // Quarts→Semis
+  // Fase2(4)->Fase3(2)
   els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineW);
   els+=svgConnector(colX(1),matchYW(1,2),matchYW(1,3),colX(2),matchYW(2,1),C.lineW);
-  // Semis→Final
-  els+=svgConnector(colX(2),matchYW(2,0),matchYW(2,1),colX(3),matchYW(3,0),C.lineFinal);
+  // Fase3(2)->Semis(2): 1 a 1
+  for(let i=0;i<2;i++) els+=svgLine(colX(2),matchYW(2,i),colX(3),matchYW(3,i),C.lineW);
+  // Semis(2)->Final
+  els+=svgConnector(colX(3),matchYW(3,0),matchYW(3,1),colX(4),matchYW(4,0),C.lineFinal);
 
   // L headers
-  for(let cc=0;cc<5;cc++){
-    const lc=cc===4?C.labelTercer:C.labelL;
-    els+=svgColHeader(colX(cc),lTop-HEADER,lLabels[cc],lc);
+  for(let cc=0;cc<4;cc++){
+    els+=svgColHeader(colX(cc),lTop-HEADER,lLabels[cc],C.labelL);
   }
   // L matches
-  for(let cc=0;cc<5;cc++){
+  for(let cc=0;cc<4;cc++){
     for(let i=0;i<lIds[cc].length;i++){
-      els+=svgMatch(colX(cc),matchYL(cc,i),gm(lIds[cc][i]),lColor(lIds[cc][i]));
+      els+=svgMatch(colX(cc),matchYL(cc,i),gm(lIds[cc][i]),'l');
     }
   }
-  // L connectors (simplified pairs)
+  // L connectors: PF1(4)->PF2(4) 1 a 1
   for(let i=0;i<4;i++) els+=svgLine(colX(0),matchYL(0,i),colX(1),matchYL(1,i),C.lineL);
+  // PF2(4)->PF3(2)
   els+=svgConnector(colX(1),matchYL(1,0),matchYL(1,1),colX(2),matchYL(2,0),C.lineL);
   els+=svgConnector(colX(1),matchYL(1,2),matchYL(1,3),colX(2),matchYL(2,1),C.lineL);
-  els+=svgConnector(colX(2),matchYL(2,0),matchYL(2,1),colX(3),matchYL(3,0),C.lineL);
-  els+=svgLine(colX(3),matchYL(3,0),colX(4),matchYL(4,0),C.lineL);
+  // PF3(2)->PF4(2) 1 a 1
+  for(let i=0;i<2;i++) els+=svgLine(colX(2),matchYL(2,i),colX(3),matchYL(3,i),C.lineL);
+
+  // 3r lloc — caixa solta sota la final
+  const tercerY=matchYW(4,0)+BH+40;
+  els+=svgColHeader(colX(4),tercerY-HEADER,'3R LLOC',C.labelTercer);
+  els+=svgMatch(colX(4),tercerY,gm('3lloc'),'tercer');
 
   els+=`<text x="10" y="${wTop-HEADER-18}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
   els+=`<text x="10" y="${lTop-HEADER-18}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
