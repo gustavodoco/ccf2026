@@ -263,12 +263,19 @@ function parseCSV(text){
     const g=grupos[row.grupo];
     const lI=goa(g.equipes,row.local);
     const vI=goa(g.equipes,row.visitante);
-    g.partidas.push({local:lI,visit:vI,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null});
+    g.partidas.push({local:lI,visit:vI,p_local:toScore(row.pontos_local),p_visit:toScore(row.pontos_visit)});
   }
   return{grupos:Object.values(grupos)};
 }
-async function loadPlayoffsFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();const rows=csvToRows(await r.text());const out=[];for(const row of rows){if(!row.fase||!row.local)continue;out.push({fase:row.fase,local:row.local,visit:row.visitante,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null})}return out}
+async function loadPlayoffsFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();const rows=csvToRows(await r.text());const out=[];for(const row of rows){if(!row.fase||!row.local)continue;out.push({fase:row.fase,local:row.local,visit:row.visitante,p_local:toScore(row.pontos_local),p_visit:toScore(row.pontos_visit)})}return out}
 function goa(arr,v){let i=arr.indexOf(v);if(i===-1){arr.push(v);i=arr.length-1}return i}
+function toScore(v){
+  if(v===undefined||v===null) return null;
+  const s=String(v).trim();
+  if(s==='') return null;
+  const n=parseInt(s,10);
+  return isNaN(n)?null:n;
+}
 
 // ── CLASSIFICACIÓ ─────────────────────────────────────────
 function calcStandings(g){
@@ -307,7 +314,7 @@ function renderGrup(g){
     const schedBadge=prog
       ? `<span class="sched-badge"><span class="sched-hora">${esc(prog.hora)}</span><span class="sched-camp">${esc(prog.camp)}</span></span>`
       : '';
-    return`<div class="match-row">${schedBadge?`<div class="match-sched">${schedBadge}</div>`:''}<div class="match-teams"><span class="team-name">${g.equipes[p.local]}</span><span class="vs">×</span><span class="team-name right">${g.equipes[p.visit]}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${p.p_local!==null?p.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${p.p_visit!==null?p.p_visit:'–'}</div></div></div></div>`
+    return`<div class="match-row">${schedBadge?`<div class="match-sched">${schedBadge}</div>`:''}<div class="match-teams"><span class="team-name">${g.equipes[p.local]}</span><span class="vs">×</span><span class="team-name right">${g.equipes[p.visit]}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${p.p_local!==null&&p.p_local!==undefined?p.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${p.p_visit!==null&&p.p_visit!==undefined?p.p_visit:'–'}</div></div></div></div>`
   }).join('');
   const rows=st.map((s,i)=>{const pos=i+1,rc=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'rank-other';const coef=s.p_plus-s.p_minus;return`<tr><td><span class="rank-badge ${rc}">${pos}</span>${s.nome}</td><td>${s.v}</td><td>${s.p_plus}</td><td>${s.p_minus}</td><td>${coef>=0?'+':''}${coef}</td></tr>`}).join('');
   return`<div class="group-card"><div class="group-header"><span>${g.nome}</span><span class="group-size">${g.equipes.length} equipes</span></div><div class="group-body"><div class="section-label">Classificació</div><table class="standings-table"><thead><tr><th>Parella</th><th>V</th><th>P+</th><th>P−</th><th>Coef</th></tr></thead><tbody>${rows}</tbody></table><div class="section-label" style="margin-top:14px">Partits</div>${matches}</div></div>`
@@ -339,14 +346,14 @@ function svgText(x,y,text,fill,fontSize,fontWeight,anchor,clip){
   if(clip) attrs+=` clip-path="url(#${clip})"`;
   return`<text ${attrs}>${esc(text)}</text>`;
 }
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function esc(s){if(s===null||s===undefined)s='';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
 function svgMatch(x,y,m,type){
   // type: 'w','l','final','tercer','previa'
   const has=m&&m.p_local!==null&&m.p_visit!==null;
   const lW=has&&m.p_local>m.p_visit, vW=has&&m.p_visit>m.p_local;
   const t1=m?m.local:'', t2=m?m.visit:'';
-  const s1=m&&m.p_local!==null?m.p_local:'', s2=m&&m.p_visit!==null?m.p_visit:'';
+  const s1=(m&&m.p_local!==null&&m.p_local!==undefined)?m.p_local:null, s2=(m&&m.p_visit!==null&&m.p_visit!==undefined)?m.p_visit:null;
   const tbd1=!t1, tbd2=!t2;
 
   const bg   = type==='final'?C.bgFinal:type==='tercer'?C.bgTercer:type==='previa'?C.bgPrevia:type==='l'?C.bgMatchL:C.bgMatchW;
@@ -369,13 +376,13 @@ function svgMatch(x,y,m,type){
   const c1=tbd1?C.teamTbd:lW?C.teamWinner:C.teamNormal;
   const w1=lW?'bold':'normal';
   out+=svgText(x+10,y+mid-8,tbd1?'·':(t1||'·'),c1,11,w1,'start',clipId);
-  if(s1!=='') out+=svgText(x+BW-18,y+mid-8,s1,lW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
+  if(s1!==null) out+=svgText(x+BW-18,y+mid-8,s1,lW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
 
   // team 2
   const c2=tbd2?C.teamTbd:vW?C.teamWinner:C.teamNormal;
   const w2=vW?'bold':'normal';
   out+=svgText(x+10,y+mid+16,tbd2?'·':(t2||'·'),c2,11,w2,'start',clipId);
-  if(s2!=='') out+=svgText(x+BW-18,y+mid+16,s2,vW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
+  if(s2!==null) out+=svgText(x+BW-18,y+mid+16,s2,vW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
 
   return out;
 }
