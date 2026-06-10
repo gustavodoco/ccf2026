@@ -160,8 +160,15 @@ let _c=0,_t;
 document.querySelector('.page-title').addEventListener('click',()=>{_c++;clearTimeout(_t);_t=setTimeout(()=>_c=0,2000);if(_c>=5){_c=0;const b=document.getElementById('admin-btn');b.style.display='inline-block';b.scrollIntoView({behavior:'smooth'})}});
 
 // ── URLs ──────────────────────────────────────────────────
-const SHEET_URLS={ pro:'', amateur:'', femeni:'', mixt:'' };
-const PLAYOFF_URLS={ pro:'', 'amat-a':'', 'amat-b':'', femeni:'', mixt:'' };
+const Shttps://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=169620668&single=true&output=csv', 
+amateur:'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=1212678885&single=true&output=csv', 
+femeni:'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=1561764640&single=true&output=csv', 
+mixt:'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=45733146&single=true&output=csv' };
+const PLAYOFF_URLS={ pro:'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=514388579&single=true&output=csv', 
+'amat-a':'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=930444700&single=true&output=csv', 
+'amat-b':'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=930444700&single=true&output=csv', 
+femeni:'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=564804510&single=true&output=csv', 
+mixt:'https://docs.google.com/spreadsheets/d/e/2PACX-1vRZil50PH5jneutDhKytmUJwd_dP9sbP9cX3Y-950XrqO4WpchXqDY7ywRLTS4w4UPJaCd6WBfxZXAV/pub?gid=1195574451&single=true&output=csv' };
 const PROGRAMA_URLS={ sabado:'', domingo:'' };
 let programaData={sabado:null,domingo:null};
 
