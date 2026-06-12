@@ -192,13 +192,9 @@ const FALLBACK_DATA={
     {nome:'Grup Únic',equipes:['Parella 1','Parella 2','Parella 3','Parella 4','Parella 5','Parella 6','Parella 7'],
      partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:4,visit:5,p_local:null,p_visit:null},{local:6,visit:0,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null},{local:5,visit:6,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:4,visit:6,p_local:null,p_visit:null},{local:5,visit:0,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:3,visit:5,p_local:null,p_visit:null},{local:6,visit:1,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:1,visit:5,p_local:null,p_visit:null},{local:2,visit:6,p_local:null,p_visit:null},{local:3,visit:0,p_local:null,p_visit:null},{local:4,visit:1,p_local:null,p_visit:null},{local:5,visit:2,p_local:null,p_visit:null},{local:6,visit:3,p_local:null,p_visit:null}]}
   ]},
-  mixt:{info:'6 grups de 3 equipes. <strong>Fase prèvia</strong>: 2ns vs 3rs d\'altres grups. Els 6 primers + 6 vencedors = <strong>12 equipes</strong> al playoff.',grupos:[
-    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
+  mixt:{info:'2 grups: <strong>Grup A</strong> (4 equipes) i <strong>Grup B</strong> (5 equipes). Els <strong>2 millors de cada grup</strong> passen a les semifinals.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4','Parella B5'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:1,visit:4,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null}]}
   ]}
 };
 
@@ -667,26 +663,31 @@ function buildBracketFemeni(pd){
   return{svg:els, w:totalW, h:totalH};
 }
 
-// ── BUILD BRACKET MIXT (fase prèvia + bracket 12) ────────
+// ── BUILD BRACKET MIXT (semifinals + final + 3r lloc) ────────
 function buildBracketMixt(pd){
   const gm=id=>(pd||[]).find(m=>m.fase===id)||null;
-  // Fase prèvia: Prev1..Prev6 side by side (2 cols x 3)
-  const prevIds=[['Prev1','Prev2','Prev3'],['Prev4','Prev5','Prev6']];
-  const prevH=3*BH+4*GAP+HEADER+20;
-  const prevW=2*COL+20;
-  let prevEls='';
-  prevEls+=`<text x="10" y="16" fill="${C.labelPrevia}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">🔁 FASE PRÈVIA — 2NS VS 3RS</text>`;
-  for(let c=0;c<2;c++){
-    for(let i=0;i<3;i++){
-      const x=c*COL+10, y=HEADER+10+i*(BH+GAP);
-      prevEls+=svgMatch(x,y,gm(prevIds[c][i]),'previa');
-    }
-  }
+  const colX=c=>c*COL+10;
+  const rowY=(c,i)=>[[60,60+BH+GAP],[60+BH/2],[60+BH+GAP+BH+GAP]][c][i];
+  const totalW=2*COL+20, totalH=3*BH+5*GAP+HEADER+60;
+  let els='';
 
-  // Main bracket 12 with M prefix
-  const main=buildBracket12(pd,'M');
+  // col 0: SF1, SF2
+  els+=svgColHeader(colX(0),10,'SEMIFINALS',C.labelW);
+  els+=svgMatch(colX(0),rowY(0,0),gm('SF1'),'w');
+  els+=svgMatch(colX(0),rowY(0,1),gm('SF2'),'w');
+  // col 1: Final, 3lloc
+  els+=svgColHeader(colX(1)-5,10,'FINAL',C.labelF);
+  els+=svgMatch(colX(1),rowY(1,0),gm('Final'),'final');
+  els+=svgMatch(colX(1),rowY(2,0)+30,gm('3lloc'),'tercer');
+  els+=`<text x="${colX(1)}" y="${rowY(2,0)+22}" fill="${C.labelTercer}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">3R I 4T LLOC</text>`;
 
-  return{prevSvg:prevEls, prevW, prevH, mainSvg:main.svg, mainW:main.w, mainH:main.h};
+  // connectors: SF1+SF2 → Final
+  els+=svgConnector(colX(0),rowY(0,0),rowY(0,1),colX(1),rowY(1,0),C.lineFinal);
+  // SF losers → 3lloc (dashed, conceptual)
+  els+=`<path d="M${colX(0)+BW},${rowY(0,0)+BH/2} H${colX(0)+BW+20} V${rowY(2,0)+30+BH/2} H${colX(1)}" fill="none" stroke="${C.lineL}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+  els+=`<path d="M${colX(0)+BW},${rowY(0,1)+BH/2} H${colX(0)+BW+20} V${rowY(2,0)+30+BH/2}" fill="none" stroke="${C.lineL}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+
+  return{svg:els, w:totalW, h:totalH};
 }
 
 // ── SVG WRAPPER ───────────────────────────────────────────
@@ -722,7 +723,7 @@ function renderCat(cat){
   }
   if(cat==='mixt'){
     const mx=buildBracketMixt(playoffData.mixt||[]);
-    playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(mx.prevSvg,mx.prevW,mx.prevH)}</div><div class="bracket-svg-wrap" style="margin-top:16px">${makeSVG(mx.mainSvg,mx.mainW,mx.mainH)}</div>`;
+    playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Semifinals i Final</div><div class="bracket-svg-wrap">${makeSVG(mx.svg,mx.w,mx.h)}</div>`;
   }
 
   el.innerHTML=`${info}${grups}<div style="height:24px"></div>${playoffs}`;
