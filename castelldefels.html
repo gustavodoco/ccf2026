@@ -407,7 +407,7 @@ function buildBracket12(pd, prefix){
 
   // L-bracket: 4 → 2 → 2 → 1
   const lIds=[['P9','P10','P11','P12'],['P13','P14'],['P17','P18'],['P21']];
-  const lLabels=['PERD. FASE 1','PERD. FASE 2','PERD. FASE 3','3R LLOC'];
+  const lLabels=['PERD. FASE 1','PERD. FASE 2','PERD. FASE 3 → SEMIS','3R LLOC'];
   const lColor=id=>(id==='P21'?'tercer':'l');
 
   // Calculate heights
@@ -481,8 +481,8 @@ function buildBracket12(pd, prefix){
   els+=svgConnector(lColX(0),matchYL(0,2),matchYL(0,3),lColX(1),matchYL(1,0),C.lineL);
   // PF2→PF3 single
   for(let i=0;i<2;i++) els+=svgLine(lColX(1),matchYL(1,i),lColX(2),matchYL(2,i),C.lineL);
-  // PF3→3r merge
-  els+=svgConnector(lColX(2),matchYL(2,0),matchYL(2,1),lColX(3),matchYL(3,0),C.lineL);
+  // P17 i P18 (finalistes perdedors) pugen a les semifinals (P19/P20).
+  // El 3r lloc (P21) el juguen els perdedors de les semifinals — sense connector dibuixat.
 
   // Section labels
   const wLabel=`▲ BRACKET GUANYADORS`;
