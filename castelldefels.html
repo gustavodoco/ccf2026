@@ -120,7 +120,7 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <h1 class="page-title">🏖 Castelldefels</h1>
   <p class="page-sub">Circuit Català de Futevolei</p>
   <div>
-    <span class="dates-badge">📅 13 i 14 de Juny 2026</span>
+    <span class="dates-badge">📅 12 · 13 · 14 de Juny 2026</span>
     <span class="live-badge"><span class="live-dot"></span>Actualització automàtica</span>
   </div>
 </div>
@@ -150,7 +150,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <button class="cat-tab" onclick="showCat('amateur',this)">AMATEUR</button>
   <button class="cat-tab" onclick="showCat('femeni',this)">FEMENÍ</button>
   <button class="cat-tab" onclick="showCat('mixt',this)">MIXT</button>
-  <button class="cat-tab" onclick="showPrograma(this)">PROGRAMA</button>
 </div>
 <div class="content-card"><div id="cat-content"><div class="loading"><div class="spinner"></div><p>Carregant dades...</p></div></div></div>
 </div>
@@ -175,28 +174,31 @@ let programaData={sabado:null,domingo:null};
 
 // ── FALLBACK ──────────────────────────────────────────────
 const FALLBACK_DATA={
-  pro:{info:'6 grups de 3 equipes. Els <strong>1rs</strong> classifiquen directe. <strong>2ns vs 3rs</strong>: partit classificatori. Els classificats juguen la <strong>Doble Eliminatòria (12 equips)</strong>. Les 6 parelles eliminades baixen a l\'Amateur A.',grupos:[
+  pro:{info:'4 grups de 4 equipes. Els <strong>1rs</strong> passen directament a la Fase 2. Els <strong>2ns i 3rs</strong> juguen la Fase 1. Els <strong>4ts</strong> cauen a l\'Amateur A.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3','Parella C4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3','Parella D4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
+  ]},
+  amateur:{info:'2 grups de 3 equipes + 4 grups de 4 equipes. <strong>Amateur A</strong> (12 eq.): 6 primers + 2 millors 2ns + 4 últims del Pro. <strong>Amateur B</strong> (16 eq.): la resta.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3','Parella C4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3','Parella D4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3','Parella E4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3','Parella F4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
+  ]},
+  femeni:{info:'1 grup de 7 equipes (tots contra tots). Les <strong>4 primeres</strong> passen a les semifinals.',grupos:[
+    {nome:'Grup Únic',equipes:['Parella 1','Parella 2','Parella 3','Parella 4','Parella 5','Parella 6','Parella 7'],
+     partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:4,visit:5,p_local:null,p_visit:null},{local:6,visit:0,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null},{local:5,visit:6,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:4,visit:6,p_local:null,p_visit:null},{local:5,visit:0,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:3,visit:5,p_local:null,p_visit:null},{local:6,visit:1,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:1,visit:5,p_local:null,p_visit:null},{local:2,visit:6,p_local:null,p_visit:null},{local:3,visit:0,p_local:null,p_visit:null},{local:4,visit:1,p_local:null,p_visit:null},{local:5,visit:2,p_local:null,p_visit:null},{local:6,visit:3,p_local:null,p_visit:null}]}
+  ]},
+  mixt:{info:'6 grups de 3 equipes. <strong>Fase prèvia</strong>: 2ns vs 3rs d\'altres grups. Els 6 primers + 6 vencedors = <strong>12 equipes</strong> al playoff.',grupos:[
     {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
-  ]},
-  amateur:{info:'6 grups de 4 equipes. <strong>Amateur A</strong>: Doble Eliminatòria (14 equips). <strong>Amateur B</strong>: Doble Eliminatòria (16 equips).',grupos:[
-    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3','Parella C4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3','Parella D4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3','Parella E4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3','Parella F4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
-  ]},
-  femeni:{info:'1 grup de 6 equipes (tots contra tots). Les <strong>4 primeres</strong> passen a les semifinals.',grupos:[
-    {nome:'Grup Únic',equipes:['Parella 1','Parella 2','Parella 3','Parella 4','Parella 5','Parella 6'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:0,visit:5,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:1,visit:4,p_local:null,p_visit:null},{local:1,visit:5,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:2,visit:5,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null},{local:3,visit:5,p_local:null,p_visit:null},{local:4,visit:5,p_local:null,p_visit:null}]}
-  ]},
-  mixt:{info:'1 grup de 5 + 1 grup de 4 equipes. <strong>Semifinal</strong> i <strong>Final</strong>.',grupos:[
-    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4','Parella A5'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:1,visit:4,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null}]},
-    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
   ]}
 };
 
@@ -326,7 +328,7 @@ function svgText(x,y,text,fill,fontSize,fontWeight,anchor,clip){
   if(clip) attrs+=` clip-path="url(#${clip})"`;
   return`<text ${attrs}>${esc(text)}</text>`;
 }
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function esc(s){if(s===null||s===undefined)s='';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
 function svgMatch(x,y,m,type){
   // type: 'w','l','final','tercer','previa'
@@ -492,170 +494,145 @@ function buildBracket12(pd, prefix){
 }
 
 
-// ── BUILD BRACKET 16 (Amateur B) ─────────────────────────
-function buildBracket16(pd, prefix){
+// ── BUILD BRACKET 14 (Amateur A) — doble eliminatòria 14 equipes ──
+function buildBracketA14(pd, prefix){
   const gm=id=>(pd||[]).find(m=>m.fase===prefix+id)||null;
-  const colX=col=>col*COL+10;
+  const colX=c=>c*COL+10;
+  const PITCH=BH+18;
 
-  // W: F1(8) → Quarts(4) → Semis(2) → Final(1)
-  const wRows=[8,4,2,1];
-  const wIds=[['P1','P2','P3','P4','P5','P6','P7','P8'],['P9','P10','P11','P12'],['P13','P14'],['P15']];
-  const wLabels=['FASE 1','QUARTS','SEMIFINALS','FINAL'];
-  const wColor=id=>(id==='P15'?'final':'w');
-
-  // L: PF1(4) → PF2(4) → PF3(2) → PSemis(1) → 3r(1)
-  const lIds=[['P16','P17','P18','P19'],['P20','P21','P22','P23'],['P24','P25'],['P26'],['P27']];
-  const lLabels=['PERD. F1','PERD. F2','PERD. F3','PERD. SEMIS','3R LLOC'];
-  const lColor=id=>(id==='P27'?'tercer':'l');
-
-  const wTotalH=8*BH+9*GAP;
-  const lTotalH=8*BH+9*GAP;
-  const totalW=5*COL+20;
-  const wTop=HEADER+10;
-  const lTop=wTotalH+wTop+60;
-  const totalH=lTop+lTotalH+40;
-
-  function yPos(rows,col,idx,top,totalH){
-    const n=rows[col];
-    const sp=(totalH-(n*BH))/(n+1);
-    return top+sp+idx*(BH+sp);
-  }
-  const matchYW=(col,idx)=>yPos(wRows,col,idx,wTop,wTotalH);
-  const lRows=[4,4,2,1,1];
-  const matchYL=(col,idx)=>yPos(lRows,col,idx,lTop,lTotalH);
+  // WINNERS
+  const wTop=HEADER+24, yW=s=>wTop+s*PITCH;
+  const f1=[['P1',0],['P2',1],['P3',2],['P4',3],['P5',4],['P6',5]];
+  const f2=[['P9',0],['P10',1.5],['P11',3],['P12',4.5]];
+  const f3=[['P19',0.75],['P20',3.75]];
+  const sf=[['SF1',0.75],['SF2',3.75]];
+  const fin=[['FINAL',2.25]];
 
   let els='';
-  // W headers
-  for(let cc=0;cc<4;cc++){
-    const lc=cc===3?C.labelF:C.labelW;
-    els+=svgColHeader(colX(cc),wTop-HEADER,wLabels[cc],lc);
-  }
-  // W matches
-  for(let cc=0;cc<4;cc++){
-    for(let i=0;i<wIds[cc].length;i++){
-      els+=svgMatch(colX(cc),matchYW(cc,i),gm(wIds[cc][i]),wColor(wIds[cc][i]));
-    }
-  }
-  // W connectors F1→Quarts (pairs merge)
-  els+=svgConnector(colX(0),matchYW(0,0),matchYW(0,1),colX(1),matchYW(1,0),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,2),matchYW(0,3),colX(1),matchYW(1,1),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,4),matchYW(0,5),colX(1),matchYW(1,2),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,6),matchYW(0,7),colX(1),matchYW(1,3),C.lineW);
-  // Quarts→Semis
-  els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineW);
-  els+=svgConnector(colX(1),matchYW(1,2),matchYW(1,3),colX(2),matchYW(2,1),C.lineW);
-  // Semis→Final
-  els+=svgConnector(colX(2),matchYW(2,0),matchYW(2,1),colX(3),matchYW(3,0),C.lineFinal);
+  els+=svgColHeader(colX(0),wTop-HEADER,'Fase 1',C.labelW);
+  els+=svgColHeader(colX(1),wTop-HEADER,'Fase 2',C.labelW);
+  els+=svgColHeader(colX(2),wTop-HEADER,'Fase 3',C.labelW);
+  els+=svgColHeader(colX(3),wTop-HEADER,'Semifinals',C.labelW);
+  els+=svgColHeader(colX(4),wTop-HEADER,'Final',C.labelF);
 
-  // L headers
-  for(let cc=0;cc<5;cc++){
-    const lc=cc===4?C.labelTercer:C.labelL;
-    els+=svgColHeader(colX(cc),lTop-HEADER,lLabels[cc],lc);
-  }
-  // L matches
-  for(let cc=0;cc<5;cc++){
-    for(let i=0;i<lIds[cc].length;i++){
-      els+=svgMatch(colX(cc),matchYL(cc,i),gm(lIds[cc][i]),lColor(lIds[cc][i]));
-    }
-  }
-  // L connectors (simplified pairs)
-  for(let i=0;i<4;i++) els+=svgLine(colX(0),matchYL(0,i),colX(1),matchYL(1,i),C.lineL);
-  els+=svgConnector(colX(1),matchYL(1,0),matchYL(1,1),colX(2),matchYL(2,0),C.lineL);
-  els+=svgConnector(colX(1),matchYL(1,2),matchYL(1,3),colX(2),matchYL(2,1),C.lineL);
-  els+=svgConnector(colX(2),matchYL(2,0),matchYL(2,1),colX(3),matchYL(3,0),C.lineL);
-  els+=svgLine(colX(3),matchYL(3,0),colX(4),matchYL(4,0),C.lineL);
+  els+=svgLine(colX(0),yW(0),colX(1),yW(0),C.lineW);
+  els+=svgConnector(colX(0),yW(1),yW(2),colX(1),yW(1.5),C.lineW);
+  els+=svgLine(colX(0),yW(3),colX(1),yW(3),C.lineW);
+  els+=svgConnector(colX(0),yW(4),yW(5),colX(1),yW(4.5),C.lineW);
+  els+=svgConnector(colX(1),yW(0),yW(1.5),colX(2),yW(0.75),C.lineW);
+  els+=svgConnector(colX(1),yW(3),yW(4.5),colX(2),yW(3.75),C.lineW);
+  els+=svgLine(colX(2),yW(0.75),colX(3),yW(0.75),C.lineW);
+  els+=svgLine(colX(2),yW(3.75),colX(3),yW(3.75),C.lineW);
+  els+=svgConnector(colX(3),yW(0.75),yW(3.75),colX(4),yW(2.25),C.lineFinal);
 
-  els+=`<text x="10" y="${wTop-HEADER-18}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
-  els+=`<text x="10" y="${lTop-HEADER-18}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
+  f1.forEach(([id,s])=>els+=svgMatch(colX(0),yW(s),gm(id),'w'));
+  f2.forEach(([id,s])=>els+=svgMatch(colX(1),yW(s),gm(id),'w'));
+  f3.forEach(([id,s])=>els+=svgMatch(colX(2),yW(s),gm(id),'w'));
+  sf.forEach(([id,s])=>els+=svgMatch(colX(3),yW(s),gm(id),'w'));
+  fin.forEach(([id,s])=>els+=svgMatch(colX(4),yW(s),gm(id),'final'));
 
-  return{svg:els, w:totalW, h:totalH};
+  els+=`<text x="10" y="${wTop-HEADER-16}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
+
+  // LOSERS
+  const lTop=yW(5)+BH+70, yL=s=>lTop+s*PITCH;
+  const lf1=[['P8',0],['P7',2]];
+  const lf2=[['P13',0],['P14',1],['P15',2],['P16',3]];
+  const lf3=[['P17',0.5],['P18',2.5]];
+  const lf4=[['P22',0.5],['P21',2.5]];
+  const l3r=[['3R',1.5]];
+
+  els+=svgColHeader(colX(0),lTop-HEADER,'Perdedors Fase 1',C.labelL);
+  els+=svgColHeader(colX(1),lTop-HEADER,'Perdedors Fase 2',C.labelL);
+  els+=svgColHeader(colX(2),lTop-HEADER,'Perdedors Fase 3',C.labelL);
+  els+=svgColHeader(colX(3),lTop-HEADER,'Perdedors Fase 4',C.labelL);
+  els+=svgColHeader(colX(4),lTop-HEADER,'Tercer Lloc',C.labelTercer);
+
+  els+=svgLine(colX(0),yL(0),colX(1),yL(0),C.lineL);
+  els+=svgLine(colX(0),yL(2),colX(1),yL(2),C.lineL);
+  els+=svgConnector(colX(1),yL(0),yL(1),colX(2),yL(0.5),C.lineL);
+  els+=svgConnector(colX(1),yL(2),yL(3),colX(2),yL(2.5),C.lineL);
+  els+=svgLine(colX(2),yL(0.5),colX(3),yL(0.5),C.lineL);
+  els+=svgLine(colX(2),yL(2.5),colX(3),yL(2.5),C.lineL);
+
+  lf1.forEach(([id,s])=>els+=svgMatch(colX(0),yL(s),gm(id),'l'));
+  lf2.forEach(([id,s])=>els+=svgMatch(colX(1),yL(s),gm(id),'l'));
+  lf3.forEach(([id,s])=>els+=svgMatch(colX(2),yL(s),gm(id),'l'));
+  lf4.forEach(([id,s])=>els+=svgMatch(colX(3),yL(s),gm(id),'l'));
+  l3r.forEach(([id,s])=>els+=svgMatch(colX(4),yL(s),gm(id),'tercer'));
+
+  els+=`<text x="10" y="${lTop-HEADER-16}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
+
+  return{svg:els, w:5*COL+20, h:yL(3)+BH+30};
 }
 
-// ── BUILD BRACKET 14 (Amateur A — 2 byes a 1a ronda) ─────
-function buildBracket14(pd, prefix){
+// ── BUILD BRACKET 16 (Amateur B) — doble eliminatòria 16 equipes ──
+function buildBracket16(pd, prefix){
   const gm=id=>(pd||[]).find(m=>m.fase===prefix+id)||null;
-  const colX=col=>col*COL+10;
+  const colX=c=>c*COL+10;
+  const PITCH=BH+18;
 
-  // W: F1(6 partits + 2 byes) → Quarts(4) → Semis(2) → Final(1)
-  const wRows=[8,4,2,1];
-  const wIds=[['P1','P2','P3','P4','P5','P6'],['P7','P8','P9','P10'],['P11','P12'],['P13']];
-  const wLabels=['FASE 1','QUARTS','SEMIFINALS','FINAL'];
-  const wColor=id=>(id==='P13'?'final':'w');
-
-  // L: skeleton (confirmar amb imatge real del quadre)
-  const lIds=[['P14','P15','P16'],['P17','P18','P19'],['P20','P21'],['P22'],['P23']];
-  const lLabels=['PERD. F1','PERD. F2','PERD. F3','PERD. SEMIS','3R LLOC'];
-  const lColor=id=>(id==='P23'?'tercer':'l');
-
-  const wTotalH=8*BH+9*GAP;
-  const lTotalH=8*BH+9*GAP;
-  const totalW=5*COL+20;
-  const wTop=HEADER+10;
-  const lTop=wTotalH+wTop+60;
-  const totalH=lTop+lTotalH+40;
-
-  function yPos(rows,col,idx,top,th){
-    const n=rows[col];
-    const sp=(th-(n*BH))/(n+1);
-    return top+sp+idx*(BH+sp);
-  }
-  const matchYW=(col,idx)=>yPos(wRows,col,idx,wTop,wTotalH);
-  const lRows=[3,3,2,1,1];
-  const matchYL=(col,idx)=>yPos(lRows,col,idx,lTop,lTotalH);
+  // WINNERS
+  const wTop=HEADER+24, yW=s=>wTop+s*PITCH;
+  const f1=[['P1',0],['P2',1],['P3',2],['P4',3],['P5',4],['P6',5],['P7',6],['P8',7]];
+  const f2=[['P13',0.5],['P14',2.5],['P15',4.5],['P16',6.5]];
+  const f3=[['P23',1.5],['P24',5.5]];
+  const sf=[['SF1',1.5],['SF2',5.5]];
+  const fin=[['FINAL',3.5]];
 
   let els='';
-  // W headers
-  for(let cc=0;cc<4;cc++){
-    const lc=cc===3?C.labelF:C.labelW;
-    els+=svgColHeader(colX(cc),wTop-HEADER,wLabels[cc],lc);
-  }
-  // W matches (6 partits)
-  for(let i=0;i<6;i++){
-    els+=svgMatch(colX(0),matchYW(0,i),gm(wIds[0][i]),'w');
-  }
-  // 2 byes (slots 6 i 7) → directes a quarts
-  for(let i=6;i<8;i++){
-    els+=`<text x="${colX(0)}" y="${matchYW(0,i)+BH/2+4}" fill="${C.labelW}" font-size="11" font-weight="700" font-family="system-ui,sans-serif">BYE — classificat directe</text>`;
-  }
-  for(let cc=1;cc<4;cc++){
-    for(let i=0;i<wIds[cc].length;i++){
-      els+=svgMatch(colX(cc),matchYW(cc,i),gm(wIds[cc][i]),wColor(wIds[cc][i]));
-    }
-  }
-  // W connectors F1→Quarts: P1+P2→P7, P3+P4→P8, P5+bye→P9, P6+bye→P10
-  els+=svgConnector(colX(0),matchYW(0,0),matchYW(0,1),colX(1),matchYW(1,0),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,2),matchYW(0,3),colX(1),matchYW(1,1),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,4),matchYW(0,6),colX(1),matchYW(1,2),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,5),matchYW(0,7),colX(1),matchYW(1,3),C.lineW);
-  // Quarts→Semis
-  els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineW);
-  els+=svgConnector(colX(1),matchYW(1,2),matchYW(1,3),colX(2),matchYW(2,1),C.lineW);
-  // Semis→Final
-  els+=svgConnector(colX(2),matchYW(2,0),matchYW(2,1),colX(3),matchYW(3,0),C.lineFinal);
+  els+=svgColHeader(colX(0),wTop-HEADER,'Fase 1',C.labelW);
+  els+=svgColHeader(colX(1),wTop-HEADER,'Fase 2',C.labelW);
+  els+=svgColHeader(colX(2),wTop-HEADER,'Fase 3',C.labelW);
+  els+=svgColHeader(colX(3),wTop-HEADER,'Semifinals',C.labelW);
+  els+=svgColHeader(colX(4),wTop-HEADER,'Final',C.labelF);
 
-  // L headers
-  for(let cc=0;cc<5;cc++){
-    const lc=cc===4?C.labelTercer:C.labelL;
-    els+=svgColHeader(colX(cc),lTop-HEADER,lLabels[cc],lc);
-  }
-  // L matches
-  for(let cc=0;cc<5;cc++){
-    for(let i=0;i<lIds[cc].length;i++){
-      els+=svgMatch(colX(cc),matchYL(cc,i),gm(lIds[cc][i]),lColor(lIds[cc][i]));
-    }
-  }
-  // L connectors (simplificat)
-  els+=svgConnector(colX(0),matchYL(0,0),matchYL(0,1),colX(1),matchYL(1,0),C.lineL);
-  els+=svgLine(colX(0),matchYL(0,2),colX(1),matchYL(1,1),C.lineL);
-  els+=svgConnector(colX(1),matchYL(1,0),matchYL(1,1),colX(2),matchYL(2,0),C.lineL);
-  els+=svgLine(colX(1),matchYL(1,2),colX(2),matchYL(2,1),C.lineL);
-  els+=svgConnector(colX(2),matchYL(2,0),matchYL(2,1),colX(3),matchYL(3,0),C.lineL);
-  els+=svgLine(colX(3),matchYL(3,0),colX(4),matchYL(4,0),C.lineL);
+  els+=svgConnector(colX(0),yW(0),yW(1),colX(1),yW(0.5),C.lineW);
+  els+=svgConnector(colX(0),yW(2),yW(3),colX(1),yW(2.5),C.lineW);
+  els+=svgConnector(colX(0),yW(4),yW(5),colX(1),yW(4.5),C.lineW);
+  els+=svgConnector(colX(0),yW(6),yW(7),colX(1),yW(6.5),C.lineW);
+  els+=svgConnector(colX(1),yW(0.5),yW(2.5),colX(2),yW(1.5),C.lineW);
+  els+=svgConnector(colX(1),yW(4.5),yW(6.5),colX(2),yW(5.5),C.lineW);
+  els+=svgLine(colX(2),yW(1.5),colX(3),yW(1.5),C.lineW);
+  els+=svgLine(colX(2),yW(5.5),colX(3),yW(5.5),C.lineW);
+  els+=svgConnector(colX(3),yW(1.5),yW(5.5),colX(4),yW(3.5),C.lineFinal);
 
-  els+=`<text x="10" y="${wTop-HEADER-18}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
-  els+=`<text x="10" y="${lTop-HEADER-18}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
+  f1.forEach(([id,s])=>els+=svgMatch(colX(0),yW(s),gm(id),'w'));
+  f2.forEach(([id,s])=>els+=svgMatch(colX(1),yW(s),gm(id),'w'));
+  f3.forEach(([id,s])=>els+=svgMatch(colX(2),yW(s),gm(id),'w'));
+  sf.forEach(([id,s])=>els+=svgMatch(colX(3),yW(s),gm(id),'w'));
+  fin.forEach(([id,s])=>els+=svgMatch(colX(4),yW(s),gm(id),'final'));
 
-  return{svg:els, w:totalW, h:totalH};
+  els+=`<text x="10" y="${wTop-HEADER-16}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
+
+  // LOSERS
+  const lTop=yW(7)+BH+70, yL=s=>lTop+s*PITCH;
+  const lf1=[['P9',0],['P10',1],['P11',2],['P12',3]];
+  const lf2=[['P20',0],['P19',1],['P18',2],['P17',3]];
+  const lf3=[['P22',0.5],['P21',2.5]];
+  const lf4=[['P25',0.5],['P26',2.5]];
+  const l3r=[['3R',1.5]];
+
+  els+=svgColHeader(colX(0),lTop-HEADER,'Perdedors Fase 1',C.labelL);
+  els+=svgColHeader(colX(1),lTop-HEADER,'Perdedors Fase 2',C.labelL);
+  els+=svgColHeader(colX(2),lTop-HEADER,'Perdedors Fase 3',C.labelL);
+  els+=svgColHeader(colX(3),lTop-HEADER,'Perdedors Fase 4',C.labelL);
+  els+=svgColHeader(colX(4),lTop-HEADER,'Tercer Lloc',C.labelTercer);
+
+  for(let i=0;i<4;i++) els+=svgLine(colX(0),yL(i),colX(1),yL(i),C.lineL);
+  els+=svgConnector(colX(1),yL(0),yL(1),colX(2),yL(0.5),C.lineL);
+  els+=svgConnector(colX(1),yL(2),yL(3),colX(2),yL(2.5),C.lineL);
+  els+=svgLine(colX(2),yL(0.5),colX(3),yL(0.5),C.lineL);
+  els+=svgLine(colX(2),yL(2.5),colX(3),yL(2.5),C.lineL);
+
+  lf1.forEach(([id,s])=>els+=svgMatch(colX(0),yL(s),gm(id),'l'));
+  lf2.forEach(([id,s])=>els+=svgMatch(colX(1),yL(s),gm(id),'l'));
+  lf3.forEach(([id,s])=>els+=svgMatch(colX(2),yL(s),gm(id),'l'));
+  lf4.forEach(([id,s])=>els+=svgMatch(colX(3),yL(s),gm(id),'l'));
+  l3r.forEach(([id,s])=>els+=svgMatch(colX(4),yL(s),gm(id),'tercer'));
+
+  els+=`<text x="10" y="${lTop-HEADER-16}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
+
+  return{svg:els, w:5*COL+20, h:yL(3)+BH+30};
 }
 
 // ── BUILD BRACKET FEMENÍ ─────────────────────────────────
@@ -735,17 +712,17 @@ function renderCat(cat){
     playoffs=`<div class="bracket-section-title">🏆 Playoff Pro — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(b.svg,b.w,b.h)}</div>`;
   }
   if(cat==='amateur'){
-    const a=buildBracket14(playoffData['amat-a']||[],'A');
+    const a=buildBracketA14(playoffData['amat-a']||[],'A');
     const b16=buildBracket16(playoffData['amat-b']||[],'B');
-    playoffs=`<div class="bracket-section-title">🏆 Amateur A — Doble Eliminatòria (14 equips)</div><div class="bracket-svg-wrap">${makeSVG(a.svg,a.w,a.h)}</div><div class="bracket-section-title" style="margin-top:32px">🏆 Amateur B — Doble Eliminatòria (16 equips)</div><div class="bracket-svg-wrap">${makeSVG(b16.svg,b16.w,b16.h)}</div>`;
+    playoffs=`<div class="bracket-section-title">🏆 Amateur A — Doble Eliminatòria (14 equipes)</div><div class="bracket-svg-wrap">${makeSVG(a.svg,a.w,a.h)}</div><div class="bracket-section-title" style="margin-top:32px">🏆 Amateur B — Doble Eliminatòria (16 equipes)</div><div class="bracket-svg-wrap">${makeSVG(b16.svg,b16.w,b16.h)}</div>`;
   }
   if(cat==='femeni'){
     const f=buildBracketFemeni(playoffData.femeni||[]);
     playoffs=`<div class="bracket-section-title">🏆 Playoff Femení</div><div class="bracket-svg-wrap">${makeSVG(f.svg,f.w,f.h)}</div>`;
   }
   if(cat==='mixt'){
-    const mx=buildBracketFemeni(playoffData.mixt||[]);
-    playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Semifinals i Final</div><div class="bracket-svg-wrap">${makeSVG(mx.svg,mx.w,mx.h)}</div>`;
+    const mx=buildBracketMixt(playoffData.mixt||[]);
+    playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(mx.prevSvg,mx.prevW,mx.prevH)}</div><div class="bracket-svg-wrap" style="margin-top:16px">${makeSVG(mx.mainSvg,mx.mainW,mx.mainH)}</div>`;
   }
 
   el.innerHTML=`${info}${grups}<div style="height:24px"></div>${playoffs}`;
@@ -821,8 +798,9 @@ function switchProgramaDay(day,btn){
 function renderPrograma(){
   const el=document.getElementById('cat-content');
   const days=[
-    {key:'sabado',label:'Dissabte 13'},
-    {key:'domingo',label:'Diumenge 14'}
+    {key:'divendres',label:'Divendres 15'},
+    {key:'sabado',label:'Dissabte 16'},
+    {key:'domingo',label:'Diumenge 17'}
   ];
   const dayBtns=days.map(d=>`<button class="prog-day-btn${d.key===currentProgramaDay?' active':''}" onclick="switchProgramaDay('${d.key}',this)">${d.label}</button>`).join('');
   const data=programaData[currentProgramaDay];
