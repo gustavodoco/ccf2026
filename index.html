@@ -93,6 +93,9 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 .dupla-name{font-weight:600}
 .club-name{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+.tie-mark{display:inline-block;margin-left:5px;font-size:11px;font-weight:800;color:#f9a030;vertical-align:middle}
+.rank-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,.07);font-size:11px;color:rgba(255,255,255,.4)}
+.rank-legend b{color:#f9a030}
 
 .no-data{text-align:center;padding:40px;color:rgba(255,255,255,.3);font-size:14px}
 
@@ -274,6 +277,9 @@ function assignRanks(list){
     if(d.total===lastTotal){ d._rank=lastRank; }
     else { d._rank=i+1; lastRank=d._rank; lastTotal=d.total; }
   });
+  const counts={};
+  r.forEach(d=>counts[d._rank]=(counts[d._rank]||0)+1);
+  r.forEach(d=>d._tied=counts[d._rank]>1);
   return r;
 }
 
@@ -288,7 +294,7 @@ function switchCat(cat, btn){
 
 function sortBy(field){
   if(sortField === field) sortAsc = !sortAsc;
-  else { sortField = field; sortAsc = false; }
+  else { sortField = field; sortAsc = (field === 'dupla'); }
   renderRanking();
 }
 
@@ -321,31 +327,38 @@ function renderRanking(){
   const rows = data.map((d, i) => {
     const pos = d._rank;
     const pc = pos===1?'pos-1':pos===2?'pos-2':pos===3?'pos-3':'';
-    const e1 = d.etapa_1 ? `<span class="pts-etapa has">${d.etapa_1.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
-    const e2 = d.etapa_2 ? `<span class="pts-etapa has">${d.etapa_2.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
-    const e3 = d.etapa_3 ? `<span class="pts-etapa has">${d.etapa_3.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
+    const tie = d._tied ? `<span class="tie-mark" title="Empat amb la mateixa posició">=</span>` : '';
+    const cell = v => (v===null||v===undefined) ? `<span class="pts-etapa">–</span>` : `<span class="pts-etapa has">${v.toLocaleString()}</span>`;
     return `<tr>
-      <td class="num"><span class="pos ${pc}">${pos}</span></td>
-      <td><div class="dupla-name">${d.dupla}</div>${d.club?`<div class="club-name">${d.club}</div>`:''}</td>
-      <td class="num">${e1}</td>
-      <td class="num">${e2}</td>
-      <td class="num">${e3}</td>
+      <td class="num"><span class="pos ${pc}">${pos}</span>${tie}</td>
+      <td><div class="dupla-name">${d.dupla}</div></td>
+      <td class="num">${cell(d.etapa_1)}</td>
+      <td class="num">${cell(d.etapa_2)}</td>
+      <td class="num">${cell(d.etapa_3)}</td>
       <td class="num pts-col">${(d.total||0).toLocaleString()}</td>
     </tr>`;
   }).join('');
 
+  const arrow = f => sortField===f ? (sortAsc?' ↑':' ↓') : '';
+  const count = data.length;
+
   el.innerHTML = `<div style="overflow-x:auto">
     <table class="ranking-table">
       <thead><tr>
-        <th class="num" onclick="sortBy('pos')">#</th>
-        <th onclick="sortBy('dupla')">Dupla</th>
-        <th class="num" onclick="sortBy('etapa_1')">E1<br><small style="font-weight:400;opacity:.6">Torredembarra</small></th>
-        <th class="num" onclick="sortBy('etapa_2')">E2<br><small style="font-weight:400;opacity:.6">Castelldefels</small></th>
-        <th class="num" onclick="sortBy('etapa_3')">E3<br><small style="font-weight:400;opacity:.6">Vilanova</small></th>
-        <th class="num" onclick="sortBy('total')">Total</th>
+        <th class="num" onclick="sortBy('pos')">#${arrow('pos')}</th>
+        <th onclick="sortBy('dupla')">Dupla${arrow('dupla')}</th>
+        <th class="num" onclick="sortBy('etapa_1')">E1${arrow('etapa_1')}<br><small style="font-weight:400;opacity:.6">Torredembarra</small></th>
+        <th class="num" onclick="sortBy('etapa_2')">E2${arrow('etapa_2')}<br><small style="font-weight:400;opacity:.6">Castelldefels</small></th>
+        <th class="num" onclick="sortBy('etapa_3')">E3${arrow('etapa_3')}<br><small style="font-weight:400;opacity:.6">Vilanova</small></th>
+        <th class="num" onclick="sortBy('total')">Total${arrow('total')}</th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table>
+  </div>
+  <div class="rank-legend">
+    <span>${count} ${count===1?'dupla':'duples'}</span>
+    <span><b>=</b> mateixa posició (empat)</span>
+    <span>Desempat: qui arriba abans a la puntuació més alta</span>
   </div>`;
 }
 
