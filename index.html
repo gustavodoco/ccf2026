@@ -258,6 +258,25 @@ function parseRankingCSV(text){
   return out.sort((a,b)=>(b.total||0)-(a.total||0));
 }
 
+// ── RÀNQUING (empat + desempat) ──────────────────────────
+// Total desc; desempat: qui va fer més punts abans (etapa_1, etapa_2, etapa_3)
+function rankCompare(a,b){
+  const dt=(b.total||0)-(a.total||0); if(dt) return dt;
+  const d1=(b.etapa_1||0)-(a.etapa_1||0); if(d1) return d1;
+  const d2=(b.etapa_2||0)-(a.etapa_2||0); if(d2) return d2;
+  const d3=(b.etapa_3||0)-(a.etapa_3||0); if(d3) return d3;
+  return 0;
+}
+function assignRanks(list){
+  const r=[...list].sort(rankCompare);
+  let lastTotal=null,lastRank=0;
+  r.forEach((d,i)=>{
+    if(d.total===lastTotal){ d._rank=lastRank; }
+    else { d._rank=i+1; lastRank=d._rank; lastTotal=d.total; }
+  });
+  return r;
+}
+
 // ── RENDER ────────────────────────────────────────────────
 function switchCat(cat, btn){
   document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
@@ -276,15 +295,21 @@ function sortBy(field){
 function renderRanking(){
   const el = document.getElementById('ranking-content');
   const search = document.getElementById('search-dupla').value.toLowerCase();
+  assignRanks(rankingData[currentCat] || []);
   let data = [...(rankingData[currentCat] || [])];
 
   if(search) data = data.filter(d => d.dupla.toLowerCase().includes(search));
 
-  data.sort((a,b) => {
-    let av = a[sortField] ?? 0, bv = b[sortField] ?? 0;
-    if(typeof av === 'string'){ av = av.toLowerCase(); bv = bv.toLowerCase(); }
-    return sortAsc ? (av > bv ? 1 : -1) : (av < bv ? 1 : -1);
-  });
+  if(sortField === 'total' || sortField === 'pos'){
+    data.sort(rankCompare);
+    if(sortAsc) data.reverse();
+  } else {
+    data.sort((a,b) => {
+      let av = a[sortField] ?? 0, bv = b[sortField] ?? 0;
+      if(typeof av === 'string'){ av = av.toLowerCase(); bv = bv.toLowerCase(); }
+      return sortAsc ? (av > bv ? 1 : -1) : (av < bv ? 1 : -1);
+    });
+  }
 
   if(!data.length){
     el.innerHTML = `<div class="no-data">${rankingData[currentCat].length === 0
@@ -294,7 +319,7 @@ function renderRanking(){
   }
 
   const rows = data.map((d, i) => {
-    const pos = i + 1;
+    const pos = d._rank;
     const pc = pos===1?'pos-1':pos===2?'pos-2':pos===3?'pos-3':'';
     const e1 = d.etapa_1 ? `<span class="pts-etapa has">${d.etapa_1.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
     const e2 = d.etapa_2 ? `<span class="pts-etapa has">${d.etapa_2.toLocaleString()}</span>` : `<span class="pts-etapa">–</span>`;
