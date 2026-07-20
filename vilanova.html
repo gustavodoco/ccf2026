@@ -121,14 +121,32 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <p class="page-sub">Circuit Català de Futevolei</p>
   <div>
     <span class="dates-badge">📅 24 · 25 · 26 de Juliol 2026</span>
-    <span class="live-badge"><span class="live-dot"></span>Inscripcions obertes</span>
+    <span class="live-badge"><span class="live-dot"></span>En directe · Torneig en curs</span>
   </div>
 </div>
-<div style="background:linear-gradient(135deg,rgba(225,107,11,.18),rgba(249,234,9,.06));border:1px solid rgba(249,234,9,.35);border-radius:16px;padding:22px 24px;margin-bottom:20px;text-align:center">
-  <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f9ea09;text-transform:uppercase;margin-bottom:6px">Aquesta setmana · 24 · 25 · 26 de Juliol</div>
-  <div style="font-size:1.4rem;font-weight:800;margin-bottom:6px">Inscripcions obertes</div>
-  <p style="color:rgba(255,255,255,.6);font-size:13px;max-width:520px;margin:0 auto 16px">Última etapa del Circuit Català de Futevolei 2026. Categories: Pro, Amateur, Femení i Mixt. Places limitades!</p>
-  <a href="INSERIR_URL_INSCRIPCIO" style="display:inline-block;background:linear-gradient(135deg,#e16b0b,#f9a030);color:#1a1507;font-weight:900;font-size:14px;letter-spacing:.5px;padding:11px 28px;border-radius:30px;text-decoration:none">Inscriu-te ara →</a>
+<div style="background:linear-gradient(135deg,rgba(225,107,11,.18),rgba(249,234,9,.06));border:1px solid rgba(249,234,9,.35);border-radius:16px;padding:22px 24px;margin-bottom:20px">
+  <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f9ea09;text-transform:uppercase;margin-bottom:10px;text-align:center">Etapa 3 · 24 · 25 · 26 de Juliol · En curs</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+    <div style="background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px">
+      <div style="font-size:10px;letter-spacing:2px;color:#f9a030;font-weight:800;text-transform:uppercase;margin-bottom:8px">Fase Classificatòria</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.7">
+        <strong style="color:#fff">PRO</strong> — 16 parelles · 4 grups de 4<br>
+        <span style="color:rgba(255,255,255,.45)">1rs, 2ns i 3rs → DE Pro · 4ts → DE Amateur A</span><br>
+        <strong style="color:#fff">AMATEUR</strong> — 24 parelles · 6 grups de 4<br>
+        <span style="color:rgba(255,255,255,.45)">1rs + 2 millors 2ns → Amateur A · 4 segons restants + 4 millors 3rs → Amateur B · la resta → Debutant</span>
+      </div>
+    </div>
+    <div style="background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px">
+      <div style="font-size:10px;letter-spacing:2px;color:#f9a030;font-weight:800;text-transform:uppercase;margin-bottom:8px">Fase Doble Eliminatòria</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.7">
+        <strong style="color:#fff">PRO</strong> — 12 equips<br>
+        <strong style="color:#fff">AMATEUR A</strong> — 12 equips<br>
+        <strong style="color:#fff">AMATEUR B</strong> — 8 equips<br>
+        <strong style="color:#fff">DEBUTANT</strong> — 8 equips<br>
+        <strong style="color:#fff">MIXT</strong> — 2 grups de 6 · semifinals i final
+      </div>
+    </div>
+  </div>
 </div>
 <div class="update-bar">
   <span id="last-update">Carregant dades...</span>
@@ -137,25 +155,18 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <button class="toggle-config" onclick="toggleConfig()" style="display:none" id="admin-btn">⚙ Configurar URLs de Google Sheets</button>
 <div class="config-panel" id="config-panel" style="display:none">
   <div class="config-title">URLs de Google Sheets (CSV publicat)</div>
-  <div class="config-section">Fase de Grups</div>
+  <div class="config-section">Categories (grups + playoffs a la mateixa pestanya)</div>
   <div class="config-row"><span class="config-label">Pro</span><input class="config-input" id="url-pro" placeholder="URL CSV pestanya Pro"></div>
   <div class="config-row"><span class="config-label">Amateur</span><input class="config-input" id="url-amateur" placeholder="URL CSV pestanya Amateur"></div>
-  <div class="config-row"><span class="config-label">Femení</span><input class="config-input" id="url-femeni" placeholder="URL CSV pestanya Femení"></div>
   <div class="config-row"><span class="config-label">Mixt</span><input class="config-input" id="url-mixt" placeholder="URL CSV pestanya Mixt"></div>
-  <div class="config-section">Playoffs</div>
-  <div class="config-row"><span class="config-label">Playoffs Pro</span><input class="config-input" id="url-playoff-pro" placeholder="URL CSV Playoffs_Pro"></div>
-  <div class="config-row"><span class="config-label">Playoffs Amateur A</span><input class="config-input" id="url-playoff-amat-a" placeholder="URL CSV Playoffs_AmateurA"></div>
-  <div class="config-row"><span class="config-label">Playoffs Amateur B</span><input class="config-input" id="url-playoff-amat-b" placeholder="URL CSV Playoffs_AmateurB"></div>
-  <div class="config-row"><span class="config-label">Playoffs Femení</span><input class="config-input" id="url-playoff-femeni" placeholder="URL CSV Playoffs_Femení"></div>
-  <div class="config-row"><span class="config-label">Playoffs Mixt</span><input class="config-input" id="url-playoff-mixt" placeholder="URL CSV Playoffs_Mixt"></div>
   <div class="config-row" style="margin-top:10px"><button class="config-save" onclick="saveUrls()">Desar URLs</button></div>
   <div class="config-hint">Arxiu → Compartir → Publicar al web → pestanya → CSV → Publicar → copiar l'enllaç.</div>
 </div>
 <div class="cat-tabs">
   <button class="cat-tab active" onclick="showCat('pro',this)">PRO</button>
   <button class="cat-tab" onclick="showCat('amateur',this)">AMATEUR</button>
-  <button class="cat-tab" onclick="showCat('femeni',this)">FEMENÍ</button>
   <button class="cat-tab" onclick="showCat('mixt',this)">MIXT</button>
+  <button class="cat-tab" onclick="showPrograma(this)">📅 PROGRAMA</button>
 </div>
 <div class="content-card"><div id="cat-content"><div class="loading"><div class="spinner"></div><p>Carregant dades...</p></div></div></div>
 </div>
@@ -166,43 +177,41 @@ let _c=0,_t;
 document.querySelector('.page-title').addEventListener('click',()=>{_c++;clearTimeout(_t);_t=setTimeout(()=>_c=0,2000);if(_c>=5){_c=0;const b=document.getElementById('admin-btn');b.style.display='inline-block';b.scrollIntoView({behavior:'smooth'})}});
 
 // ── URLs ──────────────────────────────────────────────────
-const SHEET_URLS={ pro:'', amateur:'', femeni:'', mixt:'' };
-const PLAYOFF_URLS={ pro:'', 'amat-a':'', 'amat-b':'', femeni:'', mixt:'' };
-const PROGRAMA_URLS={ divendres:'', sabado:'', domingo:'' };
-let programaData={divendres:null,sabado:null,domingo:null};
+const SHEET_URLS={
+  pro:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQqhmei4sJIE6rFXodELdfIzkGbjLNDKF0phKTmI6ZhEJjuMgjQ6JSCpZjLwu59OiH5T25tCmx7vWl3/pub?gid=169620668&single=true&output=csv',
+  amateur:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQqhmei4sJIE6rFXodELdfIzkGbjLNDKF0phKTmI6ZhEJjuMgjQ6JSCpZjLwu59OiH5T25tCmx7vWl3/pub?gid=1212678885&single=true&output=csv',
+  mixt:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQqhmei4sJIE6rFXodELdfIzkGbjLNDKF0phKTmI6ZhEJjuMgjQ6JSCpZjLwu59OiH5T25tCmx7vWl3/pub?gid=45733146&single=true&output=csv'
+};
+const PROGRAMA_URLS={
+  sabado:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQqhmei4sJIE6rFXodELdfIzkGbjLNDKF0phKTmI6ZhEJjuMgjQ6JSCpZjLwu59OiH5T25tCmx7vWl3/pub?gid=579853102&single=true&output=csv',
+  domingo:'https://docs.google.com/spreadsheets/d/e/2PACX-1vQqhmei4sJIE6rFXodELdfIzkGbjLNDKF0phKTmI6ZhEJjuMgjQ6JSCpZjLwu59OiH5T25tCmx7vWl3/pub?gid=1162203601&single=true&output=csv'
+};
+let programaData={sabado:null,domingo:null};
 
 // ── FALLBACK ──────────────────────────────────────────────
 const FALLBACK_DATA={
-  pro:{info:'4 grups de 4 equipes. Els <strong>1rs</strong> passen directament a la Fase 2. Els <strong>2ns i 3rs</strong> juguen la Fase 1. Els <strong>4ts</strong> cauen a l\'Amateur A.',grupos:[
+  pro:{info:'<strong>16 parelles · 4 grups de 4</strong>. Els <strong>3 primers</strong> de cada grup passen a la Doble Eliminatòria Pro (12 equips). Els <strong>4ts</strong> passen a la Doble Eliminatòria Amateur A.',grupos:[
     {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3','Parella C4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3','Parella D4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
   ]},
-  amateur:{info:'2 grups de 3 equipes + 4 grups de 4 equipes. <strong>Amateur A</strong> (12 eq.): 6 primers + 2 millors 2ns + 4 últims del Pro. <strong>Amateur B</strong> (16 eq.): la resta.',grupos:[
-    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+  amateur:{info:'<strong>24 parelles · 6 grups de 4</strong>. <strong>Amateur A</strong> (12 eq.): els 1rs de cada grup + els 2 millors 2ns + els 4 últims del Pro. <strong>Amateur B</strong> (8 eq.): els 4 segons restants + els 4 millors 3rs. <strong>Debutant</strong> (8 eq.): la resta d\'equips.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3','Parella C4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3','Parella D4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3','Parella E4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
     {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3','Parella F4'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
   ]},
-  femeni:{info:'1 grup de 7 equipes (tots contra tots). Les <strong>4 primeres</strong> passen a les semifinals.',grupos:[
-    {nome:'Grup Únic',equipes:['Parella 1','Parella 2','Parella 3','Parella 4','Parella 5','Parella 6','Parella 7'],
-     partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:4,visit:5,p_local:null,p_visit:null},{local:6,visit:0,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null},{local:5,visit:6,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:4,visit:6,p_local:null,p_visit:null},{local:5,visit:0,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:3,visit:5,p_local:null,p_visit:null},{local:6,visit:1,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:1,visit:5,p_local:null,p_visit:null},{local:2,visit:6,p_local:null,p_visit:null},{local:3,visit:0,p_local:null,p_visit:null},{local:4,visit:1,p_local:null,p_visit:null},{local:5,visit:2,p_local:null,p_visit:null},{local:6,visit:3,p_local:null,p_visit:null}]}
-  ]},
-  mixt:{info:'6 grups de 3 equipes. <strong>Fase prèvia</strong>: 2ns vs 3rs d\'altres grups. Els 6 primers + 6 vencedors = <strong>12 equipes</strong> al playoff.',grupos:[
-    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup C',equipes:['Parella C1','Parella C2','Parella C3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup D',equipes:['Parella D1','Parella D2','Parella D3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup E',equipes:['Parella E1','Parella E2','Parella E3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]},
-    {nome:'Grup F',equipes:['Parella F1','Parella F2','Parella F3'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null}]}
+  mixt:{info:'<strong>2 grups de 6 parelles</strong> (tots contra tots). Els <strong>2 primers</strong> de cada grup passen a les semifinals.',grupos:[
+    {nome:'Grup A',equipes:['Parella A1','Parella A2','Parella A3','Parella A4','Parella A5','Parella A6'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:0,visit:5,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:1,visit:4,p_local:null,p_visit:null},{local:1,visit:5,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:2,visit:5,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null},{local:3,visit:5,p_local:null,p_visit:null},{local:4,visit:5,p_local:null,p_visit:null}]},
+    {nome:'Grup B',equipes:['Parella B1','Parella B2','Parella B3','Parella B4','Parella B5','Parella B6'],partidas:[{local:0,visit:1,p_local:null,p_visit:null},{local:0,visit:2,p_local:null,p_visit:null},{local:0,visit:3,p_local:null,p_visit:null},{local:0,visit:4,p_local:null,p_visit:null},{local:0,visit:5,p_local:null,p_visit:null},{local:1,visit:2,p_local:null,p_visit:null},{local:1,visit:3,p_local:null,p_visit:null},{local:1,visit:4,p_local:null,p_visit:null},{local:1,visit:5,p_local:null,p_visit:null},{local:2,visit:3,p_local:null,p_visit:null},{local:2,visit:4,p_local:null,p_visit:null},{local:2,visit:5,p_local:null,p_visit:null},{local:3,visit:4,p_local:null,p_visit:null},{local:3,visit:5,p_local:null,p_visit:null},{local:4,visit:5,p_local:null,p_visit:null}]}
   ]}
 };
 
 let etapaData={};
-let playoffData={pro:[],  'amat-a':[], 'amat-b':[], femeni:[], mixt:[]};
+let playoffData={pro:[], amateur:[], mixt:[]};
 let currentCat='pro';
 
 // ── CÀRREGA ───────────────────────────────────────────────
@@ -211,8 +220,14 @@ async function loadAllData(){
   Object.keys(FALLBACK_DATA).forEach(c=>{if(!etapaData[c])etapaData[c]=JSON.parse(JSON.stringify(FALLBACK_DATA[c]))});
   renderCat(currentCat);
   try{const r=await fetch('etapa_vilanova_data.json');if(r.ok){const j=await r.json();Object.keys(j).forEach(c=>{if(j[c]&&j[c].grupos)etapaData[c]={...FALLBACK_DATA[c],...j[c]}})}}catch(e){}
-  await Promise.allSettled(Object.entries(SHEET_URLS).map(async([c,u])=>{if(!u)return;try{const d=await loadFromSheets(u);if(d&&d.grupos&&d.grupos.length)etapaData[c]={...FALLBACK_DATA[c],...d}}catch(e){}}));
-  await Promise.allSettled(Object.entries(PLAYOFF_URLS).map(async([k,u])=>{if(!u)return;try{playoffData[k]=await loadPlayoffsFromSheets(u)}catch(e){}}));
+  await Promise.allSettled(Object.entries(SHEET_URLS).map(async([c,u])=>{
+    if(!u)return;
+    try{
+      const d=await loadSheet(u);
+      if(d.grupos&&d.grupos.length)etapaData[c]={...FALLBACK_DATA[c],grupos:d.grupos};
+      playoffData[c]=d.playoffs||[];
+    }catch(e){}
+  }));
   await loadPrograma();
   document.getElementById('last-update').textContent=`Última actualització: ${new Date().toLocaleTimeString('ca-ES')}`;
   renderCat(currentCat);
@@ -241,21 +256,36 @@ function csvToRows(text){
   }
   return rows;
 }
-async function loadFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();return parseCSV(await r.text())}
-function parseCSV(text){
-  const rows=csvToRows(text);
-  const grupos={};
-  for(const row of rows){
-    if(!row.grupo||!row.local)continue;
-    if(!grupos[row.grupo])grupos[row.grupo]={nome:row.grupo,partidas:[],equipes:[]};
-    const g=grupos[row.grupo];
-    const lI=goa(g.equipes,row.local);
-    const vI=goa(g.equipes,row.visitante);
-    g.partidas.push({local:lI,visit:vI,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null});
-  }
-  return{grupos:Object.values(grupos)};
+const PLAY_RE=/^(?:[ABD]?P\d{1,2}|SF[12]|FINAL|3LLOC)$/;
+function canonFase(code){
+  const u=code.replace(/\s+/g,'').toUpperCase();
+  if(u==='FINAL')return'Final';
+  if(u==='3LLOC')return'3lloc';
+  return u;
 }
-async function loadPlayoffsFromSheets(url){const r=await fetch(url);if(!r.ok)throw new Error();const rows=csvToRows(await r.text());const out=[];for(const row of rows){if(!row.fase||!row.local)continue;out.push({fase:row.fase,local:row.local,visit:row.visitante,p_local:row.pontos_local!==''?parseInt(row.pontos_local):null,p_visit:row.pontos_visit!==''?parseInt(row.pontos_visit):null})}return out}
+async function loadSheet(url){const r=await fetch(url);if(!r.ok)throw new Error();return parseSheet(await r.text())}
+function num(v){if(v===undefined||v===null||v==='')return null;const n=parseInt(v,10);return isNaN(n)?null:n}
+function parseSheet(text){
+  const rows=csvToRows(text);
+  const grupos={},playoffs=[];
+  for(const row of rows){
+    const local=(row.local||'').trim();
+    const visit=(row.visitante||'').trim();
+    if(!local)continue;
+    const pl=num(row.pontos_local), pv=num(row.pontos_visit);
+    const code=((row.fase||'')||(row.grupo||'')).trim();
+    if(code&&PLAY_RE.test(code.replace(/\s+/g,'').toUpperCase())){
+      playoffs.push({fase:canonFase(code),local:local,visit:visit,p_local:pl,p_visit:pv});
+      continue;
+    }
+    const grupo=(row.grupo||'').trim();
+    if(!grupo)continue;
+    if(!grupos[grupo])grupos[grupo]={nome:grupo,partidas:[],equipes:[]};
+    const g=grupos[grupo];
+    g.partidas.push({local:goa(g.equipes,local),visit:goa(g.equipes,visit),p_local:pl,p_visit:pv});
+  }
+  return{grupos:Object.values(grupos),playoffs:playoffs};
+}
 function goa(arr,v){let i=arr.indexOf(v);if(i===-1){arr.push(v);i=arr.length-1}return i}
 
 // ── CLASSIFICACIÓ ─────────────────────────────────────────
@@ -284,7 +314,7 @@ function findPrograma(nameA, nameB){
   return null;
 }
 
-function diaLabel(d){return d==='divendres'?'Div.':d==='sabado'?'Dis.':'Diu.'}
+function diaLabel(d){return d==='sabado'?'Dis.':'Diu.'}
 
 function renderGrup(g){
   const st=calcStandings(g);
@@ -327,7 +357,7 @@ function svgText(x,y,text,fill,fontSize,fontWeight,anchor,clip){
   if(clip) attrs+=` clip-path="url(#${clip})"`;
   return`<text ${attrs}>${esc(text)}</text>`;
 }
-function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function esc(s){if(s===null||s===undefined)s='';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
 function svgMatch(x,y,m,type){
   // type: 'w','l','final','tercer','previa'
@@ -493,78 +523,54 @@ function buildBracket12(pd, prefix){
 }
 
 
-// ── BUILD BRACKET 16 (Amateur B) ─────────────────────────
-function buildBracket16(pd, prefix){
+
+// ── BUILD BRACKET 8 (Amateur B, Debutant) ────────────────
+function buildBracket8(pd, prefix){
   const gm=id=>(pd||[]).find(m=>m.fase===prefix+id)||null;
   const colX=col=>col*COL+10;
 
-  // W: F1(8) → Quarts(4) → Semis(2) → Final(1)
-  const wRows=[8,4,2,1];
-  const wIds=[['P1','P2','P3','P4','P5','P6','P7','P8'],['P9','P10','P11','P12'],['P13','P14'],['P15']];
-  const wLabels=['FASE 1','QUARTS','SEMIFINALS','FINAL'];
-  const wColor=id=>(id==='P15'?'final':'w');
+  // W: F1(4) -> SEMIS(2) -> FINAL(1)
+  const wRows=[4,2,1];
+  const wIds=[['P1','P2','P3','P4'],['P5','P6'],['P7']];
+  const wLabels=['QUARTS','SEMIFINALS','FINAL'];
+  const wColor=id=>(id==='P7'?'final':'w');
 
-  // L: PF1(4) → PF2(4) → PF3(2) → PSemis(1) → 3r(1)
-  const lIds=[['P16','P17','P18','P19'],['P20','P21','P22','P23'],['P24','P25'],['P26'],['P27']];
-  const lLabels=['PERD. F1','PERD. F2','PERD. F3','PERD. SEMIS','3R LLOC'];
-  const lColor=id=>(id==='P27'?'tercer':'l');
+  // L: PERD. QUARTS(2) -> PERD. SEMIS(2) -> 3R LLOC(1)
+  const lRows=[2,2,1];
+  const lIds=[['P8','P9'],['P10','P11'],['P12']];
+  const lLabels=['PERD. QUARTS','PERD. SEMIS','3R LLOC'];
+  const lColor=id=>(id==='P12'?'tercer':'l');
 
-  const wTotalH=8*BH+9*GAP;
-  const lTotalH=8*BH+9*GAP;
-  const totalW=5*COL+20;
+  const wTotalH=4*BH+5*GAP;
+  const lTotalH=3*BH+4*GAP;
+  const totalW=3*COL+20;
   const wTop=HEADER+10;
   const lTop=wTotalH+wTop+60;
   const totalH=lTop+lTotalH+40;
 
-  function yPos(rows,col,idx,top,totalH){
+  function yPos(rows,col,idx,top,tot){
     const n=rows[col];
-    const sp=(totalH-(n*BH))/(n+1);
+    const sp=(tot-(n*BH))/(n+1);
     return top+sp+idx*(BH+sp);
   }
-  const matchYW=(col,idx)=>yPos(wRows,col,idx,wTop,wTotalH);
-  const lRows=[4,4,2,1,1];
-  const matchYL=(col,idx)=>yPos(lRows,col,idx,lTop,lTotalH);
+  const matchYW=(c,i)=>yPos(wRows,c,i,wTop,wTotalH);
+  const matchYL=(c,i)=>yPos(lRows,c,i,lTop,lTotalH);
 
   let els='';
-  // W headers
-  for(let cc=0;cc<4;cc++){
-    const lc=cc===3?C.labelF:C.labelW;
-    els+=svgColHeader(colX(cc),wTop-HEADER,wLabels[cc],lc);
-  }
-  // W matches
-  for(let cc=0;cc<4;cc++){
-    for(let i=0;i<wIds[cc].length;i++){
-      els+=svgMatch(colX(cc),matchYW(cc,i),gm(wIds[cc][i]),wColor(wIds[cc][i]));
-    }
-  }
-  // W connectors F1→Quarts (pairs merge)
+  for(let c=0;c<3;c++) els+=svgColHeader(colX(c),wTop-HEADER,wLabels[c],c===2?C.labelF:C.labelW);
+  for(let c=0;c<3;c++)
+    for(let i=0;i<wIds[c].length;i++)
+      els+=svgMatch(colX(c),matchYW(c,i),gm(wIds[c][i]),wColor(wIds[c][i]));
   els+=svgConnector(colX(0),matchYW(0,0),matchYW(0,1),colX(1),matchYW(1,0),C.lineW);
   els+=svgConnector(colX(0),matchYW(0,2),matchYW(0,3),colX(1),matchYW(1,1),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,4),matchYW(0,5),colX(1),matchYW(1,2),C.lineW);
-  els+=svgConnector(colX(0),matchYW(0,6),matchYW(0,7),colX(1),matchYW(1,3),C.lineW);
-  // Quarts→Semis
-  els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineW);
-  els+=svgConnector(colX(1),matchYW(1,2),matchYW(1,3),colX(2),matchYW(2,1),C.lineW);
-  // Semis→Final
-  els+=svgConnector(colX(2),matchYW(2,0),matchYW(2,1),colX(3),matchYW(3,0),C.lineFinal);
+  els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineFinal);
 
-  // L headers
-  for(let cc=0;cc<5;cc++){
-    const lc=cc===4?C.labelTercer:C.labelL;
-    els+=svgColHeader(colX(cc),lTop-HEADER,lLabels[cc],lc);
-  }
-  // L matches
-  for(let cc=0;cc<5;cc++){
-    for(let i=0;i<lIds[cc].length;i++){
-      els+=svgMatch(colX(cc),matchYL(cc,i),gm(lIds[cc][i]),lColor(lIds[cc][i]));
-    }
-  }
-  // L connectors (simplified pairs)
-  for(let i=0;i<4;i++) els+=svgLine(colX(0),matchYL(0,i),colX(1),matchYL(1,i),C.lineL);
+  for(let c=0;c<3;c++) els+=svgColHeader(colX(c),lTop-HEADER,lLabels[c],c===2?C.labelTercer:C.labelL);
+  for(let c=0;c<3;c++)
+    for(let i=0;i<lIds[c].length;i++)
+      els+=svgMatch(colX(c),matchYL(c,i),gm(lIds[c][i]),lColor(lIds[c][i]));
+  for(let i=0;i<2;i++) els+=svgLine(colX(0),matchYL(0,i),colX(1),matchYL(1,i),C.lineL);
   els+=svgConnector(colX(1),matchYL(1,0),matchYL(1,1),colX(2),matchYL(2,0),C.lineL);
-  els+=svgConnector(colX(1),matchYL(1,2),matchYL(1,3),colX(2),matchYL(2,1),C.lineL);
-  els+=svgConnector(colX(2),matchYL(2,0),matchYL(2,1),colX(3),matchYL(3,0),C.lineL);
-  els+=svgLine(colX(3),matchYL(3,0),colX(4),matchYL(4,0),C.lineL);
 
   els+=`<text x="10" y="${wTop-HEADER-18}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
   els+=`<text x="10" y="${lTop-HEADER-18}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
@@ -572,8 +578,8 @@ function buildBracket16(pd, prefix){
   return{svg:els, w:totalW, h:totalH};
 }
 
-// ── BUILD BRACKET FEMENÍ ─────────────────────────────────
-function buildBracketFemeni(pd){
+// ── BUILD BRACKET SEMIS + FINAL (Mixt) ───────────────────
+function buildBracketSemis(pd){
   const gm=id=>(pd||[]).find(m=>m.fase===id)||null;
   const ids=[['SF1','SF2'],['Final'],['3lloc']];
   const labels=['SEMIFINALS','FINAL','3R I 4T LLOC'];
@@ -604,28 +610,6 @@ function buildBracketFemeni(pd){
   return{svg:els, w:totalW, h:totalH};
 }
 
-// ── BUILD BRACKET MIXT (fase prèvia + bracket 12) ────────
-function buildBracketMixt(pd){
-  const gm=id=>(pd||[]).find(m=>m.fase===id)||null;
-  // Fase prèvia: Prev1..Prev6 side by side (2 cols x 3)
-  const prevIds=[['Prev1','Prev2','Prev3'],['Prev4','Prev5','Prev6']];
-  const prevH=3*BH+4*GAP+HEADER+20;
-  const prevW=2*COL+20;
-  let prevEls='';
-  prevEls+=`<text x="10" y="16" fill="${C.labelPrevia}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">🔁 FASE PRÈVIA — 2NS VS 3RS</text>`;
-  for(let c=0;c<2;c++){
-    for(let i=0;i<3;i++){
-      const x=c*COL+10, y=HEADER+10+i*(BH+GAP);
-      prevEls+=svgMatch(x,y,gm(prevIds[c][i]),'previa');
-    }
-  }
-
-  // Main bracket 12 with M prefix
-  const main=buildBracket12(pd,'M');
-
-  return{prevSvg:prevEls, prevW, prevH, mainSvg:main.svg, mainW:main.w, mainH:main.h};
-}
-
 // ── SVG WRAPPER ───────────────────────────────────────────
 function makeSVG(els,w,h){
   return`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" style="display:block;min-width:${w}px"><rect width="${w}" height="${h}" fill="transparent"/>${els}</svg>`;
@@ -635,6 +619,7 @@ function makeSVG(els,w,h){
 function showCat(cat,btn){document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');currentCat=cat;renderCat(cat)}
 
 function renderCat(cat){
+  if(cat==='__programa__'){renderPrograma();return}
   const el=document.getElementById('cat-content');
   const data=etapaData[cat];
   if(!data||!data.grupos||!data.grupos.length){
@@ -649,25 +634,25 @@ function renderCat(cat){
     playoffs=`<div class="bracket-section-title">🏆 Playoff Pro — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(b.svg,b.w,b.h)}</div>`;
   }
   if(cat==='amateur'){
-    const a=buildBracket12(playoffData['amat-a']||[],'AP');
-    const b16=buildBracket16(playoffData['amat-b']||[],'BP');
-    playoffs=`<div class="bracket-section-title">🏆 Amateur A — Doble Eliminatòria (12 equipes)</div><div class="bracket-svg-wrap">${makeSVG(a.svg,a.w,a.h)}</div><div class="bracket-section-title" style="margin-top:32px">🏆 Amateur B — Doble Eliminatòria (16 equipes)</div><div class="bracket-svg-wrap">${makeSVG(b16.svg,b16.w,b16.h)}</div>`;
-  }
-  if(cat==='femeni'){
-    const f=buildBracketFemeni(playoffData.femeni||[]);
-    playoffs=`<div class="bracket-section-title">🏆 Playoff Femení</div><div class="bracket-svg-wrap">${makeSVG(f.svg,f.w,f.h)}</div>`;
+    const pdAm=playoffData.amateur||[];
+    const a=buildBracket12(pdAm,'A');
+    const b8=buildBracket8(pdAm,'B');
+    const d8=buildBracket8(pdAm,'D');
+    playoffs=`<div class="bracket-section-title">🏆 Amateur A — Doble Eliminatòria (12 equips)</div><div class="bracket-svg-wrap">${makeSVG(a.svg,a.w,a.h)}</div>`
+      +`<div class="bracket-section-title" style="margin-top:32px">🏆 Amateur B — Doble Eliminatòria (8 equips)</div><div class="bracket-svg-wrap">${makeSVG(b8.svg,b8.w,b8.h)}</div>`
+      +`<div class="bracket-section-title" style="margin-top:32px">🏆 Debutant — Doble Eliminatòria (8 equips)</div><div class="bracket-svg-wrap">${makeSVG(d8.svg,d8.w,d8.h)}</div>`;
   }
   if(cat==='mixt'){
-    const mx=buildBracketMixt(playoffData.mixt||[]);
-    playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Doble Eliminatòria</div><div class="bracket-svg-wrap">${makeSVG(mx.prevSvg,mx.prevW,mx.prevH)}</div><div class="bracket-svg-wrap" style="margin-top:16px">${makeSVG(mx.mainSvg,mx.mainW,mx.mainH)}</div>`;
+    const mx=buildBracketSemis(playoffData.mixt||[]);
+    playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Semifinals i Final</div><div class="bracket-svg-wrap">${makeSVG(mx.svg,mx.w,mx.h)}</div>`;
   }
 
   el.innerHTML=`${info}${grups}<div style="height:24px"></div>${playoffs}`;
 }
 
 // ── CONFIG ────────────────────────────────────────────────
-function toggleConfig(){const p=document.getElementById('config-panel');p.style.display=p.style.display==='none'?'block':'none';if(p.style.display==='block'){document.getElementById('url-pro').value=SHEET_URLS.pro;document.getElementById('url-amateur').value=SHEET_URLS.amateur;document.getElementById('url-femeni').value=SHEET_URLS.femeni;document.getElementById('url-mixt').value=SHEET_URLS.mixt;document.getElementById('url-playoff-pro').value=PLAYOFF_URLS.pro;document.getElementById('url-playoff-amat-a').value=PLAYOFF_URLS['amat-a'];document.getElementById('url-playoff-amat-b').value=PLAYOFF_URLS['amat-b'];document.getElementById('url-playoff-femeni').value=PLAYOFF_URLS.femeni;document.getElementById('url-playoff-mixt').value=PLAYOFF_URLS.mixt;}}
-function saveUrls(){SHEET_URLS.pro=document.getElementById('url-pro').value.trim()||SHEET_URLS.pro;SHEET_URLS.amateur=document.getElementById('url-amateur').value.trim()||SHEET_URLS.amateur;SHEET_URLS.femeni=document.getElementById('url-femeni').value.trim()||SHEET_URLS.femeni;SHEET_URLS.mixt=document.getElementById('url-mixt').value.trim()||SHEET_URLS.mixt;PLAYOFF_URLS.pro=document.getElementById('url-playoff-pro').value.trim()||PLAYOFF_URLS.pro;PLAYOFF_URLS['amat-a']=document.getElementById('url-playoff-amat-a').value.trim()||PLAYOFF_URLS['amat-a'];PLAYOFF_URLS['amat-b']=document.getElementById('url-playoff-amat-b').value.trim()||PLAYOFF_URLS['amat-b'];PLAYOFF_URLS.femeni=document.getElementById('url-playoff-femeni').value.trim()||PLAYOFF_URLS.femeni;PLAYOFF_URLS.mixt=document.getElementById('url-playoff-mixt').value.trim()||PLAYOFF_URLS.mixt;document.getElementById('config-panel').style.display='none';loadAllData();}
+function toggleConfig(){const p=document.getElementById('config-panel');p.style.display=p.style.display==='none'?'block':'none';if(p.style.display==='block'){['pro','amateur','mixt'].forEach(k=>document.getElementById('url-'+k).value=SHEET_URLS[k])}}
+function saveUrls(){['pro','amateur','mixt'].forEach(k=>{const v=document.getElementById('url-'+k).value.trim();if(v)SHEET_URLS[k]=v});document.getElementById('config-panel').style.display='none';loadAllData();}
 
 
 // ── PROGRAMA ──────────────────────────────────────────────
@@ -735,9 +720,8 @@ function switchProgramaDay(day,btn){
 function renderPrograma(){
   const el=document.getElementById('cat-content');
   const days=[
-    {key:'divendres',label:'Divendres 15'},
-    {key:'sabado',label:'Dissabte 16'},
-    {key:'domingo',label:'Diumenge 17'}
+    {key:'sabado',label:'Dissabte 25'},
+    {key:'domingo',label:'Diumenge 26'}
   ];
   const dayBtns=days.map(d=>`<button class="prog-day-btn${d.key===currentProgramaDay?' active':''}" onclick="switchProgramaDay('${d.key}',this)">${d.label}</button>`).join('');
   const data=programaData[currentProgramaDay];
