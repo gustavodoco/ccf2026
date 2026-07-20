@@ -99,6 +99,33 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .match-teams{display:flex;align-items:center;gap:6px;width:100%}
 .team-name{flex:1;color:rgba(255,255,255,.88);font-weight:600;font-size:13px;white-space:normal;overflow:visible;text-overflow:unset}
 .team-name.right{text-align:right}
+
+.dest-pill{display:inline-block;font-size:9px;font-weight:900;letter-spacing:1px;padding:2px 7px;border-radius:5px;text-transform:uppercase}
+.dest-a{background:rgba(249,234,9,.14);color:#f9ea09;border:1px solid rgba(249,234,9,.3)}
+.dest-b{background:rgba(225,107,11,.16);color:#f9a030;border:1px solid rgba(225,107,11,.32)}
+.dest-d{background:rgba(255,255,255,.06);color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.12)}
+.repesca-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:12px}
+.repesca-card{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px}
+.repesca-card h4{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);font-weight:800;margin-bottom:10px}
+.repesca-row{display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,.04)}
+.repesca-row:last-child{border-bottom:none}
+.repesca-pos{width:18px;text-align:center;font-size:10px;font-weight:800;color:rgba(255,255,255,.3)}
+.repesca-name{flex:1;color:rgba(255,255,255,.85);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.repesca-grp{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.5px}
+.repesca-num{font-size:11px;color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums;min-width:38px;text-align:right}
+.repesca-cut{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#f9a030}
+.repesca-cut::before,.repesca-cut::after{content:'';flex:1;height:1px;background:rgba(225,107,11,.35)}
+.repesca-note{font-size:11px;color:rgba(255,255,255,.32);line-height:1.6;margin-top:12px}
+.repesca-row.qualif .repesca-name{color:#fff}
+.repesca-row.fora .repesca-name{color:rgba(255,255,255,.42)}
+.fmt-details{margin-top:18px;border:1px solid rgba(255,255,255,.07);border-radius:10px;background:rgba(255,255,255,.02)}
+.fmt-details>summary{cursor:pointer;list-style:none;padding:10px 14px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.fmt-details>summary::-webkit-details-marker{display:none}
+.fmt-details>summary::before{content:'▸ ';color:#f9a030}
+.fmt-details[open]>summary::before{content:'▾ '}
+.fmt-details>summary:hover{color:#f9a030}
+.fmt-body{padding:0 14px 14px}
+.mini-tie{font-size:9px;color:rgba(255,255,255,.28);margin-left:4px}
 </style>
 </head>
 <body>
@@ -122,30 +149,6 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
   <div>
     <span class="dates-badge">📅 24 · 25 · 26 de Juliol 2026</span>
     <span class="live-badge"><span class="live-dot"></span>En directe · Torneig en curs</span>
-  </div>
-</div>
-<div style="background:linear-gradient(135deg,rgba(225,107,11,.18),rgba(249,234,9,.06));border:1px solid rgba(249,234,9,.35);border-radius:16px;padding:22px 24px;margin-bottom:20px">
-  <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#f9ea09;text-transform:uppercase;margin-bottom:10px;text-align:center">Etapa 3 · 24 · 25 · 26 de Juliol · En curs</div>
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
-    <div style="background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px">
-      <div style="font-size:10px;letter-spacing:2px;color:#f9a030;font-weight:800;text-transform:uppercase;margin-bottom:8px">Fase Classificatòria</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.7">
-        <strong style="color:#fff">PRO</strong> — 16 parelles · 4 grups de 4<br>
-        <span style="color:rgba(255,255,255,.45)">1rs, 2ns i 3rs → DE Pro · 4ts → DE Amateur A</span><br>
-        <strong style="color:#fff">AMATEUR</strong> — 24 parelles · 6 grups de 4<br>
-        <span style="color:rgba(255,255,255,.45)">1rs + 2 millors 2ns → Amateur A · 4 segons restants + 4 millors 3rs → Amateur B · la resta → Debutant</span>
-      </div>
-    </div>
-    <div style="background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 16px">
-      <div style="font-size:10px;letter-spacing:2px;color:#f9a030;font-weight:800;text-transform:uppercase;margin-bottom:8px">Fase Doble Eliminatòria</div>
-      <div style="font-size:12px;color:rgba(255,255,255,.7);line-height:1.7">
-        <strong style="color:#fff">PRO</strong> — 12 equips<br>
-        <strong style="color:#fff">AMATEUR A</strong> — 12 equips<br>
-        <strong style="color:#fff">AMATEUR B</strong> — 8 equips<br>
-        <strong style="color:#fff">DEBUTANT</strong> — 8 equips<br>
-        <strong style="color:#fff">MIXT</strong> — 2 grups de 6 · semifinals i final
-      </div>
-    </div>
   </div>
 </div>
 <div class="update-bar">
@@ -289,11 +292,73 @@ function parseSheet(text){
 function goa(arr,v){let i=arr.indexOf(v);if(i===-1){arr.push(v);i=arr.length-1}return i}
 
 // ── CLASSIFICACIÓ ─────────────────────────────────────────
-function calcStandings(g){
-  const s=g.equipes.map(e=>({nome:e,v:0,p_plus:0,p_minus:0}));
-  g.partidas.forEach(p=>{if(p.p_local!==null&&p.p_visit!==null){s[p.local].p_plus+=p.p_local;s[p.local].p_minus+=p.p_visit;s[p.visit].p_plus+=p.p_visit;s[p.visit].p_minus+=p.p_local;if(p.p_local>p.p_visit)s[p.local].v++;else if(p.p_visit>p.p_local)s[p.visit].v++}});
-  return s.sort((a,b)=>b.v-a.v||(b.p_plus-b.p_minus)-(a.p_plus-a.p_minus)||b.p_plus-a.p_plus)
+// Coeficient = punts a favor / punts en contra (criteri FIVB)
+function coef(t){
+  if(t.p_minus>0)return t.p_plus/t.p_minus;
+  return t.p_plus>0?999:1;
 }
+function coefTxt(t){
+  if(!t.jugats)return '–';
+  return coef(t).toFixed(3);
+}
+// 1r Victòries · 2n Enfrontament directe (només si 2 empatats) · 3r Coeficient · 4t Punts a favor
+function cmpTeams(a,b){return b.v-a.v||coef(b)-coef(a)||b.p_plus-a.p_plus}
+
+function statsFor(g,names){
+  const set=new Set(names), st={};
+  names.forEach(n=>st[n]={nome:n,v:0,d:0,jugats:0,p_plus:0,p_minus:0});
+  g.partidas.forEach(p=>{
+    if(p.p_local===null||p.p_visit===null)return;
+    const a=g.equipes[p.local], b=g.equipes[p.visit];
+    if(!set.has(a)||!set.has(b))return;
+    st[a].jugats++;st[b].jugats++;
+    st[a].p_plus+=p.p_local;st[a].p_minus+=p.p_visit;
+    st[b].p_plus+=p.p_visit;st[b].p_minus+=p.p_local;
+    if(p.p_local>p.p_visit){st[a].v++;st[b].d++}
+    else if(p.p_visit>p.p_local){st[b].v++;st[a].d++}
+  });
+  return st;
+}
+
+// Desempat: mini-lliga només amb els partits entre els empatats.
+// 2 empatats -> equival al confronte directe. 3+ -> victòries, coeficient i punts del mini-grup.
+function resolveTie(g,block){
+  if(block.length<2)return block;
+  const names=block.map(t=>t.nome);
+  const mini=statsFor(g,names);
+  const byName={};block.forEach(t=>byName[t.nome]=t);
+  return names
+    .map(n=>({m:mini[n],f:byName[n]}))
+    .sort((x,y)=>
+      y.m.v-x.m.v ||
+      coef(y.m)-coef(x.m) ||
+      (y.m.p_plus-x.m.p_plus) ||
+      coef(y.f)-coef(x.f) ||
+      (y.f.p_plus-x.f.p_plus))
+    .map(x=>{
+      x.f.tie = block.length===2?'directe':'mini';
+      x.f.mini = x.m;
+      return x.f;
+    });
+}
+
+function calcStandings(g){
+  const full=statsFor(g,g.equipes);
+  const arr=g.equipes.map(n=>full[n]);
+  arr.sort(cmpTeams);
+  const out=[];
+  let i=0;
+  while(i<arr.length){
+    let j=i;
+    while(j+1<arr.length&&arr[j+1].v===arr[i].v)j++;
+    const block=arr.slice(i,j+1);
+    if(block.length>1)out.push(...resolveTie(g,block));
+    else out.push(block[0]);
+    i=j+1;
+  }
+  return out;
+}
+
 function findPrograma(nameA, nameB){
   // Busca en tots els dies del programa
   for(const day of Object.keys(programaData)){
@@ -316,6 +381,82 @@ function findPrograma(nameA, nameB){
 
 function diaLabel(d){return d==='sabado'?'Dis.':'Diu.'}
 
+// ══ CLASSIFICACIÓ CREUADA (Amateur) ══════════════════════
+const AMAT_A_MILLORS_2NS = 2;   // millors 2ns que pugen a Amateur A
+const AMAT_B_MILLORS_3RS = 4;   // millors 3rs que van a Amateur B
+
+function computeAmateurSplit(grupos){
+  const firsts=[],seconds=[],thirds=[],rest=[];
+  grupos.forEach(g=>{
+    const st=calcStandings(g);
+    st.forEach((t,i)=>{
+      const e={...t,grup:g.nome,pos:i+1};
+      if(i===0)firsts.push(e);
+      else if(i===1)seconds.push(e);
+      else if(i===2)thirds.push(e);
+      else rest.push(e);
+    });
+  });
+  seconds.sort(cmpTeams);
+  thirds.sort(cmpTeams);
+  const amatA=firsts.concat(seconds.slice(0,AMAT_A_MILLORS_2NS));
+  const amatB=seconds.slice(AMAT_A_MILLORS_2NS).concat(thirds.slice(0,AMAT_B_MILLORS_3RS));
+  const debut=thirds.slice(AMAT_B_MILLORS_3RS).concat(rest);
+  const dest={};
+  amatA.forEach(t=>dest[t.nome]='A');
+  amatB.forEach(t=>dest[t.nome]='B');
+  debut.forEach(t=>dest[t.nome]='D');
+  const totalPartides=grupos.reduce((n,g)=>n+g.partidas.length,0);
+  const jugades=grupos.reduce((n,g)=>n+g.partidas.filter(p=>p.p_local!==null&&p.p_visit!==null).length,0);
+  return{firsts,seconds,thirds,rest,amatA,amatB,debut,dest,complet:jugades===totalPartides&&totalPartides>0,jugades,totalPartides};
+}
+
+function destPill(d){
+  if(d==='A')return'<span class="dest-pill dest-a">Amateur A</span>';
+  if(d==='B')return'<span class="dest-pill dest-b">Amateur B</span>';
+  return'<span class="dest-pill dest-d">Debutant</span>';
+}
+
+function repescaRow(t,i,fora){
+  return`<div class="repesca-row ${fora?'fora':'qualif'}"><span class="repesca-pos">${i+1}</span><span class="repesca-name">${esc(t.nome)}</span><span class="repesca-grp">${esc(t.grup).replace(/^Grup\s*/i,'')}</span><span class="repesca-num">${t.v}V</span><span class="repesca-num">${coefTxt(t)}</span></div>`;
+}
+
+function rankList(title,arr,tall,tallLabel){
+  let body='';
+  arr.forEach((t,i)=>{
+    if(tall&&i===tall)body+=`<div class="repesca-cut">${tallLabel}</div>`;
+    body+=repescaRow(t,i,tall?i>=tall:false);
+  });
+  if(!arr.length)body='<div class="repesca-note">Sense dades.</div>';
+  return`<div class="repesca-card"><h4>${title}</h4>${body}</div>`;
+}
+
+function renderRepesca(sp){
+  const llista=arr=>arr.map(t=>`<div class="repesca-row"><span class="repesca-name">${esc(t.nome)}</span><span class="repesca-grp">${esc(t.grup).replace(/^Grup\s*/i,'')} · ${t.pos}${['','r','n','r','t'][t.pos]||'è'}</span></div>`).join('');
+  const estat=sp.complet
+    ? `<span style="color:#f9ea09">Definitiu</span> — fase de grups completa.`
+    : `<span style="color:#f9a030">Provisional</span> — ${sp.jugades}/${sp.totalPartides} partits jugats.`;
+  return`
+  <div class="bracket-section-title" style="margin-top:28px">📋 Classificació creuada</div>
+  <div class="repesca-grid">
+    ${rankList('Millors 1rs',sp.firsts)}
+    ${rankList('Millors 2ns',sp.seconds,AMAT_A_MILLORS_2NS,'↑ Amateur A &nbsp;·&nbsp; ↓ Amateur B')}
+    ${rankList('Millors 3rs',sp.thirds,AMAT_B_MILLORS_3RS,'↑ Amateur B &nbsp;·&nbsp; ↓ Debutant')}
+    ${rankList('Millors 4ts',sp.rest)}
+  </div>
+  <div class="repesca-note">${estat} Ordre: victòries · coeficient (punts a favor ÷ punts en contra) · punts a favor. Empats dins del grup es resolen per mini-lliga entre els empatats.</div>
+  <details class="fmt-details">
+    <summary>Composició de cada categoria</summary>
+    <div class="fmt-body">
+      <div class="repesca-grid">
+        <div class="repesca-card"><h4>${destPill('A')} &nbsp;${sp.amatA.length} equips</h4>${llista(sp.amatA)}<div class="repesca-note">+ els 4ts dels grups Pro.</div></div>
+        <div class="repesca-card"><h4>${destPill('B')} &nbsp;${sp.amatB.length} equips</h4>${llista(sp.amatB)}</div>
+        <div class="repesca-card"><h4>${destPill('D')} &nbsp;${sp.debut.length} equips</h4>${llista(sp.debut)}</div>
+      </div>
+    </div>
+  </details>`;
+}
+
 function renderGrup(g){
   const st=calcStandings(g);
   const matches=g.partidas.map(p=>{
@@ -327,8 +468,13 @@ function renderGrup(g){
       : '';
     return`<div class="match-row">${schedBadge?`<div class="match-sched">${schedBadge}</div>`:''}<div class="match-teams"><span class="team-name">${g.equipes[p.local]}</span><span class="vs">×</span><span class="team-name right">${g.equipes[p.visit]}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${p.p_local!==null?p.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${p.p_visit!==null?p.p_visit:'–'}</div></div></div></div>`
   }).join('');
-  const rows=st.map((s,i)=>{const pos=i+1,rc=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'rank-other';const coef=s.p_plus-s.p_minus;return`<tr><td><span class="rank-badge ${rc}">${pos}</span>${s.nome}</td><td>${s.v}</td><td>${s.p_plus}</td><td>${s.p_minus}</td><td>${coef>=0?'+':''}${coef}</td></tr>`}).join('');
-  return`<div class="group-card"><div class="group-header"><span>${g.nome}</span><span class="group-size">${g.equipes.length} equipes</span></div><div class="group-body"><div class="section-label">Classificació</div><table class="standings-table"><thead><tr><th>Parella</th><th>V</th><th>P+</th><th>P−</th><th>Coef</th></tr></thead><tbody>${rows}</tbody></table><div class="section-label" style="margin-top:14px">Partits</div>${matches}</div></div>`
+  const rows=st.map((s,i)=>{
+    const pos=i+1,rc=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'rank-other';
+    const sal=s.p_plus-s.p_minus;
+    const tie=s.tie==='mini'?'<span class="mini-tie" title="Desempat per mini-lliga entre els empatats">▪</span>':s.tie==='directe'?'<span class="mini-tie" title="Desempat per confronte directe">▪</span>':'';
+    return`<tr><td><span class="rank-badge ${rc}">${pos}</span>${esc(s.nome)}${tie}</td><td>${s.v}</td><td>${s.p_plus}</td><td>${s.p_minus}</td><td>${sal>=0?'+':''}${sal}</td><td style="color:#f9a030;font-variant-numeric:tabular-nums">${coefTxt(s)}</td></tr>`
+  }).join('');
+  return`<div class="group-card"><div class="group-header"><span>${g.nome}</span><span class="group-size">${g.equipes.length} equipes</span></div><div class="group-body"><div class="section-label">Classificació</div><table class="standings-table"><thead><tr><th>Parella</th><th>V</th><th>P+</th><th>P−</th><th>Saldo</th><th>Coef</th></tr></thead><tbody>${rows}</tbody></table><div class="section-label" style="margin-top:14px">Partits</div>${matches}</div></div>`
 }
 
 // ══════════════════════════════════════════════════════════
@@ -625,7 +771,10 @@ function renderCat(cat){
   if(!data||!data.grupos||!data.grupos.length){
     el.innerHTML=`<div class="loading"><p style="font-size:14px;color:rgba(255,255,255,.4)">Dades de ${cat.toUpperCase()} no disponibles.</p></div>`;return
   }
-  const info=data.info?`<div class="cat-info-box">${data.info}</div>`:'';
+  const info=data.info?`<details class="fmt-details"><summary>Format de competició</summary><div class="fmt-body" style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.7">${data.info}</div></details>`:'';
+
+  let repesca='';
+  if(cat==='amateur')repesca=renderRepesca(computeAmateurSplit(data.grupos));
   const grups=`<div class="groups-grid">${data.grupos.map(renderGrup).join('')}</div>`;
 
   let playoffs='';
@@ -647,7 +796,7 @@ function renderCat(cat){
     playoffs=`<div class="bracket-section-title">🏆 Playoff Mixt — Semifinals i Final</div><div class="bracket-svg-wrap">${makeSVG(mx.svg,mx.w,mx.h)}</div>`;
   }
 
-  el.innerHTML=`${info}${grups}<div style="height:24px"></div>${playoffs}`;
+  el.innerHTML=`${grups}${repesca}<div style="height:24px"></div>${playoffs}${info}`;
 }
 
 // ── CONFIG ────────────────────────────────────────────────
