@@ -675,21 +675,21 @@ function buildBracket8(pd, prefix){
   const gm=id=>(pd||[]).find(m=>m.fase===prefix+id)||null;
   const colX=col=>col*COL+10;
 
-  // W: F1(4) -> SEMIS(2) -> FINAL(1)
-  const wRows=[4,2,1];
-  const wIds=[['P1','P2','P3','P4'],['P5','P6'],['P7']];
-  const wLabels=['QUARTS','SEMIFINALS','FINAL'];
-  const wColor=id=>(id==='P7'?'final':'w');
+  // W: 1A RONDA(4) -> 2A RONDA(2) -> SEMIFINALS creuada(2) -> FINAL(1)
+  const wRows=[4,2,2,1];
+  const wIds=[['P1','P2','P3','P4'],['P7','P8'],['P11','P12'],['P13']];
+  const wLabels=['1A RONDA','2A RONDA','SEMIFINALS','FINAL'];
+  const wColor=id=>(id==='P13'?'final':'w');
 
-  // L: PERD. QUARTS(2) -> PERD. SEMIS(2) -> 3R LLOC(1)
+  // L: PERD. 1A RONDA(2) -> PERD. 2A RONDA(2) -> 3R LLOC(1)
   const lRows=[2,2,1];
-  const lIds=[['P8','P9'],['P10','P11'],['P12']];
-  const lLabels=['PERD. QUARTS','PERD. SEMIS','3R LLOC'];
-  const lColor=id=>(id==='P12'?'tercer':'l');
+  const lIds=[['P5','P6'],['P9','P10'],['P14']];
+  const lLabels=['PERD. 1A RONDA','PERD. 2A RONDA','3R LLOC'];
+  const lColor=id=>(id==='P14'?'tercer':'l');
 
   const wTotalH=4*BH+5*GAP;
-  const lTotalH=3*BH+4*GAP;
-  const totalW=3*COL+20;
+  const lTotalH=2*BH+3*GAP;
+  const totalW=4*COL+20;
   const wTop=HEADER+10;
   const lTop=wTotalH+wTop+60;
   const totalH=lTop+lTotalH+40;
@@ -703,20 +703,36 @@ function buildBracket8(pd, prefix){
   const matchYL=(c,i)=>yPos(lRows,c,i,lTop,lTotalH);
 
   let els='';
-  for(let c=0;c<3;c++) els+=svgColHeader(colX(c),wTop-HEADER,wLabels[c],c===2?C.labelF:C.labelW);
-  for(let c=0;c<3;c++)
+  // ── GUANYADORS ──
+  for(let c=0;c<4;c++) els+=svgColHeader(colX(c),wTop-HEADER,wLabels[c],c===3?C.labelF:C.labelW);
+  for(let c=0;c<4;c++)
     for(let i=0;i<wIds[c].length;i++)
       els+=svgMatch(colX(c),matchYW(c,i),gm(wIds[c][i]),wColor(wIds[c][i]));
+  // 1A RONDA -> 2A RONDA
   els+=svgConnector(colX(0),matchYW(0,0),matchYW(0,1),colX(1),matchYW(1,0),C.lineW);
   els+=svgConnector(colX(0),matchYW(0,2),matchYW(0,3),colX(1),matchYW(1,1),C.lineW);
-  els+=svgConnector(colX(1),matchYW(1,0),matchYW(1,1),colX(2),matchYW(2,0),C.lineFinal);
+  // 2A RONDA -> SEMIFINALS (una plaça; l'altra ve del bracket perdedors)
+  els+=svgLine(colX(1),matchYW(1,0),colX(2),matchYW(2,0),C.lineW);
+  els+=svgLine(colX(1),matchYW(1,1),colX(2),matchYW(2,1),C.lineW);
+  // SEMIFINALS -> FINAL
+  els+=svgConnector(colX(2),matchYW(2,0),matchYW(2,1),colX(3),matchYW(3,0),C.lineFinal);
 
+  // ── PERDEDORS ──
   for(let c=0;c<3;c++) els+=svgColHeader(colX(c),lTop-HEADER,lLabels[c],c===2?C.labelTercer:C.labelL);
   for(let c=0;c<3;c++)
     for(let i=0;i<lIds[c].length;i++)
       els+=svgMatch(colX(c),matchYL(c,i),gm(lIds[c][i]),lColor(lIds[c][i]));
+  // PERD. 1A -> PERD. 2A (l'altra plaça ve dels perdedors de 2A RONDA)
   for(let i=0;i<2;i++) els+=svgLine(colX(0),matchYL(0,i),colX(1),matchYL(1,i),C.lineL);
-  els+=svgConnector(colX(1),matchYL(1,0),matchYL(1,1),colX(2),matchYL(2,0),C.lineL);
+
+  // ── RE-ENTRADA: guanyadors PERD. 2A RONDA -> SEMIFINALS ──
+  const dash=(x1,y1,x2,y2,col)=>`<path d="M${x1},${y1} H${(x2)} V${y2} H${x2}" fill="none" stroke="${col}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+  els+=`<path d="M${colX(1)+BW},${matchYL(1,0)+BH/2} H${colX(2)-8} V${matchYW(2,0)+BH/2} H${colX(2)}" fill="none" stroke="${C.lineL}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+  els+=`<path d="M${colX(1)+BW},${matchYL(1,1)+BH/2} H${colX(2)-8} V${matchYW(2,1)+BH/2} H${colX(2)}" fill="none" stroke="${C.lineL}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
+
+  // ── SEMIFINALS (perdedors) -> 3R LLOC ──
+  const s1=matchYW(2,0)+BH, s2=matchYW(2,1)+BH, t=matchYL(2,0)+BH/2, cx=colX(2)+BW/2;
+  els+=`<path d="M${cx},${s1} V${t} M${cx},${s2} V${t} M${cx},${t} H${colX(2)+BW/2}" fill="none" stroke="${C.lineTercer||C.lineL}" stroke-width="1.5" stroke-dasharray="4,3" stroke-linecap="round"/>`;
 
   els+=`<text x="10" y="${wTop-HEADER-18}" fill="${C.labelW}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▲ BRACKET GUANYADORS</text>`;
   els+=`<text x="10" y="${lTop-HEADER-18}" fill="${C.labelL}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif">▼ BRACKET PERDEDORS</text>`;
