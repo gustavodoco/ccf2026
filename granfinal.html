@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WKJ827VFRD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WKJ827VFRD');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gran Final Castelldefels 2026 – Circuit Català de Futvolei</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="ccf.css">
+<meta name="theme-color" content="#FBF9E4">
+</head>
+<body>
+<div class="blobs" aria-hidden="true">
+  <svg class="blob-a" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#F2CB13" d="M42.7,-62.9C55.1,-54.8,64.6,-42.1,70.7,-27.8C76.8,-13.5,79.5,2.4,75.3,16.4C71.1,30.4,60,42.5,47.2,52.9C34.4,63.3,19.9,72,3.6,74.5C-12.7,77,-30.8,73.3,-45.3,63.9C-59.8,54.5,-70.7,39.4,-75.6,22.7C-80.5,6,-79.4,-12.3,-72.2,-27.6C-65,-42.9,-51.7,-55.2,-37.1,-62.9C-22.5,-70.6,-6.6,-73.7,7.9,-71.3C22.4,-68.9,30.3,-71,42.7,-62.9Z" transform="translate(100 100)"/></svg>
+  <svg class="blob-b" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#D96D26" d="M47.4,-66.8C60.1,-58.4,68,-43.1,72.8,-27.3C77.6,-11.5,79.3,4.9,74.6,19.2C69.9,33.5,58.8,45.8,45.5,55.6C32.2,65.4,16.1,72.7,-0.8,73.8C-17.7,74.9,-35.4,69.8,-48.3,59.4C-61.2,49,-69.3,33.3,-73.1,16.6C-76.9,-0.1,-76.4,-17.8,-69.3,-32.1C-62.2,-46.4,-48.5,-57.3,-34.3,-65.1C-20.1,-72.9,-5.4,-77.6,8.9,-76.4C23.2,-75.2,34.7,-75.2,47.4,-66.8Z" transform="translate(100 100)"/></svg>
+  <svg class="blob-c" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#F2E517" d="M39.9,-56.6C51.1,-49.3,59.2,-37.3,65.2,-24C71.2,-10.7,75.1,3.9,71.6,16.6C68.1,29.3,57.2,40.1,45.1,49.6C33,59.1,19.7,67.3,4.7,69.3C-10.3,71.3,-27,67.1,-41.2,58.4C-55.4,49.7,-67.1,36.5,-71.9,21.2C-76.7,5.9,-74.6,-11.5,-67.4,-26C-60.2,-40.5,-47.9,-52.1,-34.6,-58.9C-21.3,-65.7,-7,-67.7,4.8,-64.3C16.6,-60.9,28.7,-63.9,39.9,-56.6Z" transform="translate(100 100)"/></svg>
+</div>
+<div class="container">
+<!-- NAV -->
+<nav class="top-nav">
+  <a href="index.html" class="nav-back">← Rànquing General</a>
+  <div class="nav-etapes">
+    <a href="torredembarra.html" class="nav-etapa-btn"><span class="dot"></span>Etapa 1 · Torredembarra</a>
+    <a href="castelldefels.html" class="nav-etapa-btn"><span class="dot"></span>Etapa 2 · Castelldefels</a>
+    <a href="vilanova.html" class="nav-etapa-btn"><span class="dot"></span>Etapa 3 · Vilanova</a>
+    <a href="granfinal.html" class="nav-etapa-btn active"><span class="dot"></span>Gran Final · Castelldefels</a>
+  </div>
+</nav>
+<div class="page-header">
+  <div style="margin-bottom:10px"><img src="ccf-lockup.png" alt="Circuit Català de Futvolei" style="height:52px" onerror="this.style.display='none'"></div>
+  <div><span class="etapa-badge">Gran Final · 2026</span></div>
+  <h1 class="page-title">Gran Final</h1>
+  <p class="page-sub">Castelldefels · Circuit Català de Futvolei</p>
+  <div>
+    <span class="dates-badge">Dissabte 14 de Novembre 2026</span>
+    <span class="live-badge"><span class="live-dot"></span>Actualització automàtica</span>
+  </div>
+</div>
+<div class="update-bar">
+  <span id="last-update">Carregant dades...</span>
+  <button class="refresh-btn" onclick="loadAllData()">↻ Actualitzar</button>
+</div>
+<button class="toggle-config" onclick="toggleConfig()" style="display:none" id="admin-btn">Configurar URLs de Google Sheets</button>
+<div class="config-panel" id="config-panel" style="display:none">
+  <div class="config-title">URLs de Google Sheets (CSV publicat)</div>
+  <div class="config-section">Categories (grups + playoffs a la mateixa pestanya)</div>
+  <div class="config-row"><span class="config-label">Pro</span><input class="config-input" id="url-pro" placeholder="URL CSV pestanya Pro"></div>
+  <div class="config-row"><span class="config-label">Amateur</span><input class="config-input" id="url-amateur" placeholder="URL CSV pestanya Amateur"></div>
+  <div class="config-row" style="margin-top:10px"><button class="config-save" onclick="saveUrls()">Desar URLs</button></div>
+  <div class="config-hint">Arxiu → Compartir → Publicar al web → pestanya → CSV → Publicar → copiar l'enllaç.</div>
+</div>
+<div class="cat-tabs">
+  <button class="cat-tab active" onclick="showCat('pro',this)">PRO</button>
+  <button class="cat-tab" onclick="showCat('amateur',this)">AMATEUR</button>
+  <button class="cat-tab" onclick="showPrograma(this)">PROGRAMA</button>
+</div>
+<div class="content-card"><div id="cat-content"><div class="loading"><div class="spinner"></div><p>Carregant dades...</p></div></div></div>
+<footer class="site-footer">
+  <img src="ccf-mark.png" alt="CCF" onerror="this.style.display='none'">
+  <p>Circuit Català de Futvolei · 2026</p>
+</footer>
+</div>
+
+<script>
+// ── ADMIN ─────────────────────────────────────────────────
+let _c=0,_t;
+document.querySelector('.page-title').addEventListener('click',()=>{_c++;clearTimeout(_t);_t=setTimeout(()=>_c=0,2000);if(_c>=5){_c=0;const b=document.getElementById('admin-btn');b.style.display='inline-block';b.scrollIntoView({behavior:'smooth'})}});
+
+// ── URLs ──────────────────────────────────────────────────
+const SHEET_URLS={ pro:'', amateur:'' };   // enganxar URL CSV publicat (grups + playoffs a la mateixa pestanya)
+const PROGRAMA_URLS={ sabado:'' };
+let programaData={sabado:null};
+
+// ── FALLBACK ──────────────────────────────────────────────
+const PAIRS={3:[[0,1],[0,2],[1,2]],4:[[0,1],[2,3],[0,2],[1,3],[0,3],[1,2]]};
+function mkGrup(tag,n){
+  return{nome:'Grup '+tag,equipes:Array.from({length:n},(_,i)=>'Parella '+tag+(i+1)),
+    partidas:PAIRS[n].map(([l,v])=>({local:l,visit:v,p_local:null,p_visit:null}))};
+}
+const FALLBACK_DATA={
+  pro:{info:'<strong>9 parelles · 3 grups de 3</strong> (tots contra tots). Les <strong>9 parelles</strong> passen a la Doble Eliminatòria Pro.',grupos:['A','B','C'].map(t=>mkGrup(t,3))},
+  amateur:{info:'<strong>20 parelles · 5 grups de 4</strong>. Les <strong>10 millors</strong> (1rs i 2ns) juguen l\'<strong>Amateur A</strong>. Les altres <strong>10</strong> juguen l\'<strong>Amateur B</strong>. Doble Eliminatòria de 10 equips cada una.',grupos:['A','B','C','D','E'].map(t=>mkGrup(t,4))}
+};
+
+let etapaData={};
+let playoffData={pro:[], amateur:[]};
+let currentCat='pro';
+
+// ── CÀRREGA ───────────────────────────────────────────────
+async function loadAllData(){
+  document.getElementById('last-update').textContent='Actualitzant...';
+  Object.keys(FALLBACK_DATA).forEach(c=>{if(!etapaData[c])etapaData[c]=JSON.parse(JSON.stringify(FALLBACK_DATA[c]))});
+  renderCat(currentCat);
+  try{const r=await fetch('etapa_granfinal_data.json');if(r.ok){const j=await r.json();Object.keys(j).forEach(c=>{if(j[c]&&j[c].grupos)etapaData[c]={...FALLBACK_DATA[c],...j[c]}})}}catch(e){}
+  await Promise.allSettled(Object.entries(SHEET_URLS).map(async([c,u])=>{
+    if(!u)return;
+    try{
+      const d=await loadSheet(u);
+      if(d.grupos&&d.grupos.length)etapaData[c]={...FALLBACK_DATA[c],grupos:d.grupos};
+      playoffData[c]=d.playoffs||[];
+    }catch(e){}
+  }));
+  await loadPrograma();
+  document.getElementById('last-update').textContent=`Última actualització: ${new Date().toLocaleTimeString('ca-ES')}`;
+  renderCat(currentCat);
+}
+function splitCSVLine(line){
+  const r=[];let cur='';let q=false;
+  for(let i=0;i<line.length;i++){const ch=line[i];
+    if(ch==='"'){q=!q;}
+    else if(ch===','&&!q){r.push(cur);cur='';}
+    else cur+=ch;}
+  r.push(cur);
+  return r.map(s=>s.trim());
+}
+function csvToRows(text){
+  // remove BOM + \r, split lines
+  const clean=text.replace(/^\uFEFF/,'').replace(/\r/g,'');
+  const lines=clean.trim().split('\n').filter(l=>l.trim()!=='');
+  if(!lines.length) return[];
+  const headers=splitCSVLine(lines[0]).map(h=>h.toLowerCase().trim());
+  const rows=[];
+  for(let i=1;i<lines.length;i++){
+    const vals=splitCSVLine(lines[i]);
+    const row={};
+    headers.forEach((k,idx)=>row[k]=(vals[idx]||'').trim());
+    rows.push(row);
+  }
+  return rows;
+}
+const PLAY_RE=/^(?:[ABD]?P\d{1,2}|C[1-4]|SF[12]|FINAL|3LLOC)$/;
+function canonFase(code){
+  const u=code.replace(/\s+/g,'').toUpperCase();
+  if(u==='FINAL')return'Final';
+  if(u==='3LLOC')return'3lloc';
+  return u;
+}
+async function loadSheet(url){const r=await fetch(url);if(!r.ok)throw new Error();return parseSheet(await r.text())}
+function num(v){if(v===undefined||v===null||v==='')return null;const n=parseInt(v,10);return isNaN(n)?null:n}
+function parseSheet(text){
+  const rows=csvToRows(text);
+  const grupos={},playoffs=[];
+  for(const row of rows){
+    const local=(row.local||'').trim();
+    const visit=(row.visitante||'').trim();
+    if(!local)continue;
+    const pl=num(row.pontos_local), pv=num(row.pontos_visit);
+    const code=((row.fase||'')||(row.grupo||'')).trim();
+    if(code&&PLAY_RE.test(code.replace(/\s+/g,'').toUpperCase())){
+      playoffs.push({fase:canonFase(code),local:local,visit:visit,p_local:pl,p_visit:pv});
+      continue;
+    }
+    const grupo=(row.grupo||'').trim();
+    if(!grupo)continue;
+    if(!grupos[grupo])grupos[grupo]={nome:grupo,partidas:[],equipes:[]};
+    const g=grupos[grupo];
+    g.partidas.push({local:goa(g.equipes,local),visit:goa(g.equipes,visit),p_local:pl,p_visit:pv});
+  }
+  return{grupos:Object.values(grupos),playoffs:playoffs};
+}
+function goa(arr,v){let i=arr.indexOf(v);if(i===-1){arr.push(v);i=arr.length-1}return i}
+
+// ── CLASSIFICACIÓ ─────────────────────────────────────────
+// Coeficient = punts a favor / punts en contra (criteri FIVB)
+function coef(t){
+  if(t.p_minus>0)return t.p_plus/t.p_minus;
+  return t.p_plus>0?999:1;
+}
+function coefTxt(t){
+  if(!t.jugats)return '–';
+  return coef(t).toFixed(3);
+}
+// 1r Victòries · 2n Enfrontament directe (només si 2 empatats) · 3r Coeficient · 4t Punts a favor
+function cmpTeams(a,b){return b.v-a.v||coef(b)-coef(a)||b.p_plus-a.p_plus}
+
+function statsFor(g,names){
+  const set=new Set(names), st={};
+  names.forEach(n=>st[n]={nome:n,v:0,d:0,jugats:0,p_plus:0,p_minus:0});
+  g.partidas.forEach(p=>{
+    if(p.p_local===null||p.p_visit===null)return;
+    const a=g.equipes[p.local], b=g.equipes[p.visit];
+    if(!set.has(a)||!set.has(b))return;
+    st[a].jugats++;st[b].jugats++;
+    st[a].p_plus+=p.p_local;st[a].p_minus+=p.p_visit;
+    st[b].p_plus+=p.p_visit;st[b].p_minus+=p.p_local;
+    if(p.p_local>p.p_visit){st[a].v++;st[b].d++}
+    else if(p.p_visit>p.p_local){st[b].v++;st[a].d++}
+  });
+  return st;
+}
+
+// Desempat: mini-lliga només amb els partits entre els empatats.
+// 2 empatats -> equival al confronte directe. 3+ -> victòries, coeficient i punts del mini-grup.
+function resolveTie(g,block){
+  if(block.length<2)return block;
+  const names=block.map(t=>t.nome);
+  const mini=statsFor(g,names);
+  const byName={};block.forEach(t=>byName[t.nome]=t);
+  return names
+    .map(n=>({m:mini[n],f:byName[n]}))
+    .sort((x,y)=>
+      y.m.v-x.m.v ||
+      coef(y.m)-coef(x.m) ||
+      (y.m.p_plus-x.m.p_plus) ||
+      coef(y.f)-coef(x.f) ||
+      (y.f.p_plus-x.f.p_plus))
+    .map(x=>{
+      x.f.tie = block.length===2?'directe':'mini';
+      x.f.mini = x.m;
+      return x.f;
+    });
+}
+
+function calcStandings(g){
+  const full=statsFor(g,g.equipes);
+  const arr=g.equipes.map(n=>full[n]);
+  arr.sort(cmpTeams);
+  const out=[];
+  let i=0;
+  while(i<arr.length){
+    let j=i;
+    while(j+1<arr.length&&arr[j+1].v===arr[i].v)j++;
+    const block=arr.slice(i,j+1);
+    if(block.length>1)out.push(...resolveTie(g,block));
+    else out.push(block[0]);
+    i=j+1;
+  }
+  return out;
+}
+
+function findPrograma(nameA, nameB){
+  // Busca en tots els dies del programa
+  for(const day of Object.keys(programaData)){
+    const data=programaData[day];
+    if(!data||!data.rows) continue;
+    for(const slots of data.rows){
+      for(const s of slots){
+        if(!s.partida) continue;
+        const p=s.partida.toLowerCase();
+        const a=nameA.toLowerCase(), b=nameB.toLowerCase();
+        // Comprova si els dos noms apareixen a la cel·la
+        if(p.includes(a)&&p.includes(b)){
+          return{hora:s.hora, camp:s.camp, dia:day};
+        }
+      }
+    }
+  }
+  return null;
+}
+
+function diaLabel(d){return d==='sabado'?'Dis.':'Diu.'}
+
+// ══ CLASSIFICACIÓ CREUADA ════════════════════════════════
+function computeSplit(grupos){
+  const firsts=[],seconds=[],thirds=[],rest=[];
+  grupos.forEach(g=>{
+    calcStandings(g).forEach((t,i)=>{
+      const e={...t,grup:g.nome,pos:i+1};
+      (i===0?firsts:i===1?seconds:i===2?thirds:rest).push(e);
+    });
+  });
+  [firsts,seconds,thirds,rest].forEach(a=>a.sort(cmpTeams));
+  const amatA=firsts.concat(seconds), amatB=thirds.concat(rest);
+  const totalPartides=grupos.reduce((n,g)=>n+g.partidas.length,0);
+  const jugades=grupos.reduce((n,g)=>n+g.partidas.filter(p=>p.p_local!==null&&p.p_visit!==null).length,0);
+  return{firsts,seconds,thirds,rest,amatA,amatB,complet:jugades===totalPartides&&totalPartides>0,jugades,totalPartides};
+}
+function destPill(d){
+  return d==='A'?'<span class="dest-pill dest-a">Amateur A</span>':'<span class="dest-pill dest-b">Amateur B</span>';
+}
+function repescaRow(t,i){
+  return`<div class="repesca-row"><span class="repesca-pos">${i+1}</span><span class="repesca-name">${esc(t.nome)}</span><span class="repesca-grp">${esc(t.grup).replace(/^Grup\s*/i,'')}</span><span class="repesca-num">${t.v}V</span><span class="repesca-num">${coefTxt(t)}</span></div>`;
+}
+function rankList(title,arr){
+  const body=arr.length?arr.map(repescaRow).join(''):'<div class="repesca-note">Sense dades.</div>';
+  return`<div class="repesca-card"><h4>${title}</h4>${body}</div>`;
+}
+function renderCreuada(sp,cat){
+  const am=cat==='amateur';
+  const llista=arr=>arr.map(t=>`<div class="repesca-row"><span class="repesca-name">${esc(t.nome)}</span><span class="repesca-grp">${esc(t.grup).replace(/^Grup\s*/i,'')} · ${t.pos}${['','r','n','r','t'][t.pos]||'è'}</span></div>`).join('');
+  const estat=sp.complet
+    ? `<span style="color:#3B6D11;font-weight:800">Definitiu</span> — fase de grups completa.`
+    : `<span style="color:#D96D26;font-weight:800">Provisional</span> — ${sp.jugades}/${sp.totalPartides} partits jugats.`;
+  const lists=rankList('Millors 1rs',sp.firsts)+rankList('Millors 2ns',sp.seconds)+rankList('Millors 3rs',sp.thirds)+(am?rankList('Millors 4ts',sp.rest):'');
+  const comp=am?`<details class="fmt-details"><summary>Composició de cada categoria</summary><div class="fmt-body"><div class="repesca-grid"><div class="repesca-card"><h4>${destPill('A')} &nbsp;${sp.amatA.length} equips</h4>${llista(sp.amatA)}</div><div class="repesca-card"><h4>${destPill('B')} &nbsp;${sp.amatB.length} equips</h4>${llista(sp.amatB)}</div></div></div></details>`:'';
+  return`<div class="bracket-section-title" style="margin-top:28px">📋 Classificació creuada</div><div class="repesca-grid">${lists}</div><div class="repesca-note">${estat} Ordre: victòries · coeficient (punts a favor ÷ punts en contra) · punts a favor. Empats dins del grup es resolen per mini-lliga entre els empatats.</div>${comp}`;
+}
+
+function renderGrup(g){
+  const st=calcStandings(g);
+  const matches=g.partidas.map(p=>{
+    const has=p.p_local!==null&&p.p_visit!==null;
+    const lW=has&&p.p_local>p.p_visit,vW=has&&p.p_visit>p.p_local;
+    const prog=findPrograma(g.equipes[p.local],g.equipes[p.visit]);
+    const schedBadge=prog
+      ? `<span class="sched-badge"><span class="sched-hora">${esc(prog.hora)}</span><span class="sched-camp">${esc(prog.camp)}</span></span>`
+      : '';
+    return`<div class="match-row">${schedBadge?`<div class="match-sched">${schedBadge}</div>`:''}<div class="match-teams"><span class="team-name">${g.equipes[p.local]}</span><span class="vs">×</span><span class="team-name right">${g.equipes[p.visit]}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${p.p_local!==null?p.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${p.p_visit!==null?p.p_visit:'–'}</div></div></div></div>`
+  }).join('');
+  const rows=st.map((s,i)=>{
+    const pos=i+1,rc=pos===1?'rank-1':pos===2?'rank-2':pos===3?'rank-3':'rank-other';
+    const sal=s.p_plus-s.p_minus;
+    const tie=s.tie==='mini'?'<span class="mini-tie" title="Desempat per mini-lliga entre els empatats">▪</span>':s.tie==='directe'?'<span class="mini-tie" title="Desempat per confronte directe">▪</span>':'';
+    return`<tr><td><span class="rank-badge ${rc}">${pos}</span>${esc(s.nome)}${tie}</td><td>${s.v}</td><td>${s.p_plus}</td><td>${s.p_minus}</td><td>${sal>=0?'+':''}${sal}</td><td style="color:#D96D26;font-weight:800;font-variant-numeric:tabular-nums">${coefTxt(s)}</td></tr>`
+  }).join('');
+  return`<div class="group-card"><div class="group-header"><span>${g.nome}</span><span class="group-size">${g.equipes.length} equipes</span></div><div class="group-body"><div class="section-label">Classificació</div><table class="standings-table"><thead><tr><th>Parella</th><th>V</th><th>P+</th><th>P−</th><th>Saldo</th><th>Coef</th></tr></thead><tbody>${rows}</tbody></table><div class="section-label" style="margin-top:14px">Partits</div>${matches}</div></div>`
+}
+
+// ══════════════════════════════════════════════════════════
+// SVG BRACKET ENGINE
+// ══════════════════════════════════════════════════════════
+const BW=200, BH=58, GAP=14, COL=240, HEADER=28;
+const C={
+  bg:'#FBF9E4', bgMatch:'#FFFFFF', bgMatchW:'rgba(242,203,19,0.35)',
+  bgMatchL:'rgba(0,0,0,0.04)', bgFinal:'rgba(242,229,23,0.5)', bgTercer:'rgba(217,109,38,0.16)',
+  bgPrevia:'rgba(59,109,17,0.10)',
+  border:'rgba(0,0,0,0.28)', borderW:'#D96D26', borderL:'rgba(0,0,0,0.15)',
+  borderFinal:'#000000', borderTercer:'#D96D26', borderPrevia:'#3B6D11',
+  line:'rgba(0,0,0,0.3)', lineW:'#D96D26', lineL:'rgba(0,0,0,0.15)',
+  lineFinal:'rgba(0,0,0,0.55)', linePrevia:'rgba(59,109,17,0.5)',
+  labelW:'#D96D26', labelL:'rgba(0,0,0,0.4)', labelF:'#000000',
+  labelTercer:'#D96D26', labelPrevia:'#3B6D11',
+  teamNormal:'#000000', teamTbd:'rgba(0,0,0,0.28)', teamWinner:'#D96D26',
+  scoreNormal:'rgba(0,0,0,0.55)', scoreWinner:'#D96D26',
+  headerBg:'#000000', headerText:'#FBF9E4',
+  divider:'rgba(0,0,0,0.12)'
+};
+
+function svgText(x,y,text,fill,fontSize,fontWeight,anchor,clip){
+  anchor=anchor||'start';fontWeight=fontWeight||'normal';
+  let attrs=`x="${x}" y="${y}" fill="${fill}" font-size="${fontSize}" font-weight="${fontWeight}" text-anchor="${anchor}" font-family="system-ui,sans-serif"`;
+  if(clip) attrs+=` clip-path="url(#${clip})"`;
+  return`<text ${attrs}>${esc(text)}</text>`;
+}
+function esc(s){if(s===null||s===undefined)s='';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function svgMatch(x,y,m,type){
+  // type: 'w','l','final','tercer','previa'
+  const has=m&&m.p_local!==null&&m.p_visit!==null;
+  const lW=has&&m.p_local>m.p_visit, vW=has&&m.p_visit>m.p_local;
+  const t1=m?m.local:'', t2=m?m.visit:'';
+  const s1=m&&m.p_local!==null?m.p_local:'', s2=m&&m.p_visit!==null?m.p_visit:'';
+  const tbd1=!t1, tbd2=!t2;
+
+  const bg   = type==='final'?C.bgFinal:type==='tercer'?C.bgTercer:type==='previa'?C.bgPrevia:type==='l'?C.bgMatchL:C.bgMatchW;
+  const bord = type==='final'?C.borderFinal:type==='tercer'?C.borderTercer:type==='previa'?C.borderPrevia:type==='l'?C.borderL:C.borderW;
+
+  const mid=BH/2;
+  const nameW=BW-42;
+  const clipId=`clip-${x}-${y}`;
+
+  let out=`<clipPath id="${clipId}"><rect x="${x+8}" y="${y}" width="${nameW}" height="${BH}"/></clipPath>`;
+  // box
+  out+=`<rect x="${x}" y="${y}" width="${BW}" height="${BH}" rx="6" fill="${bg}" stroke="${bord}" stroke-width="1"/>`;
+  // divider middle
+  out+=`<line x1="${x}" y1="${y+mid}" x2="${x+BW}" y2="${y+mid}" stroke="${C.divider}" stroke-width="1"/>`;
+  // score bg strip
+  out+=`<rect x="${x+BW-36}" y="${y}" width="36" height="${BH}" rx="0" fill="rgba(0,0,0,0.06)"/>`;
+  out+=`<line x1="${x+BW-36}" y1="${y}" x2="${x+BW-36}" y2="${y+BH}" stroke="${C.divider}" stroke-width="1"/>`;
+
+  // team 1
+  const c1=tbd1?C.teamTbd:lW?C.teamWinner:C.teamNormal;
+  const w1=lW?'bold':'normal';
+  out+=svgText(x+10,y+mid-8,tbd1?'·':(t1||'·'),c1,11,w1,'start',clipId);
+  if(s1!=='') out+=svgText(x+BW-18,y+mid-8,s1,lW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
+
+  // team 2
+  const c2=tbd2?C.teamTbd:vW?C.teamWinner:C.teamNormal;
+  const w2=vW?'bold':'normal';
+  out+=svgText(x+10,y+mid+16,tbd2?'·':(t2||'·'),c2,11,w2,'start',clipId);
+  if(s2!=='') out+=svgText(x+BW-18,y+mid+16,s2,vW?C.scoreWinner:C.scoreNormal,13,'bold','middle');
+
+  return out;
+}
+
+function svgColHeader(x,y,label,color){
+  return`<text x="${x+BW/2}" y="${y+18}" text-anchor="middle" fill="${color}" font-size="9" font-weight="800" letter-spacing="2" font-family="system-ui,sans-serif" text-transform="uppercase">${esc(label.toUpperCase())}</text>`;
+}
+
+// Draw connector line: right edge of match A → left edge of match B
+// Joins two matches from previous column to one in next column
+function svgConnector(x1,y1A,y1B,x2,y2,lineColor){
+  const midY1=(y1A+y1B)/2+BH/2;  // midpoint between two source matches (centre)
+  const srcA=y1A+BH/2, srcB=y1B+BH/2;
+  const dst=y2+BH/2;
+  const mx=x1+BW+8, mx2=x2-8;
+  let d=`M${x1+BW},${srcA} H${mx} V${midY1} V${srcB} M${mx},${midY1} H${mx2} V${dst} H${x2}`;
+  return`<path d="${d}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+}
+// Single line (no merge)
+function svgLine(x1,y1,x2,y2,lineColor){
+  const s=y1+BH/2, d=y2+BH/2;
+  const mx=x1+BW+8;
+  return`<path d="M${x1+BW},${s} H${mx} H${x2}" fill="none" stroke="${lineColor}" stroke-width="1.5" stroke-linecap="round"/>`;
+}
+
+// Builders de quadre: pendents de format (Pro 9 · Amateur A 10 · Amateur B 10)
+
+// ── SVG WRAPPER ───────────────────────────────────────────
+function makeSVG(els,w,h){
+  return`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" style="display:block;min-width:${w}px"><rect width="${w}" height="${h}" fill="transparent"/>${els}</svg>`;
+}
+
+// ── RENDER CAT ────────────────────────────────────────────
+function showCat(cat,btn){document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');currentCat=cat;renderCat(cat)}
+
+function renderPlayoffList(title,list){
+  const head=`<div class="bracket-section-title">🏆 ${title}</div>`;
+  if(!list.length)return head+`<div class="prog-empty">Playoff disponible quan acabi la fase de grups.</div>`;
+  const rows=list.map(m=>{
+    const has=m.p_local!==null&&m.p_visit!==null;
+    const lW=has&&m.p_local>m.p_visit,vW=has&&m.p_visit>m.p_local;
+    return`<div class="match-row"><div class="match-teams"><span class="sched-camp">${esc(m.fase)}</span><span class="team-name">${esc(m.local||'·')}</span><span class="vs">×</span><span class="team-name right">${esc(m.visit||'·')}</span><div class="score-wrap"><div class="score-box ${lW?'winner':''}">${m.p_local!==null?m.p_local:'–'}</div><div class="score-box ${vW?'winner':''}">${m.p_visit!==null?m.p_visit:'–'}</div></div></div></div>`;
+  }).join('');
+  return head+`<div class="group-card"><div class="group-body">${rows}</div></div>`;
+}
+
+function renderCat(cat){
+  if(cat==='__programa__'){renderPrograma();return}
+  const el=document.getElementById('cat-content');
+  const data=etapaData[cat];
+  if(!data||!data.grupos||!data.grupos.length){
+    el.innerHTML=`<div class="loading"><p style="font-size:14px;color:rgba(0,0,0,.4)">Dades de ${cat.toUpperCase()} no disponibles.</p></div>`;return
+  }
+  const info=data.info?`<details class="fmt-details"><summary>Format de competició</summary><div class="fmt-body" style="font-size:12px;color:rgba(0,0,0,.55);line-height:1.7">${data.info}</div></details>`:'';
+  const creuada=renderCreuada(computeSplit(data.grupos),cat);
+  const grups=`<div class="groups-grid">${data.grupos.map(renderGrup).join('')}</div>`;
+  let playoffs='';
+  if(cat==='pro')playoffs=renderPlayoffList('Playoff Pro — Doble Eliminatòria (9 equips)',playoffData.pro||[]);
+  if(cat==='amateur'){
+    const pd=playoffData.amateur||[];
+    playoffs=renderPlayoffList('Amateur A — Doble Eliminatòria (10 equips)',pd.filter(m=>m.fase.startsWith('A')))
+      +`<div style="height:24px"></div>`
+      +renderPlayoffList('Amateur B — Doble Eliminatòria (10 equips)',pd.filter(m=>m.fase.startsWith('B')));
+  }
+  el.innerHTML=`${grups}${creuada}<div style="height:24px"></div>${playoffs}${info}`;
+}
+
+// ── CONFIG ────────────────────────────────────────────────
+function toggleConfig(){const p=document.getElementById('config-panel');p.style.display=p.style.display==='none'?'block':'none';if(p.style.display==='block'){['pro','amateur'].forEach(k=>document.getElementById('url-'+k).value=SHEET_URLS[k])}}
+function saveUrls(){['pro','amateur'].forEach(k=>{const v=document.getElementById('url-'+k).value.trim();if(v)SHEET_URLS[k]=v});document.getElementById('config-panel').style.display='none';loadAllData();}
+
+
+// ── PROGRAMA ──────────────────────────────────────────────
+function parseCSVLine(line){
+  const res=[];let cur='';let inQ=false;
+  for(let i=0;i<line.length;i++){
+    const ch=line[i];
+    if(ch==='"'){inQ=!inQ;}
+    else if(ch===','&&!inQ){res.push(cur.trim());cur='';}
+    else cur+=ch;
+  }
+  res.push(cur.trim());
+  return res;
+}
+
+function parseProgramaCSV(text){
+  const lines=text.trim().split('\n').map(l=>parseCSVLine(l));
+  if(lines.length<2) return null;
+  const headers=lines[0];
+  // odd cols = field names (col 1,3,5...)
+  const fields=[];
+  for(let c=1;c<headers.length;c+=2) fields.push((headers[c]||('Camp '+Math.ceil(c/2))).trim());
+  const rows=[];
+  for(let r=1;r<lines.length;r++){
+    const row=lines[r];
+    let hasData=false;
+    const slots=fields.map((f,ci)=>{
+      const hora=(row[ci*2]||'').trim();
+      const partida=(row[ci*2+1]||'').trim();
+      if(hora||partida) hasData=true;
+      return{hora,partida,camp:f};
+    });
+    if(hasData) rows.push(slots);
+  }
+  return{fields,rows};
+}
+
+async function loadPrograma(){
+  for(const [day,url] of Object.entries(PROGRAMA_URLS)){
+    if(!url) continue;
+    try{
+      const r=await fetch(url);
+      if(!r.ok) continue;
+      programaData[day]=parseProgramaCSV(await r.text());
+    }catch(e){}
+  }
+}
+
+let currentProgramaDay='sabado';
+
+function showPrograma(btn){
+  document.querySelectorAll('.cat-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  currentCat='__programa__';
+  renderPrograma();
+}
+
+function switchProgramaDay(day,btn){
+  currentProgramaDay=day;
+  document.querySelectorAll('.prog-day-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPrograma();
+}
+
+function renderPrograma(){
+  const el=document.getElementById('cat-content');
+  const days=[
+    {key:'sabado',label:'Dissabte 14'}
+  ];
+  const dayBtns=days.map(d=>`<button class="prog-day-btn${d.key===currentProgramaDay?' active':''}" onclick="switchProgramaDay('${d.key}',this)">${d.label}</button>`).join('');
+  const data=programaData[currentProgramaDay];
+  let tableHtml='';
+  if(!data||!data.rows||!data.rows.length){
+    tableHtml=`<div class="prog-empty">Programa no disponible per a aquest dia.</div>`;
+  } else {
+    const ths=data.fields.map(f=>`<th>${esc(f)}</th>`).join('');
+    const trs=data.rows.map(slots=>`<tr>${slots.map(s=>{
+      if(!s.hora&&!s.partida) return`<td style="color:rgba(0,0,0,0.2)">–</td>`;
+      const h=s.hora?`<span class="hora-badge">${esc(s.hora)}</span>`:'';
+      const p=s.partida?esc(s.partida):'';
+      return`<td>${h}${p}</td>`;
+    }).join('')}</tr>`).join('');
+    tableHtml=`<div style="overflow-x:auto"><table class="programa-table"><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table></div>`;
+  }
+  el.innerHTML=`
+    <div style="font-size:11px;font-weight:800;letter-spacing:2px;color:#000000;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px">
+      <span style="flex:1;height:1px;background:rgba(0,0,0,0.18);display:block"></span>
+      &#128197; Programa de Partits
+      <span style="flex:1;height:1px;background:rgba(0,0,0,0.18);display:block"></span>
+    </div>
+    <div class="programa-day-tabs">${dayBtns}</div>
+    ${tableHtml}`;
+}
+loadAllData();
+setInterval(loadAllData,120000);
+</script>
+
+
+
+</body>
+</html>
