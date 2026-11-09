@@ -10,6 +10,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="ccf.css">
+<style>
+.final-card{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:var(--lemon);border:3px solid var(--ink);border-radius:var(--radius);padding:28px 32px;margin-bottom:16px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .18s,box-shadow .18s}
+.final-card::after{content:'';position:absolute;right:-60px;bottom:-90px;width:260px;height:260px;background:var(--orange);border-radius:56% 44% 62% 38%/48% 58% 42% 52%;opacity:.5;z-index:0}
+.final-card>*{position:relative;z-index:1}
+.final-card:hover{transform:translate(-2px,-3px);box-shadow:var(--shadow-hover)}
+.final-txt{display:flex;flex-direction:column;gap:8px}
+.final-title{font-size:clamp(2rem,5vw,3.2rem);font-weight:900;letter-spacing:-1.8px;text-transform:uppercase;line-height:.95}
+.final-cats{display:flex;gap:6px;flex-wrap:wrap}
+.final-cta{background:var(--ink);color:var(--lemon);font-weight:800;font-size:13px;padding:13px 26px;border-radius:40px;white-space:nowrap}
+</style>
 </head>
 <body>
 
@@ -38,6 +48,7 @@
     <a href="torredembarra.html" class="nav-etapa-btn"><span class="dot"></span>Etapa 1 · Torredembarra</a>
     <a href="castelldefels.html" class="nav-etapa-btn"><span class="dot"></span>Etapa 2 · Castelldefels</a>
     <a href="vilanova.html" class="nav-etapa-btn"><span class="dot"></span>Etapa 3 · Vilanova</a>
+    <a href="granfinal.html" class="nav-etapa-btn" style="background:var(--gold)"><span class="dot"></span>Gran Final</a>
   </div>
 </nav>
 
@@ -47,6 +58,19 @@
   <h1 class="page-title">Rànquing <span class="hl">General</span></h1>
   <p class="page-sub">Classificació acumulada de les 3 etapes del Circuit Català de Futvolei</p>
 </div>
+
+<!-- ── GRAN FINAL ──────────────────────────────── -->
+<a href="granfinal.html" class="final-card">
+  <div class="final-txt">
+    <span class="etapa-num" style="color:var(--ink)">Final de temporada · 2026</span>
+    <span class="final-title">Gran Final</span>
+    <span class="etapa-city">Castelldefels</span>
+    <span class="etapa-date" style="color:var(--ink)">Dissabte 14 de Novembre 2026</span>
+    <span class="final-cats"><span class="dest-pill dest-a">Pro</span><span class="dest-pill dest-a">Amateur A</span><span class="dest-pill dest-b">Amateur B</span></span>
+    <span class="etapa-status live">Properament</span>
+  </div>
+  <span class="final-cta">Veure Gran Final →</span>
+</a>
 
 <!-- ── ETAPES CARDS ────────────────────────────── -->
 <div class="etapes-grid">
@@ -62,11 +86,11 @@
     <span class="etapa-date">13 · 14 de Juny 2026</span>
     <span class="etapa-status done">Finalitzada</span>
   </a>
-  <a href="vilanova.html" class="etapa-card active-etapa">
+  <a href="vilanova.html" class="etapa-card">
     <span class="etapa-num">Etapa 3</span>
     <span class="etapa-city">Vilanova i la Geltrú</span>
     <span class="etapa-date">24 · 25 · 26 de Juliol 2026</span>
-    <span class="etapa-status live">En curs</span>
+    <span class="etapa-status done">Finalitzada</span>
   </a>
 </div>
 

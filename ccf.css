@@ -95,6 +95,11 @@ body{
   padding:6px 15px;border-radius:40px;margin-top:12px;margin-left:6px;
 }
 .live-dot{width:7px;height:7px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite}
+.done-badge{
+  display:inline-flex;align-items:center;gap:7px;background:transparent;
+  border:2px solid var(--ink-15);color:var(--ink-60);font-size:12px;font-weight:700;
+  padding:6px 15px;border-radius:40px;margin-top:12px;margin-left:6px;
+}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
 
 /* ── ETAPES CARDS ──────────────────────────────────────── */
