@@ -87,8 +87,8 @@ let programaData={sabado:null};
 function rr(n){const p=[];for(let i=0;i<n;i++)for(let j=i+1;j<n;j++)p.push({local:i,visit:j,p_local:null,p_visit:null});return p}
 function mkG(L,n){return[...L].map(l=>({nome:'Grup '+l,equipes:Array.from({length:n},(_,i)=>'Parella '+l+(i+1)),partidas:rr(n)}))}
 const FALLBACK_DATA={
-  pro:{info:`<strong>9 parelles · 3 grups de 3</strong>. Ningú s'elimina a la fase de grups. Doble eliminatòria de 9: seed 1-3 = 1rs dels grups A, B, C · seed 4-6 = 2ns per rànquing · seed 7-9 = 3rs per rànquing. Semifinals: guanyador P10 vs guanyador P12 i guanyador P9 vs guanyador P11.`,grupos:mkG('ABC',3)},
-  amateur:{info:`<strong>20 parelles · 5 grups de 4</strong>. 1rs i 2ns → Doble Eliminatòria Amateur A (10). 3rs i 4ts → Doble Eliminatòria Amateur B (10). Seeds: primer els millors 1rs, després els millors 2ns (A) · millors 3rs, després millors 4ts (B). Semifinals: guanyador P11 vs P13 i P12 vs P14.`,grupos:mkG('ABCDE',4)}
+  pro:{info:`<strong>9 parelles · 3 grups de 3</strong>. Ningú s'elimina a la fase de grups. Doble eliminatòria de 9: seed 1-3 = 1rs dels grups A, B, C · seed 4-6 = 2ns per rànquing · seed 7-9 = 3rs per rànquing. Semifinals creuades per evitar revenges: guanyador P10 vs P11 i guanyador P9 vs P12.`,grupos:mkG('ABC',3)},
+  amateur:{info:`<strong>20 parelles · 5 grups de 4</strong>. 1rs i 2ns → Doble Eliminatòria Amateur A (10). 3rs i 4ts → Doble Eliminatòria Amateur B (10). Seeds: primer els millors 1rs, després els millors 2ns (A) · millors 3rs, després millors 4ts (B). Semifinals creuades per evitar revenges: P11 vs P14 i P12 vs P13.`,grupos:mkG('ABCDE',4)}
 };
 
 let etapaData={};
@@ -392,10 +392,10 @@ function svgLine(x1,y1,x2,y2,lineColor){
 
 // ── DOBLE ELIMINATÒRIA (motor genèric) ───────────────────
 // slot: número = seed · 'W:id' = guanyador · 'L:id' = perdedor
-const SPEC9={P1:[8,9],P2:[4,5],P3:[2,7],P4:[3,6],P5:[1,'W:P1'],P6:['L:P4','L:P1'],P7:['L:P2','L:P5'],P8:['L:P3','W:P6'],P9:['W:P3','W:P4'],P10:['W:P5','W:P2'],P11:['L:P9','W:P7'],P12:['L:P10','W:P8'],SF1:['W:P10','W:P12'],SF2:['W:P9','W:P11'],Final:['W:SF1','W:SF2'],'3lloc':['L:SF1','L:SF2']};
+const SPEC9={P1:[8,9],P2:[4,5],P3:[2,7],P4:[3,6],P5:[1,'W:P1'],P6:['L:P4','L:P1'],P7:['L:P2','L:P5'],P8:['L:P3','W:P6'],P9:['W:P3','W:P4'],P10:['W:P5','W:P2'],P11:['L:P9','W:P7'],P12:['L:P10','W:P8'],SF1:['W:P10','W:P11'],SF2:['W:P9','W:P12'],Final:['W:SF1','W:SF2'],'3lloc':['L:SF1','L:SF2']};
 // layout: [columna, fila, 1 = bracket perdedors]
 const LAY9={P1:[0,0],P5:[1,0],P2:[1,1],P3:[1,2],P4:[1,3],P10:[2,.5],P9:[2,2.5],SF1:[3,.5],SF2:[3,2.5],Final:[4,1.5],'3lloc':[4,2.8],P6:[0,0,1],P8:[1,0,1],P7:[1,1,1],P12:[2,0,1],P11:[2,1,1]};
-const SPEC10={P1:[8,9],P2:[7,10],P3:[4,5],P4:[3,6],P5:[1,'W:P1'],P6:[2,'W:P2'],P7:['L:P3','L:P2'],P8:['L:P4','L:P1'],P9:['L:P5','W:P7'],P10:['L:P6','W:P8'],P11:['W:P5','W:P3'],P12:['W:P6','W:P4'],P13:['L:P11','W:P10'],P14:['L:P12','W:P9'],SF1:['W:P11','W:P13'],SF2:['W:P12','W:P14'],Final:['W:SF1','W:SF2'],'3lloc':['L:SF1','L:SF2']};
+const SPEC10={P1:[8,9],P2:[7,10],P3:[4,5],P4:[3,6],P5:[1,'W:P1'],P6:[2,'W:P2'],P7:['L:P3','L:P2'],P8:['L:P4','L:P1'],P9:['L:P5','W:P7'],P10:['L:P6','W:P8'],P11:['W:P5','W:P3'],P12:['W:P6','W:P4'],P13:['L:P11','W:P10'],P14:['L:P12','W:P9'],SF1:['W:P11','W:P14'],SF2:['W:P12','W:P13'],Final:['W:SF1','W:SF2'],'3lloc':['L:SF1','L:SF2']};
 const LAY10={P1:[0,0],P2:[0,2],P5:[1,0],P3:[1,1],P6:[1,2],P4:[1,3],P11:[2,.5],P12:[2,2.5],SF1:[3,.5],SF2:[3,2.5],Final:[4,1.5],'3lloc':[4,2.8],P8:[0,0,1],P7:[0,1,1],P10:[1,0,1],P9:[1,1,1],P13:[2,0,1],P14:[2,1,1]};
 const ORD=['1r','2n','3r','4t'];
 const lab=(p,n)=>Array.from({length:n},(_,k)=>`~${ORD[p]} #${k+1}`);
@@ -427,8 +427,8 @@ function drawBr(spec,lay,pd,prefix,seeds){
   const lTop=wTop+wMax*P+BH+70;
   const Y=id=>{const[,y,l]=lay[id];return(l?lTop:wTop)+y*P};
   let e='';
-  ['Ronda 1','Ronda 2','Ronda 3','Semifinals','Final'].forEach((t,c)=>{e+=svgColHeader(cx(c),wTop-HEADER,t,c===4?C.labelF:C.labelW)});
-  ['Perdedors R1','Perdedors R2','Perdedors R3'].forEach((t,c)=>{e+=svgColHeader(cx(c),lTop-HEADER,t,C.labelL)});
+  ['Fase 1','Fase 2','Fase 3','Semifinals','Final'].forEach((t,c)=>{e+=svgColHeader(cx(c),wTop-HEADER,t,c===4?C.labelF:C.labelW)});
+  ['Perdedors Fase 1','Perdedors Fase 2','Perdedors Fase 3'].forEach((t,c)=>{e+=svgColHeader(cx(c),lTop-HEADER,t,C.labelL)});
   for(const id in spec)spec[id].forEach(s=>{
     if(typeof s!=='string'||s[0]==='L')return;
     const a=lay[s.slice(2)],b=lay[id];
